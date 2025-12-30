@@ -2,12 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { projects } from '../data/projects';
+import { newsItems } from '../data/news';
 
 export default function Home() {
   const featuredProjects = projects.slice(0, 3);
+  const latestNews = newsItems.slice(0, 2);
 
   return (
     <div className="min-h-screen">
+      {/* Hero Section */}
       <section className="relative h-screen">
         <img
           src="https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1920"
@@ -27,6 +30,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Featured Projects Section */}
       <section className="max-w-screen-2xl mx-auto px-8 py-32">
         <div className="mb-16">
           <h2 className="text-3xl font-medium tracking-wider mb-4">featured Projects</h2>
@@ -74,6 +78,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Philosophy Section */}
       <section className="relative h-screen">
         <img
           src="https://images.pexels.com/photos/1707823/pexels-photo-1707823.jpeg?auto=compress&cs=tinysrgb&w=1920"
@@ -98,50 +103,40 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Latest News Section */}
       <section className="bg-gray-50 py-32">
         <div className="max-w-screen-2xl mx-auto px-8">
           <h2 className="text-3xl font-medium tracking-wider mb-16 text-center">latest news</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="group cursor-pointer">
-              <div className="overflow-hidden mb-4">
-                <img
-                  src="https://images.pexels.com/photos/2174656/pexels-photo-2174656.jpeg?auto=compress&cs=tinysrgb&w=1920"
-                  alt="Award announcement"
-                  className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-              <p className="text-xs text-gray-500 mb-2 font-light">october 15, 2024</p>
-              <h3 className="text-xl font-light tracking-wide mb-2">
-                zlg wins awards
-              </h3>
-              <p className="text-sm text-gray-700 font-light">
-                our urban tower project has been recognized with the prestigious International Architecture Excellence Award for sustainable design.
-              </p>
-            </div>
-
-            <div className="group cursor-pointer">
-              <div className="overflow-hidden mb-4">
-                <img
-                  src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1920"
-                  alt="New project announcement"
-                  className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-              <p className="text-xs text-gray-500 mb-2 font-light">September 28, 2024</p>
-              <h3 className="text-xl font-light tracking-wide mb-2">
-                breaking Ground on Coastal Innovation Hub
-              </h3>
-              <p className="text-sm text-gray-700 font-light">
-                Construction begins on our largest project to date—a 200,000 sq ft research and innovation center on the California coast.
-              </p>
-            </div>
+            {latestNews.map((news) => (
+              <Link
+                key={news.id}
+                to={`/news/${news.slug}`}
+                className="group"
+              >
+                <div className="overflow-hidden mb-4">
+                  <img
+                    src={news.image}
+                    alt={news.title}
+                    className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <p className="text-xs text-gray-500 mb-2 font-light lowercase">{news.date}</p>
+                <h3 className="text-xl font-light tracking-wide mb-2">
+                  {news.title}
+                </h3>
+                <p className="text-sm text-gray-700 font-light">
+                  {news.description}
+                </p>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* Contact Section */}
       <section className="max-w-screen-2xl mx-auto px-8 py-32 text-center">
         <h2 className="text-4xl font-medium tracking-wider mb-8">start your project</h2>
         <p className="text-lg text-gray-700 max-w-2xl mx-auto mb-12 font-light">

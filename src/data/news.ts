@@ -4,7 +4,7 @@ export interface NewsItem {
     date: string;
     title: string;
     description: string;
-    image: string; // Cloudinary public ID
+    image: string; 
     category?: string;
   }
   
