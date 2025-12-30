@@ -1,0 +1,153 @@
+import React from 'react';
+
+export default function Philosophy() {
+  return (
+    <div className="min-h-screen">
+      <section className="relative h-screen">
+        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+          <span className="text-gray-400 text-sm tracking-wide">IMAGE PLACEHOLDER - Hero Image</span>
+        </div>
+        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+          <div className="text-center text-white px-8">
+            <h1 className="text-5xl md:text-7xl font-light tracking-wider">
+              Philosophy
+            </h1>
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-4xl mx-auto px-8 py-32">
+        <div className="space-y-24">
+          <div className="text-center">
+            <h2 className="text-3xl font-light tracking-wider mb-8">
+              Beyond Pre-Defined Architectural Pursuit
+            </h2>
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              In 1992 when Susanne and me started thinking of doing competitions our focus was only design and ever since our work revolved around ideas and concepts that go beyond what was then always a pre-defined architectural pursuit or entity. We had simply wanted to do architecture that would not only engage the human spirit, but also something with a deep philosophy behind the work.
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              Up to this day, there has been a little problem I have to solve in my head, and that is that I think architecture is taking much longer to becoming like what good art is, it is not so generative and it is not always assuming an emotive role, like a good work of art does. We think that it is possible for us to connect to our buildings as easily as we can connect to art, or to our music, or to things that we adore, like our children or our books.
+            </p>
+          </div>
+
+          <div className="relative">
+            <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
+              <span className="text-gray-400 text-sm tracking-wide">IMAGE PLACEHOLDER</span>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-2xl font-light tracking-wide mb-6">Design Intelligence</h3>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              zlgdesign's very own approach to design development processes in the organisation is a self-critique on a customised proto-typing and exploration technique. We would call this design intelligence, developed over many years to survive critical investigation and intellectual discourse on all levels of our work.
+            </p>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              They do away with adapting to or embracing mainstream typology in buildings but take their stance and follow artistic directions set down at the onset of the conceptual phase of design, minus the styling. They have always maintained and believe that their Architecture is about people, and never about style or about winning beauty contests, although they like competition.
+            </p>
+            <p className="text-gray-700 leading-relaxed">
+              Their work embrace and thereafter adopt and develop to maturity whatever comes in the way of development of their designs, whether this makes sensible methodology or not. These processes are not ends but means to create something new, something unique, specific and exclusive to the Project. The Duyong project for instance, is definitely of the place, echoing the arts and culture of the fishing village of Trengganu, whereas the AAR Centre contemplates the essence of the site to inform the shape of the built form.
+            </p>
+          </div>
+
+          <div className="relative">
+            <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
+              <span className="text-gray-400 text-sm tracking-wide">IMAGE PLACEHOLDER</span>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-2xl font-light tracking-wide mb-6">Beyond Typology</h3>
+            <p className="text-gray-700 leading-relaxed">
+              Today's buildings are designed to fit within preset parameters largely defined by their typology rather than aesthetics or ethos. Fortunately for us, this has become a challenge on zlgdesign's creative processes as it reinforces our idea that buildings can share multiple typologies and encapsulate more than one function or purposefulness. It is in this context we tend to move our designs away from mainstream typological sets, in fact we would actually design ambiguous spaces or third spaces that exhibit or inherit many hybrids in the final execution.
+            </p>
+          </div>
+
+          <blockquote className="text-2xl font-light text-center italic text-gray-800 py-16 border-t border-b border-gray-300">
+            If it doesn't engage or connect with one's emotion, or if it's just not involving enough, we'll probably just throw it out the window. We won't want to take that thing all the way to the end. If it's not intriguing enough, and doesn't hold any mystery or surprises then I guess it really isn't worth developing. The drama isn't going to be there by the time one is finished with it, not enough to sustain the experience.
+          </blockquote>
+
+          <div className="relative">
+            <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
+              <span className="text-gray-400 text-sm tracking-wide">IMAGE PLACEHOLDER</span>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-16">
+            <div>
+              <h3 className="text-2xl font-light tracking-wide mb-6">Contrast and Tension</h3>
+              <p className="text-gray-700 leading-relaxed">
+                zlgdesign's more minimal work belies warmer and more democratic proposals that can still exhibit simpler but more cutting edge ideas. Other work gravitate towards using elements from the old world placed inside more modern envelopes.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-2xl font-light tracking-wide mb-6">Past Meets Future</h3>
+              <p className="text-gray-700 leading-relaxed">
+                The contrast or tension resulting from these associations and juxtapositions in their work is a constant characteristic feature in recent and upcoming projects. These explorations of bringing together things from the past and those brought out of new technology or research has become a constant inspiration.
+              </p>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
+              <span className="text-gray-400 text-sm tracking-wide">IMAGE PLACEHOLDER</span>
+            </div>
+          </div>
+
+          <blockquote className="text-xl font-light text-center italic text-gray-800 py-12 border-t border-b border-gray-300">
+            God created paper for the purpose of drawing architecture on it. Everything else is, at least for me, an abuse of paper.
+            <span className="block text-sm not-italic mt-4 text-gray-600">— Alvar Aalto</span>
+          </blockquote>
+
+          <div className="text-center">
+            <h3 className="text-2xl font-light tracking-wide mb-6">
+              The Power of Imagination
+            </h3>
+            <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto mb-4">
+              On what motivates them to design, Huat has this to say:
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
+              Thought is a form of necessary action, a precursor to a possible work of art. And if you can't imagine it in your head, it's not likely to get built. Getting that image in the mind's eye, and then executing it is what it's really all about. We usually start off with a sketch.
+            </p>
+          </div>
+
+          <div className="relative">
+            <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
+              <span className="text-gray-400 text-sm tracking-wide">IMAGE PLACEHOLDER</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gray-50 py-32">
+        <div className="max-w-screen-2xl mx-auto px-8">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-light tracking-wider mb-12 text-center">Core Principles</h2>
+
+            <div className="grid md:grid-cols-3 gap-12">
+              <div className="text-center">
+                <h4 className="text-xl font-light tracking-wide mb-4">Emotion Over Style</h4>
+                <p className="text-gray-700 leading-relaxed">
+                  Architecture must engage the human spirit and connect emotionally, transcending mere aesthetics.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <h4 className="text-xl font-light tracking-wide mb-4">Design Intelligence</h4>
+                <p className="text-gray-700 leading-relaxed">
+                  A customized exploration technique developed through critical investigation and intellectual discourse.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <h4 className="text-xl font-light tracking-wide mb-4">Hybrid Spaces</h4>
+                <p className="text-gray-700 leading-relaxed">
+                  Creating ambiguous third spaces that exhibit multiple typologies and purposes.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
