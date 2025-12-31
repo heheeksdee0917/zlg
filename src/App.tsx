@@ -1,20 +1,22 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import React from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Home from './pages/Home';
-import Philosophy from './pages/Philosophy';
-import Projects from './pages/Projects';
-import ProjectDetails from './pages/ProjectDetails';
-import People from './pages/People';
-import Partnerships from './pages/Partnerships';
+
+// Lazy load page components
+const Home = lazy(() => import('./pages/Home'));
+const Philosophy = lazy(() => import('./pages/Philosophy'));
+const Projects = lazy(() => import('./pages/Projects'));
+const ProjectDetails = lazy(() => import('./pages/ProjectDetails'));
+const People = lazy(() => import('./pages/People'));
+const Partnerships = lazy(() => import('./pages/Partnerships'));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.history.scrollRestoration = 'manual';
   }, [pathname]);
 
   return null;
@@ -27,14 +29,20 @@ function App() {
       <div className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/philosophy" element={<Philosophy />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/projects/:slug" element={<ProjectDetails />} />
-            <Route path="/people" element={<People />} />
-            <Route path="/partnerships" element={<Partnerships />} />
-          </Routes>
+          <Suspense fallback={
+            <div className="flex items-center justify-center min-h-[60vh]">
+              <div className="animate-pulse text-gray-600">Loading...</div>
+            </div>
+          }>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/philosophy" element={<Philosophy />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/projects/:slug" element={<ProjectDetails />} />
+              <Route path="/people" element={<People />} />
+              <Route path="/partnerships" element={<Partnerships />} />
+            </Routes>
+          </Suspense>
         </main>
         <Footer />
       </div>

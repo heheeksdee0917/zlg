@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function Philosophy() {
+  const [fadeIn, setFadeIn] = useState(false);
+
+  useEffect(() => {
+    setFadeIn(false);
+    const timer = setTimeout(() => setFadeIn(true), 50);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="min-h-screen">
+    <div className={`min-h-screen transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
       <section className="relative h-screen">
         <div className="w-full h-full bg-gray-200 flex items-center justify-center">
           <span className="text-gray-400 text-sm tracking-wide">IMAGE PLACEHOLDER - Hero Image</span>

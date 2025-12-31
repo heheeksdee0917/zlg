@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
-import { useState } from 'react';
 
 export default function Projects() {
+  const [fadeIn, setFadeIn] = useState(false);
+
+  useEffect(() => {
+    setFadeIn(false);
+    const timer = setTimeout(() => setFadeIn(true), 50);
+    return () => clearTimeout(timer);
+  }, []);
+
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
 
   const handleImageLoad = (imageUrl: string) => {
@@ -11,7 +18,7 @@ export default function Projects() {
   };
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className={`min-h-screen pt-20 transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
       <section className="max-w-screen-2xl mx-auto px-8 py-16">
         <div className="mb-16">
           <h1 className="text-4xl md:text-5xl font-light tracking-wider mb-6">projects</h1>
@@ -25,7 +32,7 @@ export default function Projects() {
             <Link
               key={project.id}
               to={`/projects/${project.slug}`}
-              className="group"
+              className="group block transition-all duration-500 ease-out hover:scale-105 hover:-translate-y-2"
             >
               <div className="overflow-hidden mb-6 relative bg-gray-200">
                 {!loadedImages.has(project.heroImage) && (
@@ -40,17 +47,17 @@ export default function Projects() {
                 <img
                   src={project.heroImage}
                   alt={project.title}
-                  className={`w-full h-[500px] object-cover transition-all duration-700 group-hover:scale-105 ${
-                    loadedImages.has(project.heroImage) ? 'opacity-100' : 'opacity-0'
-                  }`}
+                  className={`w-full h-[500px] object-cover transition-all duration-700 ${loadedImages.has(project.heroImage) ? 'opacity-100' : 'opacity-0'
+                    }`}
                   loading="lazy"
                   onLoad={() => handleImageLoad(project.heroImage)}
                 />
               </div>
 
               <div className="space-y-3">
-                <h2 className="text-2xl font-light tracking-wide group-hover:border-b border-black inline-block">
+                <h2 className="text-2xl font-light tracking-wide relative inline-block">
                   {project.title}
+                  <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
                 </h2>
 
                 <div className="flex items-center space-x-4 text-sm text-gray-600">

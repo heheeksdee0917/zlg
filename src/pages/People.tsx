@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function People() {
+  const [fadeIn, setFadeIn] = useState(false);
+
+  useEffect(() => {
+    setFadeIn(false);
+    const timer = setTimeout(() => setFadeIn(true), 50);
+    return () => clearTimeout(timer);
+  }, []);
+
   const team = [
     {
       id: 1,
@@ -47,7 +55,7 @@ export default function People() {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className={`min-h-screen transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
       <section className="relative h-96">
         <img
           src="https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&cs=tinysrgb&w=1920"
@@ -98,10 +106,11 @@ export default function People() {
               We are always seeking talented architects and designers who share our commitment to excellence, sustainability, and thoughtful design. If you are passionate about creating spaces that matter, we would love to hear from you.
             </p>
             <a
-              href="mailto:careers@zlgdesign.com"
-              className="inline-block text-sm tracking-wide px-12 py-4 border border-black hover:bg-black hover:text-white transition-colors"
+              href="mailto:info@zlgdesign.com"
+              className="inline-block text-sm tracking-wide px-12 py-4 border border-black font-light relative overflow-hidden group"
             >
-              View Open Positions
+              <span className="absolute inset-0 bg-black transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+              <span className="relative z-10 group-hover:text-white transition-colors duration-300">join the team</span>
             </a>
           </div>
         </div>

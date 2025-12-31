@@ -1,4 +1,5 @@
 import { Linkedin, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import React from 'react';
 
 export default function Footer() {
   return (
@@ -21,10 +22,6 @@ export default function Footer() {
                   info@zlgdesign.com
                 </a>
               </li>
-              <li className="flex items-center space-x-2">
-                <Phone size={14} />
-                <span>+1 (555) 123-4567</span>
-              </li>
             </ul>
           </div>
 
@@ -32,14 +29,14 @@ export default function Footer() {
             <h4 className="text-xs tracking-wider mb-4 font-light">follow us</h4>
             <div className="flex space-x-4">
               <a
-                href="#"
+                href="https://www.linkedin.com/company/zlg-sdn-bhd/about/"
                 className="text-gray-600 hover:text-black transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={20} />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/zlgdesign/?hl=en"
                 className="text-gray-600 hover:text-black transition-colors"
                 aria-label="Instagram"
               >
@@ -51,12 +48,19 @@ export default function Footer() {
           <div>
             <h4 className="text-xs tracking-wider mb-4 font-light">locate us</h4>
             <div className="flex items-start space-x-2 text-xs text-gray-600">
-              <MapPin size={14} className="mt-0.5 flex-shrink-0" />
-              <address className="not-italic leading-relaxed">
-              1-8, Bangunan Perdagangan D7, 800<br />
-              Jln Sentul, Sentul, 51000 Kuala Lumpur,<br />
-              Federal Territory of Kuala Lumpur
-              </address>
+              <a
+                href="https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=my&sa=X&geocode=KduUg9cRSMwxMZi5ZMdOXRTA&daddr=1-8,+Bangunan+Perdagangan+D7,+800,+Jln+Sentul,+Sentul,+51000+Kuala+Lumpur,+Federal+Territory+of+Kuala+Lumpur"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start space-x-2 text-xs text-gray-600 hover:text-black transition-colors group"
+              >
+                <MapPin size={14} className="mt-0.5 flex-shrink-0" />
+                <address className="not-italic leading-relaxed">
+                  1-8, Bangunan Perdagangan D7, 800<br />
+                  Jln Sentul, Sentul, 51000 Kuala Lumpur,<br />
+                  Federal Territory of Kuala Lumpur
+                </address>
+              </a>
             </div>
           </div>
         </div>

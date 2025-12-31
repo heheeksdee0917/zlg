@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function Partnerships() {
+  const [fadeIn, setFadeIn] = useState(false);
+
+  useEffect(() => {
+    setFadeIn(false);
+    const timer = setTimeout(() => setFadeIn(true), 50);
+    return () => clearTimeout(timer);
+  }, []);
+
   const keyPartners = [
     {
       name: 'Huat LIM',
@@ -21,10 +29,10 @@ export default function Partnerships() {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className={`min-h-screen transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
       {/* Parallax Hero Section */}
       <section className="relative h-screen overflow-hidden">
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{
             backgroundImage: 'url(https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1920)',
@@ -87,7 +95,7 @@ export default function Partnerships() {
 
       {/* Parallax Middle Section */}
       <section className="relative h-96 overflow-hidden">
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{
             backgroundImage: 'url(https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1920)',
@@ -168,10 +176,11 @@ export default function Partnerships() {
               We're always interested in connecting with talented consultants, engineers, contractors, and fabricators who share our values. If you believe in design excellence and collaborative practice, let's talk.
             </p>
             <a
-              href="mailto:partnerships@zlgdesign.com"
-              className="inline-block text-sm tracking-wide px-12 py-4 border border-black hover:bg-black hover:text-white transition-colors font-light"
+              href="mailto:info@zlgdesign.com"
+              className="inline-block text-sm tracking-wide px-12 py-4 border border-black font-light relative overflow-hidden group"
             >
-              Contact Us
+              <span className="absolute inset-0 bg-black transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+              <span className="relative z-10 group-hover:text-white transition-colors duration-300">contact us</span>
             </a>
           </div>
         </div>

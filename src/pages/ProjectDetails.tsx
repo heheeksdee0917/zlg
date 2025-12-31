@@ -5,6 +5,7 @@ import { projects } from '../data/projects';
 import { useState, useEffect } from 'react';
 
 
+
 export default function ProjectDetails() {
   const { slug } = useParams<{ slug: string }>();
   const project = projects.find((p) => p.slug === slug);
@@ -16,6 +17,18 @@ export default function ProjectDetails() {
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [dragStart, setDragStart] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
+  const [fadeIn, setFadeIn] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setFadeIn(false);
+    const timer = setTimeout(() => setFadeIn(true), 50);
+    return () => clearTimeout(timer);
+  }, [slug]);
 
   if (!project) {
     return (
@@ -127,15 +140,14 @@ export default function ProjectDetails() {
     setShowFullDescription(!showFullDescription);
   };
 
-  // Handle both string and array formats for fullDescription
-// Handle both string and array formats for fullDescription
-const paragraphs = project.fullDescription 
-  ? (Array.isArray(project.fullDescription) 
-      ? project.fullDescription 
+
+  const paragraphs = project.fullDescription
+    ? (Array.isArray(project.fullDescription)
+      ? project.fullDescription
       : project.fullDescription.split('\n').filter(p => p.trim() !== ''))
-  : [];
-const firstParagraph = paragraphs[0] || '';
-const shouldShowToggle = paragraphs.length > 1;
+    : [];
+  const firstParagraph = paragraphs[0] || '';
+  const shouldShowToggle = paragraphs.length > 1;
 
   // Keyboard navigation
   useEffect(() => {
@@ -160,11 +172,12 @@ const shouldShowToggle = paragraphs.length > 1;
   }, [lightboxOpen, currentImageIndex]);
 
   return (
-    <div className="min-h-screen pt-10">
+
+    <div className={`min-h-screen pt-10 transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
       <section className="grid md:grid-cols-3 gap-0">
         <div className="md:col-span-2 overflow-y-auto md:h-screen">
           {project.images.map((image, index) => (
-            <div 
+            <div
               key={index}
               className="w-full cursor-pointer mb-[5px]"
               onClick={() => openLightbox(image, index)}
@@ -283,7 +296,7 @@ const shouldShowToggle = paragraphs.length > 1;
 
       {/* Lightbox */}
       {lightboxOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center"
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
@@ -356,7 +369,7 @@ const shouldShowToggle = paragraphs.length > 1;
                 src={lightboxImage}
                 alt="Full size view"
                 className="select-none"
-                style={{ 
+                style={{
                   maxWidth: '100vw',
                   maxHeight: '100vh',
                   width: 'auto',
