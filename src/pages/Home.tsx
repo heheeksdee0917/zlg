@@ -2,11 +2,13 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { projects } from '../data/projects';
 import { newsItems } from '../data/news';
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect, useRef } from 'react';
 
 export default function Home() {
   const [fadeIn, setFadeIn] = useState(false);
+  const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
+  const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  
   const featuredProjects = projects.slice(0, 3);
   const latestNews = newsItems.slice(0, 2);
 
@@ -16,6 +18,34 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.getAttribute('data-section');
+          setVisibleSections(prev => ({ ...prev, [sectionId]: true }));
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    Object.values(sectionRefs.current).forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const setRef = (id) => (el) => {
+    sectionRefs.current[id] = el;
+  };
+
   return (
     <div className={`min-h-screen transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
       {/* Hero Section */}
@@ -24,7 +54,7 @@ export default function Home() {
           <img
             src="https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1920"
             alt="Signature architectural project"
-            className="w-full h-[620px] md:h-[720px] lg:h-[820px] object-cover"
+            className="w-full h-[820px] md:h-[720px] lg:h-[820px] object-cover"
             loading="eager"
           />
           <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
@@ -41,44 +71,55 @@ export default function Home() {
       </section>
 
       {/* Featured Projects Section */}
-      <section className="max-w-screen-2xl mx-auto px-4 pt-8 pb-32">
-        <div className="mb-16 text-center">
-          <h2 className="text-3xl font-medium tracking-wider mb-4">featured Projects</h2>
-          <p className="text-gray-600 max-w-2xl font-light mx-auto">
-            explore our portfolio of transformative architectural works that blend innovation, sustainability, and timeless elegance.
-          </p>
+      <section className="pt-16 pb-32">
+        <div className="mb-12 text-center max-w-screen-2xl mx-auto px-4">
+          <h2 className="text-3xl font-medium tracking-wider mb-4">featured projects</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {featuredProjects.map((project) => (
+        <div className="grid grid-cols-1 md:grid-cols-3">
+          {featuredProjects.map((project, index) => (
             <Link
               key={project.id}
               to={`/projects/${project.slug}`}
-              className="group block transition-all duration-500 ease-out hover:scale-105 hover:-translate-y-2"
+              ref={index === 0 ? setRef('featured') : undefined}
+              data-section={index === 0 ? 'featured' : undefined}
+              className={`group block relative overflow-hidden transition-all duration-1000 ease-out ${
+                visibleSections.featured ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              }`}
+              style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <div className="overflow-hidden mb-4">
+              <div className="relative w-full" style={{ aspectRatio: '2/3' }}>
                 <img
                   src={project.heroImage}
                   alt={project.title}
-                  className="w-full h-96 object-cover transition-transform duration-700"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
+                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-500"></div>
               </div>
-              <h3 className="text-xl font-light tracking-wide mb-2 relative inline-block">
-                {project.title}
-                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
-              </h3>
-              <p className="text-sm text-gray-600 mb-2 font-light">
-                {project.location} • {project.year}
-              </p>
-              <p className="text-sm text-gray-700 line-clamp-2 font-light">
-                {project.shortDescription}
-              </p>
+              <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent text-white">
+                <h3 className="text-xl font-light tracking-wide mb-2 relative inline-block">
+                  {project.title}
+                  <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-white transition-all duration-500 ease-out group-hover:w-full"></span>
+                </h3>
+                <p className="text-sm mb-2 font-light opacity-90">
+                  {project.location} • {project.year}
+                </p>
+                <p className="text-sm line-clamp-2 font-light opacity-80">
+                  {project.shortDescription}
+                </p>
+              </div>
             </Link>
           ))}
         </div>
 
-        <div className="text-center mt-16">
+        <div className={`text-center mt-32 max-w-screen-2xl mx-auto px-4 transition-all duration-1000 ease-out delay-500 ${
+          visibleSections.featured ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+        }`}>
+          <h2 className="text-3xl font-medium tracking-wider mb-4">our collections</h2>
+          <p className="text-gray-600 max-w-2xl font-light mx-auto mb-8">
+            explore our portfolio of transformative architectural works that blend innovation, sustainability, and timeless elegance.
+          </p>
           <Link
             to="/projects"
             className="inline-flex items-center space-x-2 text-sm tracking-wide border-b border-black hover:border-gray-400 transition-colors font-light"
@@ -90,7 +131,13 @@ export default function Home() {
       </section>
 
       {/* Philosophy Section */}
-      <section className="relative h-screen">
+      <section 
+        ref={setRef('philosophy')}
+        data-section="philosophy"
+        className={`relative h-screen transition-all duration-1000 ease-out ${
+          visibleSections.philosophy ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+        }`}
+      >
         <img
           src="https://images.pexels.com/photos/1707823/pexels-photo-1707823.jpeg?auto=compress&cs=tinysrgb&w=1920"
           alt="Philosophy visualization"
@@ -98,7 +145,9 @@ export default function Home() {
           loading="lazy"
         />
         <div className="absolute inset-0 bg-white bg-opacity-80 flex items-center justify-center">
-          <div className="max-w-3xl text-center px-8">
+          <div className={`max-w-3xl text-center px-8 transition-all duration-1000 ease-out delay-300 ${
+            visibleSections.philosophy ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}>
             <h2 className="text-4xl font-medium tracking-wider mb-8">our philosophy</h2>
             <p className="text-lg text-gray-700 leading-relaxed mb-8 font-light">
               we believe architecture is an act of transformation—a dialogue between instinct and intention, tradition and innovation. Each project is a narrative crafted through sustainable design, material authenticity, and spatial poetry.
@@ -115,16 +164,27 @@ export default function Home() {
       </section>
 
       {/* Latest News Section */}
-      <section className="bg-white py-32">
+      <section 
+        ref={setRef('news')}
+        data-section="news"
+        className="bg-white py-32"
+      >
         <div className="max-w-screen-2xl mx-auto px-8">
-          <h2 className="text-3xl font-medium tracking-wider mb-16 text-center">latest news</h2>
+          <h2 className={`text-3xl font-medium tracking-wider mb-16 text-center transition-all duration-1000 ease-out ${
+            visibleSections.news ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}>
+            latest news
+          </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {latestNews.map((news) => (
+            {latestNews.map((news, index) => (
               <Link
                 key={news.id}
                 to={`/news/${news.slug}`}
-                className="group"
+                className={`group transition-all duration-1000 ease-out ${
+                  visibleSections.news ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                }`}
+                style={{ transitionDelay: `${index * 200}ms` }}
               >
                 <div className="overflow-hidden mb-4">
                   <img
@@ -148,7 +208,13 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section className="max-w-screen-2xl mx-auto px-2 py-32 text-center">
+      <section 
+        ref={setRef('contact')}
+        data-section="contact"
+        className={`max-w-screen-2xl mx-auto px-2 py-32 text-center transition-all duration-1000 ease-out ${
+          visibleSections.contact ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+        }`}
+      >
         <h2 className="text-4xl font-medium tracking-wider mb-8">start your project</h2>
         <p className="text-lg text-gray-700 max-w-2xl mx-auto mb-12 font-light">
           let's collaborate to create spaces that inspire, endure, and transform. reach out to discuss your vision.

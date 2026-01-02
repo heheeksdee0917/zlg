@@ -1,25 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
 
 export default function Projects() {
   const [fadeIn, setFadeIn] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(4);
+  const [loading, setLoading] = useState(false);
+  const observerRef = useRef(null);
 
   useEffect(() => {
-    setFadeIn(false);
     const timer = setTimeout(() => setFadeIn(true), 50);
     return () => clearTimeout(timer);
   }, []);
 
-  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && visibleCount < projects.length && !loading) {
+          setLoading(true);
+          setTimeout(() => {
+            setVisibleCount(prev => Math.min(prev + 4, projects.length));
+            setLoading(false);
+          }, 500);
+        }
+      },
+      { threshold: 0.1 }
+    );
 
-  const handleImageLoad = (imageUrl: string) => {
-    setLoadedImages(prev => new Set(prev).add(imageUrl));
-  };
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [visibleCount, loading]);
+
+  const visibleProjects = projects.slice(0, visibleCount);
 
   return (
     <div className={`min-h-screen pt-20 transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
-      <section className="max-w-screen-2xl mx-auto px-8 py-16">
+      <section className="max-w-screen-2xl mx-auto px-8 py-8">
         <div className="mb-16">
           <h1 className="text-4xl md:text-5xl font-light tracking-wider mb-6">projects</h1>
           <p className="text-lg text-gray-600 max-w-3xl">
@@ -27,30 +46,19 @@ export default function Projects() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12">
-          {projects.map((project) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {visibleProjects.map((project) => (
             <Link
               key={project.id}
               to={`/projects/${project.slug}`}
               className="group block transition-all duration-500 ease-out hover:scale-105 hover:-translate-y-2"
             >
-              <div className="overflow-hidden mb-6 relative bg-gray-200">
-                {!loadedImages.has(project.heroImage) && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="animate-pulse flex space-x-2">
-                      <div className="w-3 h-3 bg-gray-400 rounded-full animate-bounce"></div>
-                      <div className="w-3 h-3 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                      <div className="w-3 h-3 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                    </div>
-                  </div>
-                )}
+              <div className="overflow-hidden mb-6 bg-gray-200">
                 <img
                   src={project.heroImage}
                   alt={project.title}
-                  className={`w-full h-[500px] object-cover transition-all duration-700 ${loadedImages.has(project.heroImage) ? 'opacity-100' : 'opacity-0'
-                    }`}
+                  className="w-full h-[500px] object-cover transition-opacity duration-700"
                   loading="lazy"
-                  onLoad={() => handleImageLoad(project.heroImage)}
                 />
               </div>
 
@@ -74,6 +82,17 @@ export default function Projects() {
               </div>
             </Link>
           ))}
+        </div>
+
+        {/* Intersection Observer Target */}
+        <div ref={observerRef} className="h-20 flex items-center justify-center mt-12">
+          {loading && (
+            <div className="flex space-x-2">
+              <div className="w-3 h-3 bg-gray-400 rounded-full animate-bounce"></div>
+              <div className="w-3 h-3 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+              <div className="w-3 h-3 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+            </div>
+          )}
         </div>
       </section>
     </div>

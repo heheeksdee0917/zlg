@@ -1,10 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, X, ZoomIn, ZoomOut, ChevronLeft, ChevronRight } from 'lucide-react';
 import { projects } from '../data/projects';
-import { useState, useEffect } from 'react';
-
-
 
 export default function ProjectDetails() {
   const { slug } = useParams<{ slug: string }>();
@@ -13,22 +10,56 @@ export default function ProjectDetails() {
   const [lightboxOpen, setLightboxOpen] = useState<boolean>(false);
   const [lightboxImage, setLightboxImage] = useState<string>('');
   const [zoom, setZoom] = useState<number>(1);
-  const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-  const [isDragging, setIsDragging] = useState<boolean>(false);
-  const [dragStart, setDragStart] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
   const [fadeIn, setFadeIn] = useState(false);
+  const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
+  const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [slug]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+    setShowFullDescription(false);
+    setCurrentImageIndex(0);
+    setLightboxOpen(false);
+    setZoom(1);
     setFadeIn(false);
+    setVisibleSections({});
     const timer = setTimeout(() => setFadeIn(true), 50);
     return () => clearTimeout(timer);
   }, [slug]);
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.getAttribute('data-section');
+          if (sectionId) {
+            setVisibleSections(prev => ({ ...prev, [sectionId]: true }));
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    Object.values(sectionRefs.current).forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, [slug]);
+
+  const setRef = (id: string) => (el: HTMLElement | null) => {
+    sectionRefs.current[id] = el;
+  };
 
   if (!project) {
     return (
@@ -50,13 +81,11 @@ export default function ProjectDetails() {
     setCurrentImageIndex(index);
     setLightboxOpen(true);
     setZoom(1);
-    setPosition({ x: 0, y: 0 });
   };
 
   const closeLightbox = () => {
     setLightboxOpen(false);
     setZoom(1);
-    setPosition({ x: 0, y: 0 });
   };
 
   const navigatePrevious = () => {
@@ -65,7 +94,6 @@ export default function ProjectDetails() {
       setCurrentImageIndex(newIndex);
       setLightboxImage(project.images[newIndex]);
       setZoom(1);
-      setPosition({ x: 0, y: 0 });
     }
   };
 
@@ -75,7 +103,6 @@ export default function ProjectDetails() {
       setCurrentImageIndex(newIndex);
       setLightboxImage(project.images[newIndex]);
       setZoom(1);
-      setPosition({ x: 0, y: 0 });
     }
   };
 
@@ -84,62 +111,12 @@ export default function ProjectDetails() {
   };
 
   const handleZoomOut = () => {
-    setZoom((prev) => {
-      const newZoom = Math.max(prev - 0.5, 1);
-      if (newZoom === 1) {
-        setPosition({ x: 0, y: 0 });
-      }
-      return newZoom;
-    });
-  };
-
-  const handleMouseDown = (e: React.MouseEvent<HTMLImageElement>) => {
-    if (zoom > 1) {
-      setIsDragging(true);
-      setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y });
-    }
-  };
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isDragging && zoom > 1) {
-      setPosition({
-        x: e.clientX - dragStart.x,
-        y: e.clientY - dragStart.y,
-      });
-    }
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleTouchStart = (e: React.TouchEvent<HTMLImageElement>) => {
-    if (zoom > 1 && e.touches.length === 1) {
-      setIsDragging(true);
-      setDragStart({
-        x: e.touches[0].clientX - position.x,
-        y: e.touches[0].clientY - position.y,
-      });
-    }
-  };
-
-  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (isDragging && zoom > 1 && e.touches.length === 1) {
-      setPosition({
-        x: e.touches[0].clientX - dragStart.x,
-        y: e.touches[0].clientY - dragStart.y,
-      });
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
+    setZoom((prev) => Math.max(prev - 0.5, 1));
   };
 
   const toggleDescription = () => {
     setShowFullDescription(!showFullDescription);
   };
-
 
   const paragraphs = project.fullDescription
     ? (Array.isArray(project.fullDescription)
@@ -149,7 +126,6 @@ export default function ProjectDetails() {
   const firstParagraph = paragraphs[0] || '';
   const shouldShowToggle = paragraphs.length > 1;
 
-  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!lightboxOpen) return;
@@ -172,10 +148,9 @@ export default function ProjectDetails() {
   }, [lightboxOpen, currentImageIndex]);
 
   return (
-
     <div className={`min-h-screen pt-10 transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
       <section className="grid md:grid-cols-3 gap-0">
-        <div className="md:col-span-2 overflow-y-auto md:h-screen">
+        <div className="md:col-span-2 overflow-y-auto md:h-screen" ref={scrollContainerRef}>
           {project.images.map((image, index) => (
             <div
               key={index}
@@ -187,54 +162,55 @@ export default function ProjectDetails() {
                 alt={`${project.title} - Image ${index + 1}`}
                 className="w-full h-auto object-cover"
                 loading={index === 0 ? "eager" : "lazy"}
+                key={`${slug}-${index}`}
               />
             </div>
           ))}
         </div>
 
-        <div className="bg-white p-8 md:p-12 md:sticky md:top-20 md:h-screen overflow-hidden flex flex-col">
-          <h1 className="text-3xl font-bold tracking-wider mb-4">{project.title}</h1>
+        <div className="bg-white md:sticky md:top-20 md:h-screen overflow-y-auto custom-scrollbar">
+          <div className="p-8 md:p-12">
+            <h1 className="text-3xl font-bold tracking-wider mb-4">{project.title}</h1>
 
-          <div className="space-y-4 mb-8 text-sm text-gray-600 font-light">
-            <div className="flex justify-between border-b border-gray-200 pb-2">
-              <span>Year</span>
-              <span>{project.year}</span>
+            <div className="space-y-4 mb-8 text-sm text-gray-600 font-light">
+              <div className="flex justify-between border-b border-gray-200 pb-2">
+                <span>Year</span>
+                <span>{project.year}</span>
+              </div>
+              <div className="flex justify-between border-b border-gray-200 pb-2">
+                <span>Location</span>
+                <span>{project.location}</span>
+              </div>
+              <div className="flex justify-between border-b border-gray-200 pb-2">
+                <span>Category</span>
+                <span>{project.category}</span>
+              </div>
+              <div className="flex justify-between border-b border-gray-200 pb-2">
+                <span>Client</span>
+                <span>{project.client}</span>
+              </div>
+              <div className="flex justify-between border-b border-gray-200 pb-2">
+                <span>Area</span>
+                <span>{project.area}</span>
+              </div>
             </div>
-            <div className="flex justify-between border-b border-gray-200 pb-2">
-              <span>Location</span>
-              <span>{project.location}</span>
-            </div>
-            <div className="flex justify-between border-b border-gray-200 pb-2">
-              <span>Category</span>
-              <span>{project.category}</span>
-            </div>
-            <div className="flex justify-between border-b border-gray-200 pb-2">
-              <span>Client</span>
-              <span>{project.client}</span>
-            </div>
-            <div className="flex justify-between border-b border-gray-200 pb-2">
-              <span>Area</span>
-              <span>{project.area}</span>
-            </div>
-          </div>
 
-          <div className="mb-8">
-            <h3 className="text-xs uppercase tracking-wider mb-3 font-light">Materials</h3>
-            <div className="flex flex-wrap gap-2">
-              {project.materials.map((material) => (
-                <span
-                  key={material}
-                  className="text-xs px-3 py-1 border border-gray-300 tracking-wide font-light"
-                >
-                  {material}
-                </span>
-              ))}
+            <div className="mb-8">
+              <h3 className="text-xs uppercase tracking-wider mb-3 font-light">Materials</h3>
+              <div className="flex flex-wrap gap-2">
+                {project.materials.map((material) => (
+                  <span
+                    key={material}
+                    className="text-xs px-3 py-1 border border-gray-300 tracking-wide font-light"
+                  >
+                    {material}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
 
-          <div className="border-t border-gray-200 pt-8 flex-1 overflow-hidden flex flex-col">
-            <h3 className="text-xs uppercase tracking-wider mb-4 font-light">Project Write-up</h3>
-            <div className="overflow-y-auto flex-1 pr-2 custom-scrollbar">
+            <div className="border-t border-gray-200 pt-8">
+              <h3 className="text-xs uppercase tracking-wider mb-4 font-light">Project Write-up</h3>
               {showFullDescription ? (
                 paragraphs.map((paragraph, index) => (
                   paragraph === '' ? (
@@ -263,16 +239,27 @@ export default function ProjectDetails() {
         </div>
       </section>
 
-      <section className="bg-gray-50 py-32">
+      <section 
+        ref={setRef('related')}
+        data-section="related"
+        className="bg-gray-50 py-32"
+      >
         <div className="max-w-screen-2xl mx-auto px-8">
-          <h2 className="text-3xl font-medium tracking-wider mb-16">Related Projects</h2>
+          <h2 className={`text-3xl font-medium tracking-wider mb-16 transition-all duration-1000 ease-out ${
+            visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}>
+            Related Projects
+          </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {relatedProjects.map((relatedProject) => (
+            {relatedProjects.map((relatedProject, index) => (
               <Link
                 key={relatedProject.id}
                 to={`/projects/${relatedProject.slug}`}
-                className="group"
+                className={`group transition-all duration-1000 ease-out ${
+                  visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                }`}
+                style={{ transitionDelay: `${index * 150}ms` }}
               >
                 <div className="overflow-hidden mb-4">
                   <img
@@ -294,16 +281,8 @@ export default function ProjectDetails() {
         </div>
       </section>
 
-      {/* Lightbox */}
       {lightboxOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center"
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-        >
+        <div className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center">
           <button
             onClick={closeLightbox}
             className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
@@ -332,7 +311,6 @@ export default function ProjectDetails() {
             </button>
           </div>
 
-          {/* Navigation Arrows */}
           {currentImageIndex > 0 && (
             <button
               onClick={navigatePrevious}
@@ -353,35 +331,24 @@ export default function ProjectDetails() {
             </button>
           )}
 
-          {/* Image Counter */}
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white font-light text-sm z-10">
             {currentImageIndex + 1} / {project.images.length}
           </div>
 
-          <div className="overflow-hidden w-full h-full flex items-center justify-center p-4 md:p-8">
-            <div
-              className="transition-transform duration-200"
+          <div className="overflow-auto w-full h-full flex items-center justify-center p-4 md:p-8">
+            <img
+              src={lightboxImage}
+              alt="Full size view"
+              className="select-none transition-transform duration-200"
               style={{
-                transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
+                transform: `scale(${zoom})`,
+                maxWidth: '90vw',
+                maxHeight: '90vh',
+                width: 'auto',
+                height: 'auto',
+                objectFit: 'contain'
               }}
-            >
-              <img
-                src={lightboxImage}
-                alt="Full size view"
-                className="select-none"
-                style={{
-                  maxWidth: '100vw',
-                  maxHeight: '100vh',
-                  width: 'auto',
-                  height: 'auto',
-                  objectFit: 'contain',
-                  cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default'
-                }}
-                onMouseDown={handleMouseDown}
-                onTouchStart={handleTouchStart}
-                draggable={false}
-              />
-            </div>
+            />
           </div>
         </div>
       )}

@@ -1,13 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 export default function Philosophy() {
   const [fadeIn, setFadeIn] = useState(false);
+  const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
+  const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
   useEffect(() => {
     setFadeIn(false);
     const timer = setTimeout(() => setFadeIn(true), 50);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.getAttribute('data-section');
+          setVisibleSections(prev => ({ ...prev, [sectionId]: true }));
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    Object.values(sectionRefs.current).forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const setRef = (id) => (el) => {
+    sectionRefs.current[id] = el;
+  };
 
   return (
     <div className={`min-h-screen transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
@@ -26,7 +56,13 @@ export default function Philosophy() {
 
       <section className="max-w-4xl mx-auto px-8 py-32">
         <div className="space-y-24">
-          <div className="text-center">
+          <div 
+            ref={setRef('intro')}
+            data-section="intro"
+            className={`text-center transition-all duration-1000 ease-out ${
+              visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             <h2 className="text-3xl font-light tracking-wider mb-8">
               Beyond Pre-Defined Architectural Pursuit
             </h2>
@@ -38,13 +74,25 @@ export default function Philosophy() {
             </p>
           </div>
 
-          <div className="relative">
+          <div 
+            ref={setRef('image1')}
+            data-section="image1"
+            className={`relative transition-all duration-1000 ease-out ${
+              visibleSections.image1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
               <span className="text-gray-400 text-sm tracking-wide">IMAGE PLACEHOLDER</span>
             </div>
           </div>
 
-          <div>
+          <div 
+            ref={setRef('intelligence')}
+            data-section="intelligence"
+            className={`transition-all duration-1000 ease-out ${
+              visibleSections.intelligence ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             <h3 className="text-2xl font-light tracking-wide mb-6">Design Intelligence</h3>
             <p className="text-gray-700 leading-relaxed mb-4">
               zlgdesign's very own approach to design development processes in the organisation is a self-critique on a customised proto-typing and exploration technique. We would call this design intelligence, developed over many years to survive critical investigation and intellectual discourse on all levels of our work.
@@ -57,37 +105,69 @@ export default function Philosophy() {
             </p>
           </div>
 
-          <div className="relative">
+          <div 
+            ref={setRef('image2')}
+            data-section="image2"
+            className={`relative transition-all duration-1000 ease-out ${
+              visibleSections.image2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
               <span className="text-gray-400 text-sm tracking-wide">IMAGE PLACEHOLDER</span>
             </div>
           </div>
 
-          <div>
+          <div 
+            ref={setRef('typology')}
+            data-section="typology"
+            className={`transition-all duration-1000 ease-out ${
+              visibleSections.typology ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             <h3 className="text-2xl font-light tracking-wide mb-6">Beyond Typology</h3>
             <p className="text-gray-700 leading-relaxed">
               Today's buildings are designed to fit within preset parameters largely defined by their typology rather than aesthetics or ethos. Fortunately for us, this has become a challenge on zlgdesign's creative processes as it reinforces our idea that buildings can share multiple typologies and encapsulate more than one function or purposefulness. It is in this context we tend to move our designs away from mainstream typological sets, in fact we would actually design ambiguous spaces or third spaces that exhibit or inherit many hybrids in the final execution.
             </p>
           </div>
 
-          <blockquote className="text-2xl font-light text-center italic text-gray-800 py-16 border-t border-b border-gray-300">
+          <blockquote 
+            ref={setRef('quote1')}
+            data-section="quote1"
+            className={`text-2xl font-light text-center italic text-gray-800 py-16 border-t border-b border-gray-300 transition-all duration-1000 ease-out ${
+              visibleSections.quote1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             If it doesn't engage or connect with one's emotion, or if it's just not involving enough, we'll probably just throw it out the window. We won't want to take that thing all the way to the end. If it's not intriguing enough, and doesn't hold any mystery or surprises then I guess it really isn't worth developing. The drama isn't going to be there by the time one is finished with it, not enough to sustain the experience.
           </blockquote>
 
-          <div className="relative">
+          <div 
+            ref={setRef('image3')}
+            data-section="image3"
+            className={`relative transition-all duration-1000 ease-out ${
+              visibleSections.image3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
               <span className="text-gray-400 text-sm tracking-wide">IMAGE PLACEHOLDER</span>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-16">
-            <div>
+          <div 
+            ref={setRef('contrast')}
+            data-section="contrast"
+            className="grid md:grid-cols-2 gap-16"
+          >
+            <div className={`transition-all duration-1000 ease-out ${
+              visibleSections.contrast ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}>
               <h3 className="text-2xl font-light tracking-wide mb-6">Contrast and Tension</h3>
               <p className="text-gray-700 leading-relaxed">
                 zlgdesign's more minimal work belies warmer and more democratic proposals that can still exhibit simpler but more cutting edge ideas. Other work gravitate towards using elements from the old world placed inside more modern envelopes.
               </p>
             </div>
-            <div>
+            <div className={`transition-all duration-1000 ease-out delay-300 ${
+              visibleSections.contrast ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}>
               <h3 className="text-2xl font-light tracking-wide mb-6">Past Meets Future</h3>
               <p className="text-gray-700 leading-relaxed">
                 The contrast or tension resulting from these associations and juxtapositions in their work is a constant characteristic feature in recent and upcoming projects. These explorations of bringing together things from the past and those brought out of new technology or research has become a constant inspiration.
@@ -95,18 +175,36 @@ export default function Philosophy() {
             </div>
           </div>
 
-          <div className="relative">
+          <div 
+            ref={setRef('image4')}
+            data-section="image4"
+            className={`relative transition-all duration-1000 ease-out ${
+              visibleSections.image4 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
               <span className="text-gray-400 text-sm tracking-wide">IMAGE PLACEHOLDER</span>
             </div>
           </div>
 
-          <blockquote className="text-xl font-light text-center italic text-gray-800 py-12 border-t border-b border-gray-300">
+          <blockquote 
+            ref={setRef('quote2')}
+            data-section="quote2"
+            className={`text-xl font-light text-center italic text-gray-800 py-12 border-t border-b border-gray-300 transition-all duration-1000 ease-out ${
+              visibleSections.quote2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             God created paper for the purpose of drawing architecture on it. Everything else is, at least for me, an abuse of paper.
             <span className="block text-sm not-italic mt-4 text-gray-600">— Alvar Aalto</span>
           </blockquote>
 
-          <div className="text-center">
+          <div 
+            ref={setRef('imagination')}
+            data-section="imagination"
+            className={`text-center transition-all duration-1000 ease-out ${
+              visibleSections.imagination ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             <h3 className="text-2xl font-light tracking-wide mb-6">
               The Power of Imagination
             </h3>
@@ -118,7 +216,13 @@ export default function Philosophy() {
             </p>
           </div>
 
-          <div className="relative">
+          <div 
+            ref={setRef('image5')}
+            data-section="image5"
+            className={`relative transition-all duration-1000 ease-out ${
+              visibleSections.image5 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
             <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
               <span className="text-gray-400 text-sm tracking-wide">IMAGE PLACEHOLDER</span>
             </div>
@@ -126,27 +230,41 @@ export default function Philosophy() {
         </div>
       </section>
 
-      <section className="bg-gray-50 py-32">
+      <section 
+        ref={setRef('principles')}
+        data-section="principles"
+        className="bg-gray-50 py-32"
+      >
         <div className="max-w-screen-2xl mx-auto px-8">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-light tracking-wider mb-12 text-center">Core Principles</h2>
+            <h2 className={`text-3xl font-light tracking-wider mb-12 text-center transition-all duration-1000 ease-out ${
+              visibleSections.principles ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}>
+              Core Principles
+            </h2>
 
             <div className="grid md:grid-cols-3 gap-12">
-              <div className="text-center">
+              <div className={`text-center transition-all duration-1000 ease-out ${
+                visibleSections.principles ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              }`} style={{ transitionDelay: '200ms' }}>
                 <h4 className="text-xl font-light tracking-wide mb-4">Emotion Over Style</h4>
                 <p className="text-gray-700 leading-relaxed">
                   Architecture must engage the human spirit and connect emotionally, transcending mere aesthetics.
                 </p>
               </div>
 
-              <div className="text-center">
+              <div className={`text-center transition-all duration-1000 ease-out ${
+                visibleSections.principles ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              }`} style={{ transitionDelay: '400ms' }}>
                 <h4 className="text-xl font-light tracking-wide mb-4">Design Intelligence</h4>
                 <p className="text-gray-700 leading-relaxed">
                   A customized exploration technique developed through critical investigation and intellectual discourse.
                 </p>
               </div>
 
-              <div className="text-center">
+              <div className={`text-center transition-all duration-1000 ease-out ${
+                visibleSections.principles ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              }`} style={{ transitionDelay: '600ms' }}>
                 <h4 className="text-xl font-light tracking-wide mb-4">Hybrid Spaces</h4>
                 <p className="text-gray-700 leading-relaxed">
                   Creating ambiguous third spaces that exhibit multiple typologies and purposes.
