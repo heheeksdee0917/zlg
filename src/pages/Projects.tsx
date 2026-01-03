@@ -6,9 +6,10 @@ export default function Projects() {
   const [fadeIn, setFadeIn] = useState(false);
   const [visibleCount, setVisibleCount] = useState(4);
   const [loading, setLoading] = useState(false);
-  const observerRef = useRef(null);
+  const observerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const timer = setTimeout(() => setFadeIn(true), 50);
     return () => clearTimeout(timer);
   }, []);
