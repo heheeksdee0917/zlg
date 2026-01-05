@@ -65,9 +65,9 @@ export default function ProjectDetails() {
     return (
       <div className="min-h-screen pt-10 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold tracking-wider mb-4">Project Not Found</h1>
+          <h1 className="text-4xl font-bold tracking-wider mb-4">project not found</h1>
           <Link to="/projects" className="text-sm border-b border-black hover:border-gray-400 font-light">
-            Return to Projects
+            return to projects
           </Link>
         </div>
       </div>
@@ -118,13 +118,9 @@ export default function ProjectDetails() {
     setShowFullDescription(!showFullDescription);
   };
 
-  const paragraphs = project.fullDescription
-    ? (Array.isArray(project.fullDescription)
-      ? project.fullDescription
-      : project.fullDescription.split('\n').filter(p => p.trim() !== ''))
-    : [];
-  const firstParagraph = paragraphs[0] || '';
-  const shouldShowToggle = paragraphs.length > 1;
+  const detailContent = project.detailContent || [];
+  const hasContent = detailContent.length > 0;
+  const shouldShowToggle = detailContent.length > 3;
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -170,69 +166,57 @@ export default function ProjectDetails() {
 
         <div className="bg-white md:sticky md:top-20 md:h-screen overflow-y-auto custom-scrollbar">
           <div className="p-8 md:p-12">
-            <h1 className="text-3xl font-bold tracking-wider mb-4">{project.title}</h1>
-
-            <div className="space-y-4 mb-8 text-sm text-gray-600 font-light">
-              <div className="flex justify-between border-b border-gray-200 pb-2">
-                <span>Year</span>
-                <span>{project.year}</span>
-              </div>
-              <div className="flex justify-between border-b border-gray-200 pb-2">
-                <span>Location</span>
-                <span>{project.location}</span>
-              </div>
-              <div className="flex justify-between border-b border-gray-200 pb-2">
-                <span>Category</span>
-                <span>{project.category}</span>
-              </div>
-              <div className="flex justify-between border-b border-gray-200 pb-2">
-                <span>Client</span>
-                <span>{project.client}</span>
-              </div>
-              <div className="flex justify-between border-b border-gray-200 pb-2">
-                <span>Area</span>
-                <span>{project.area}</span>
-              </div>
-            </div>
-
             <div className="mb-8">
-              <h3 className="text-xs uppercase tracking-wider mb-3 font-light">Materials</h3>
-              <div className="flex flex-wrap gap-2">
-                {project.materials.map((material) => (
-                  <span
-                    key={material}
-                    className="text-xs px-3 py-1 border border-gray-300 tracking-wide font-light"
-                  >
-                    {material}
-                  </span>
-                ))}
-              </div>
+              <h1 className="text-3xl font-bold tracking-wider mb-2 lowercase">
+                {project.title}
+              </h1>
+              <p className="text-sm text-gray-600 font-light lowercase">
+                {project.location}, {project.year}
+              </p>
             </div>
 
             <div className="border-t border-gray-200 pt-8">
-              <h3 className="text-xs uppercase tracking-wider mb-4 font-light">Project Write-up</h3>
-              {showFullDescription ? (
-                paragraphs.map((paragraph, index) => (
-                  paragraph === '' ? (
-                    <div key={index} className="mb-4"></div>
+              <h3 className="text-xs tracking-wider mb-4 font-light">project write-up</h3>
+              {hasContent && (
+                <>
+                  {showFullDescription ? (
+                    detailContent.map((block, index) => (
+                      <div key={index} className="mb-6">
+                        {block.heading && (
+                          <h4 className="text-xl font-semibold tracking-wide mb-4 lowercase">
+                            {block.heading}
+                          </h4>
+                        )}
+                        <p className="text-gray-700 leading-relaxed font-light lowercase">
+                          {block.content}
+                        </p>
+                      </div>
+                    ))
                   ) : (
-                    <p key={index} className="text-gray-700 leading-relaxed font-light mb-4">
-                      {paragraph}
-                    </p>
-                  )
-                ))
-              ) : (
-                <p className="text-gray-700 leading-relaxed font-light mb-4">
-                  {firstParagraph}
-                </p>
-              )}
-              {shouldShowToggle && (
-                <button
-                  onClick={toggleDescription}
-                  className="mt-2 text-sm text-black border-b border-black hover:border-gray-400 transition-colors font-light"
-                >
-                  {showFullDescription ? 'Show less' : 'Show more'}
-                </button>
+                    <>
+                      {detailContent.slice(0, 3).map((block, index) => (
+                        <div key={index} className="mb-6">
+                          {block.heading && (
+                            <h4 className="text-xl font-semibold tracking-wide mb-4 lowercase">
+                              {block.heading}
+                            </h4>
+                          )}
+                          <p className="text-gray-700 leading-relaxed font-light lowercase">
+                            {block.content}
+                          </p>
+                        </div>
+                      ))}
+                    </>
+                  )}
+                  {shouldShowToggle && (
+                    <button
+                      onClick={toggleDescription}
+                      className="mt-2 text-sm text-black border-b border-black hover:border-gray-400 transition-colors font-light"
+                    >
+                      {showFullDescription ? 'show less' : 'show more'}
+                    </button>
+                  )}
+                </>
               )}
             </div>
           </div>
@@ -248,7 +232,7 @@ export default function ProjectDetails() {
           <h2 className={`text-3xl font-medium tracking-wider mb-16 transition-all duration-1000 ease-out ${
             visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}>
-            Related Projects
+            related projects
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -269,10 +253,10 @@ export default function ProjectDetails() {
                     loading="lazy"
                   />
                 </div>
-                <h3 className="text-xl font-light tracking-wide mb-2 group-hover:border-b border-black inline-block">
+                <h3 className="text-xl font-light tracking-wide mb-2 group-hover:border-b border-black inline-block lowercase">
                   {relatedProject.title}
                 </h3>
-                <p className="text-sm text-gray-600 font-light">
+                <p className="text-sm text-gray-600 font-light lowercase">
                   {relatedProject.location} • {relatedProject.year}
                 </p>
               </Link>

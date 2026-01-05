@@ -94,7 +94,7 @@ export default function People() {
           loading="eager"
         />
         <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-          <h1 className="text-5xl md:text-6xl font-light tracking-wider text-white">
+          <h1 className="text-5xl md:text-6xl font-light tracking-wider text-white lowercase">
             People
           </h1>
         </div>
@@ -108,8 +108,8 @@ export default function People() {
         <div className={`max-w-3xl mx-auto text-center mb-24 transition-all duration-1000 ease-out ${
           visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
         }`}>
-          <h2 className="text-3xl font-light tracking-wider mb-8">Our Team</h2>
-          <p className="text-lg text-gray-700 leading-relaxed">
+          <h2 className="text-3xl font-light tracking-wider mb-8 lowercase">Our Team</h2>
+          <p className="text-lg text-gray-700 leading-relaxed lowercase">
             ZLG Design is a collective of architects, designers, and thinkers united by a shared passion for creating meaningful spaces. Our diverse backgrounds and expertise enable us to approach each project with fresh perspectives and rigorous craft.
           </p>
         </div>
@@ -125,7 +125,7 @@ export default function People() {
               }`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <div className="overflow-hidden mb-6">
+              <div className="overflow-hidden mb-6 ">
                 <img
                   src={member.image}
                   alt={member.name}
@@ -134,9 +134,9 @@ export default function People() {
                 />
               </div>
 
-              <h3 className="text-xl font-light tracking-wide mb-1">{member.name}</h3>
-              <p className="text-sm text-gray-600 mb-4 tracking-wide">{member.role}</p>
-              <p className="text-sm text-gray-700 leading-relaxed">{member.bio}</p>
+              <h3 className="text-xl font-light tracking-wide mb-1 lowercase">{member.name}</h3>
+              <p className="text-sm text-gray-600 mb-4 tracking-wide lowercase">{member.role}</p>
+              <p className="text-sm text-gray-700 leading-relaxed lowercase">{member.bio}</p>
             </div>
           ))}
         </div>
@@ -151,8 +151,8 @@ export default function People() {
           <div className={`max-w-3xl mx-auto text-center transition-all duration-1000 ease-out ${
             visibleSections.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}>
-            <h2 className="text-3xl font-light tracking-wider mb-8">Join Our Team</h2>
-            <p className="text-lg text-gray-700 leading-relaxed mb-12">
+            <h2 className="text-3xl font-light tracking-wider mb-8 lowercase">Join Our Team</h2>
+            <p className="text-lg text-gray-700 leading-relaxed mb-12 lowercase">
               We are always seeking talented architects and designers who share our commitment to excellence, sustainability, and thoughtful design. If you are passionate about creating spaces that matter, we would love to hear from you.
             </p>
             <a
@@ -160,7 +160,7 @@ export default function People() {
               className="inline-block text-sm tracking-wide px-12 py-4 border border-black font-light relative overflow-hidden group"
             >
               <span className="absolute inset-0 bg-black transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-              <span className="relative z-10 group-hover:text-white transition-colors duration-300">join the team</span>
+              <span className="relative z-10 group-hover:text-white transition-colors duration-300 lowercase">join the team</span>
             </a>
           </div>
         </div>
