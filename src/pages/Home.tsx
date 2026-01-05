@@ -7,10 +7,23 @@ import React, { useState, useEffect, useRef } from 'react';
 export default function Home() {
   const [fadeIn, setFadeIn] = useState(false);
   const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
+  const [isVideoPaused, setIsVideoPaused] = useState(false);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   
   const featuredProjects = projects.slice(0, 3);
   const latestNews = newsItems.slice(0, 2);
+
+  const toggleVideo = () => {
+    if (videoRef.current) {
+      if (isVideoPaused) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.pause();
+      }
+      setIsVideoPaused(!isVideoPaused);
+    }
+  };
 
   useEffect(() => {
     setFadeIn(false);
@@ -51,18 +64,28 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative bg-white">
         <div className="relative">
-          <img
-            src="https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1920"
-            alt="Signature architectural project"
+          <video
+            ref={videoRef}
+            src="/hero_video.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
             className="w-full h-[820px] md:h-[720px] lg:h-[820px] object-cover"
-            loading="eager"
           />
-          <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+          <button
+            onClick={toggleVideo}
+            className="absolute top-8 right-8 z-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white px-4 py-2 rounded text-sm font-light tracking-wide transition-all"
+            aria-label={isVideoPaused ? 'Play video' : 'Pause video'}
+          >
+            {isVideoPaused ? 'play' : 'pause'}
+          </button>
+          <div className="absolute inset-0 bg-black bg-opacity-30 flex items-end justify-center pb-16">
             <div className="text-center text-white px-8">
-              <h1 className="text-5xl md:text-7xl font-bold tracking-wider mb-6">
+              <h1 className="text-3xl md:text-4xl font-bold tracking-wider mb-4">
                 zlg design
               </h1>
-              <p className="text-xl md:text-2xl font-light tracking-wide">
+              <p className="text-base md:text-lg font-light tracking-wide">
                 crafting timeless spaces
               </p>
             </div>

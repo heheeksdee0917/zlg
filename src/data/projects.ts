@@ -17,8 +17,8 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: '1',
-    slug: 'phoebe-house',
-    title: 'phoebe house',
+    slug: 'tepian-tunku',
+    title: 'tepian tunku',
     year: 2015,
     location: 'kuala lumpur',
     shortDescription: 'A slender linear volume minimises site disturbance, framing uninterrupted garden and sunset views. Entry leads directly to the open kitchen-living terrace — the social core — with private realms above and play below, enveloped in lush greenery.',
@@ -36,13 +36,14 @@ export const projects: Project[] = [
         content: 'Private bedrooms are located above, while below, entertainment, play, and sports areas are nestled, surrounded by a lush garden.'
       },
     ],
-    heroImage: 'UrbanTower/UrbanTowerCoverPhoto',
+    heroImage: '/projects/tepian-tunku/CP.avif',
     images: [
-      'UrbanTower/1',
-      'UrbanTower/2',
-      'UrbanTower/3',
-      'UrbanTower/4',
-      'UrbanTower/5',
+      '/projects/tepian-tunku/CP.avif',
+      '/projects/tepian-tunku/A1.avif',
+      '/projects/tepian-tunku/A2.avif',
+      '/projects/tepian-tunku/A3.avif',
+      '/projects/tepian-tunku/A4.avif',
+      '/projects/tepian-tunku/A5.avif',
     ],
   },
   {
