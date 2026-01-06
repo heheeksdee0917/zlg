@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Play, Pause } from 'lucide-react';
 import { projects } from '../data/projects';
-import { newsItems } from '../data/news';
 import React, { useState, useEffect, useRef } from 'react';
 
 export default function Home() {
@@ -10,9 +9,8 @@ export default function Home() {
   const [isVideoPaused, setIsVideoPaused] = useState(false);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  
+
   const featuredProjects = projects.slice(0, 3);
-  const latestNews = newsItems.slice(0, 2);
 
   const toggleVideo = () => {
     if (videoRef.current) {
@@ -27,6 +25,8 @@ export default function Home() {
 
   useEffect(() => {
     setFadeIn(false);
+    // Set philosophy section as visible immediately
+    setVisibleSections({ philosophy: true });
     const timer = setTimeout(() => setFadeIn(true), 50);
     return () => clearTimeout(timer);
   }, []);
@@ -75,10 +75,10 @@ export default function Home() {
           />
           <button
             onClick={toggleVideo}
-            className="absolute top-8 right-8 z-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white px-4 py-2 rounded text-sm font-light tracking-wide transition-all"
+            className="absolute bottom-8 left-8 z-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-3 rounded-full text-sm font-light tracking-wide transition-all"
             aria-label={isVideoPaused ? 'Play video' : 'Pause video'}
           >
-            {isVideoPaused ? 'play' : 'pause'}
+            {isVideoPaused ? <Play size={20} /> : <Pause size={20} />}
           </button>
           <div className="absolute inset-0 bg-black bg-opacity-30 flex items-end justify-center pb-16">
             <div className="text-center text-white px-8">
@@ -93,12 +93,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Projects Section */}
-      <section className="pt-16 pb-32">
-        <div className="mb-12 text-center max-w-screen-2xl mx-auto px-4">
-          <h2 className="text-3xl font-medium tracking-wider mb-4">featured projects</h2>
-        </div>
+      {/* Philosophy Section */}
+      <section
+        ref={setRef('philosophy')}
+        data-section="philosophy"
+        className={`bg-white  transition-all duration-1000 ease-out ${visibleSections.philosophy ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+      >
+        <div className="h-full flex flex-col items-center justify-center px-8 mx-auto text-center">
+          {/* Description */}
+          <div className={`transition-all mt-12 duration-1000 ease-out ${visibleSections.philosophy ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`} style={{ transitionDelay: '200ms' }}>
+            <p className="text-lg md:text-xl text-gray-700 font-light italic leading-relaxed mb-8 max-w-6xl lowercase">
+              True design connects deeply, like great art or music.
+              <br />We nurture only concepts rich in tension, juxtaposition, and poetic resonance, revealing lasting emotional depth in every built form.
+            </p>
+          </div>
 
+          {/* CTA Button */}
+          <div className={`transition-all duration-1000 ease-out ${visibleSections.philosophy ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`} style={{ transitionDelay: '400ms' }}>
+            <Link
+              to="/philosophy"
+              className="inline-flex items-center space-x-2 text-sm tracking-wide px-12 py-4 border border-black font-light relative overflow-hidden group"
+            >
+              <span className="absolute inset-0 bg-black transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+              <span className="relative z-10 group-hover:text-white transition-colors duration-300">learn more about our philosophy</span>
+              <ArrowRight size={16} className="relative z-10 group-hover:text-white transition-colors duration-300" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Projects Section */}
+      <section className="pt-2 pb-4 mt-12">
         <div className="grid grid-cols-1 md:grid-cols-3">
           {featuredProjects.map((project, index) => (
             <Link
@@ -106,9 +133,8 @@ export default function Home() {
               to={`/projects/${project.slug}`}
               ref={index === 0 ? setRef('featured') : undefined}
               data-section={index === 0 ? 'featured' : undefined}
-              className={`group block relative overflow-hidden transition-all duration-1000 ease-out ${
-                visibleSections.featured ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
+              className={`group block relative overflow-hidden transition-all duration-1000 ease-out ${visibleSections.featured ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                }`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
               <div className="relative w-full" style={{ aspectRatio: '2/3' }}>
@@ -135,108 +161,30 @@ export default function Home() {
             </Link>
           ))}
         </div>
-
-        <div className={`text-center mt-32 max-w-screen-2xl mx-auto px-4 transition-all duration-1000 ease-out delay-500 ${
-          visibleSections.featured ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-        }`}>
-          <h2 className="text-3xl font-medium tracking-wider mb-4">our collections</h2>
+        <div className="mb-12 text-center max-w-screen-2xl mx-auto px-4 mt-12">
           <p className="text-gray-600 max-w-2xl font-light mx-auto mb-8">
             explore our portfolio of transformative architectural works that blend innovation, sustainability, and timeless elegance.
           </p>
+        </div>
+        {/* Centered button with underline animation */}
+        <div className="flex items-center justify-center mt-8">
           <Link
             to="/projects"
-            className="inline-flex items-center space-x-2 text-sm tracking-wide border-b border-black hover:border-gray-400 transition-colors font-light"
+            className="inline-flex items-center space-x-2 text-sm tracking-wide px-12 py-4 border border-black font-light relative overflow-hidden group"
           >
-            <span>view all projects</span>
-            <ArrowRight size={16} />
+            <span className="absolute inset-0 bg-black transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+            <span className="relative z-10 group-hover:text-white transition-colors duration-300">view all projects</span>
+            <ArrowRight size={16} className="relative z-10 group-hover:text-white transition-colors duration-300" />
           </Link>
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <section 
-        ref={setRef('philosophy')}
-        data-section="philosophy"
-        className={`relative h-screen transition-all duration-1000 ease-out ${
-          visibleSections.philosophy ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-        }`}
-      >
-        <img
-          src="https://images.pexels.com/photos/1707823/pexels-photo-1707823.jpeg?auto=compress&cs=tinysrgb&w=1920"
-          alt="Philosophy visualization"
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-white bg-opacity-80 flex items-center justify-center">
-          <div className={`max-w-3xl text-center px-8 transition-all duration-1000 ease-out delay-300 ${
-            visibleSections.philosophy ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          }`}>
-            <h2 className="text-4xl font-medium tracking-wider mb-8">our philosophy</h2>
-            <p className="text-lg text-gray-700 leading-relaxed mb-8 font-light">
-              we believe architecture is an act of transformation—a dialogue between instinct and intention, tradition and innovation. Each project is a narrative crafted through sustainable design, material authenticity, and spatial poetry.
-            </p>
-            <Link
-              to="/philosophy"
-              className="inline-flex items-center space-x-2 text-sm tracking-wide border-b border-black hover:border-gray-400 transition-colors font-light"
-            >
-              <span>our approach</span>
-              <ArrowRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Latest News Section */}
-      <section 
-        ref={setRef('news')}
-        data-section="news"
-        className="bg-white py-32"
-      >
-        <div className="max-w-screen-2xl mx-auto px-8">
-          <h2 className={`text-3xl font-medium tracking-wider mb-16 text-center transition-all duration-1000 ease-out ${
-            visibleSections.news ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          }`}>
-            latest news
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {latestNews.map((news, index) => (
-              <Link
-                key={news.id}
-                to={`/news/${news.slug}`}
-                className={`group transition-all duration-1000 ease-out ${
-                  visibleSections.news ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                }`}
-                style={{ transitionDelay: `${index * 200}ms` }}
-              >
-                <div className="overflow-hidden mb-4">
-                  <img
-                    src={news.image}
-                    alt={news.title}
-                    className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-                <p className="text-xs text-gray-500 mb-2 font-light lowercase">{news.date}</p>
-                <h3 className="text-xl font-light tracking-wide mb-2">
-                  {news.title}
-                </h3>
-                <p className="text-sm text-gray-700 font-light">
-                  {news.description}
-                </p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Contact Section */}
-      <section 
+      <section
         ref={setRef('contact')}
         data-section="contact"
-        className={`max-w-screen-2xl mx-auto px-2 py-32 text-center transition-all duration-1000 ease-out ${
-          visibleSections.contact ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-        }`}
+        className={`max-w-screen-2xl mx-auto px-2 py-32 text-center transition-all duration-1000 ease-out ${visibleSections.contact ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}
       >
         <h2 className="text-4xl font-medium tracking-wider mb-8">start your project</h2>
         <p className="text-lg text-gray-700 max-w-2xl mx-auto mb-12 font-light">

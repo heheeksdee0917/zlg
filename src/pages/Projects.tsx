@@ -64,7 +64,7 @@ export default function Projects() {
                 <img
                   src={project.heroImage}
                   alt={project.title}
-                  className="w-full h-[500px] object-cover transition-opacity duration-700"
+                  className="w-full h-[500px] object-cover transition-opacity duration-700 object-[center_90%]"
                   loading="lazy"
                   decoding="async"
                 />

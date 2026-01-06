@@ -14,12 +14,29 @@ export default function ProjectDetails() {
   const [fadeIn, setFadeIn] = useState(false);
   const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const mobileScrollContainerRef = useRef<HTMLDivElement>(null);
+  const desktopScrollContainerRef = useRef<HTMLDivElement>(null);
+  const [showScrollHint, setShowScrollHint] = useState(true);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [activeDesktopImageIndex, setActiveDesktopImageIndex] = useState(0);
+  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const desktopImageRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowScrollHint(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [slug]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTop = 0;
+    if (mobileScrollContainerRef.current) {
+      mobileScrollContainerRef.current.scrollTop = 0;
+    }
+    if (desktopScrollContainerRef.current) {
+      desktopScrollContainerRef.current.scrollTop = 0;
     }
     setShowFullDescription(false);
     setCurrentImageIndex(0);
@@ -27,6 +44,12 @@ export default function ProjectDetails() {
     setZoom(1);
     setFadeIn(false);
     setVisibleSections({});
+    setShowScrollHint(true);
+    setScrollProgress(0);
+    setActiveImageIndex(0);
+    setActiveDesktopImageIndex(0);
+    imageRefs.current = [];
+    desktopImageRefs.current = [];
     const timer = setTimeout(() => setFadeIn(true), 50);
     return () => clearTimeout(timer);
   }, [slug]);
@@ -56,6 +79,96 @@ export default function ProjectDetails() {
 
     return () => observer.disconnect();
   }, [slug]);
+
+  // Mobile scroll handler
+  useEffect(() => {
+    const handleMobileScroll = () => {
+      const container = mobileScrollContainerRef.current;
+      if (!container) return;
+
+      const scrollTop = container.scrollTop;
+      const scrollHeight = container.scrollHeight - container.clientHeight;
+      const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+
+      setScrollProgress(progress);
+
+      if (scrollTop > 50) {
+        setShowScrollHint(false);
+      }
+
+      const containerHeight = container.clientHeight;
+      const centerPoint = scrollTop + containerHeight / 2;
+
+      imageRefs.current.forEach((ref, index) => {
+        if (ref) {
+          const rect = ref.getBoundingClientRect();
+          const absoluteTop = scrollTop + rect.top;
+          const absoluteBottom = absoluteTop + rect.height;
+
+          if (centerPoint >= absoluteTop && centerPoint <= absoluteBottom) {
+            setActiveImageIndex(index);
+          }
+        }
+      });
+    };
+
+    const container = mobileScrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleMobileScroll);
+      return () => container.removeEventListener('scroll', handleMobileScroll);
+    }
+  }, []);
+
+  // Desktop scroll handler
+  useEffect(() => {
+    const handleDesktopScroll = () => {
+      const container = desktopScrollContainerRef.current;
+      if (!container) return;
+
+      const scrollTop = container.scrollTop;
+      const containerHeight = container.clientHeight;
+      const centerPoint = scrollTop + containerHeight / 2;
+
+      desktopImageRefs.current.forEach((ref, index) => {
+        if (ref) {
+          const rect = ref.getBoundingClientRect();
+          const absoluteTop = scrollTop + rect.top;
+          const absoluteBottom = absoluteTop + rect.height;
+
+          if (centerPoint >= absoluteTop && centerPoint <= absoluteBottom) {
+            setActiveDesktopImageIndex(index);
+          }
+        }
+      });
+    };
+
+    const container = desktopScrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleDesktopScroll);
+      return () => container.removeEventListener('scroll', handleDesktopScroll);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!lightboxOpen) return;
+
+      switch (e.key) {
+        case 'Escape':
+          closeLightbox();
+          break;
+        case 'ArrowLeft':
+          navigatePrevious();
+          break;
+        case 'ArrowRight':
+          navigateNext();
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxOpen, currentImageIndex]);
 
   const setRef = (id: string) => (el: HTMLElement | null) => {
     sectionRefs.current[id] = el;
@@ -122,34 +235,93 @@ export default function ProjectDetails() {
   const hasContent = detailContent.length > 0;
   const shouldShowToggle = detailContent.length > 3;
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!lightboxOpen) return;
-
-      switch (e.key) {
-        case 'Escape':
-          closeLightbox();
-          break;
-        case 'ArrowLeft':
-          navigatePrevious();
-          break;
-        case 'ArrowRight':
-          navigateNext();
-          break;
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen, currentImageIndex]);
-
   return (
-    <div className={`min-h-screen pt-10 transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
-      <section className="grid md:grid-cols-3 gap-0">
-        <div className="md:col-span-2 overflow-y-auto md:h-screen" ref={scrollContainerRef}>
+    <div className={`transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Mobile Layout */}
+      <div className="md:hidden h-screen flex flex-col">
+        {/* Image Gallery - 90% with inner scroll */}
+        <div className="h-[90vh] relative overflow-hidden">
+          <div className="h-full overflow-y-auto" ref={mobileScrollContainerRef}>
+            {/* Scroll Progress Bar */}
+            <div className="sticky top-0 left-0 right-0 h-1 bg-gray-200 z-10">
+              <div
+                className="h-full bg-black transition-all duration-300"
+                style={{ width: `${scrollProgress}%` }}
+              />
+            </div>
+
+            {project.images.map((image, index) => (
+              <div
+                key={index}
+                ref={(el) => (imageRefs.current[index] = el)}
+                className="w-full cursor-pointer mb-[5px]"
+                onClick={() => openLightbox(image, index)}
+              >
+                <img
+                  src={image}
+                  alt={`${project.title} - Image ${index + 1}`}
+                  className="w-full h-auto object-cover"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  key={`${slug}-${index}`}
+                />
+              </div>
+            ))}
+          </div>
+          {/* Dots Indicator - Vertical, Bottom-Left, Floating */}
+          <div className="fixed bottom-24 left-8 z-20 flex flex-col items-center gap-2 bg-black bg-opacity-60 px-2 py-3 rounded-full">
+            {project.images.map((_, index) => (
+              <div
+                key={index}
+                className={`rounded-full transition-all duration-300 ${index === activeImageIndex
+                    ? 'w-2 h-2 bg-white'
+                    : 'w-1.5 h-1.5 bg-white bg-opacity-50'
+                  }`}
+              />
+            ))}
+          </div>
+
+          {/* Scroll Hint - Small popup with bounce animation */}
+          {showScrollHint && (
+            <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 z-10 bg-black bg-opacity-80 text-white px-2 py-1 rounded text-xs font-light animate-bounce">
+              scroll ↓
+            </div>
+          )}
+        </div>
+
+        {/* Project Info - 10% */}
+        <div className="h-[10vh] bg-white overflow-y-auto">
+          <div className="px-8 py-4">
+            <h1 className="text-2xl font-bold tracking-wider mb-1 lowercase leading-tight">
+              {project.title}
+            </h1>
+            <p className="text-xs text-gray-600 font-light lowercase">
+              {project.location}, {project.year}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop Layout - 45/55 */}
+      <section className="hidden md:flex gap-0 min-h-screen pt-10">
+        {/* Image Gallery - 45% on desktop */}
+        <div className="w-[45%] overflow-y-auto h-screen relative" ref={desktopScrollContainerRef}>
+          {/* Desktop Vertical Dots Indicator - Bottom-Left, Floating */}
+          <div className="fixed bottom-8 left-8 z-20 flex flex-col items-center gap-2 bg-black bg-opacity-60 px-2 py-3 rounded-full">
+            {project.images.map((_, index) => (
+              <div
+                key={index}
+                className={`rounded-full transition-all duration-300 ${index === activeDesktopImageIndex
+                  ? 'w-2 h-2 bg-white'
+                  : 'w-1.5 h-1.5 bg-white bg-opacity-50'
+                  }`}
+              />
+            ))}
+          </div>
+
           {project.images.map((image, index) => (
             <div
               key={index}
+              ref={(el) => (desktopImageRefs.current[index] = el)}
               className="w-full cursor-pointer mb-[5px]"
               onClick={() => openLightbox(image, index)}
             >
@@ -158,36 +330,37 @@ export default function ProjectDetails() {
                 alt={`${project.title} - Image ${index + 1}`}
                 className="w-full h-auto object-cover"
                 loading={index === 0 ? "eager" : "lazy"}
-                key={`${slug}-${index}`}
+                key={`${slug}-desktop-${index}`}
               />
             </div>
           ))}
         </div>
 
-        <div className="bg-white md:sticky md:top-20 md:h-screen overflow-y-auto custom-scrollbar">
-          <div className="p-8 md:p-12">
-            <div className="mb-8">
-              <h1 className="text-3xl font-bold tracking-wider mb-2 lowercase">
+        {/* Project Info - 55% on desktop */}
+        <div className="w-[55%] bg-white sticky top-20 h-screen overflow-y-auto custom-scrollbar">
+          <div className="p-8 md:p-16">
+            <div className="mb-12">
+              <h1 className="text-4xl md:text-5xl font-bold tracking-wider mb-2 lowercase leading-tight">
                 {project.title}
               </h1>
-              <p className="text-sm text-gray-600 font-light lowercase">
+              <p className="text-base text-gray-600 font-light lowercase">
                 {project.location}, {project.year}
               </p>
             </div>
 
             <div className="border-t border-gray-200 pt-8">
-              <h3 className="text-xs tracking-wider mb-4 font-light">project write-up</h3>
+              <h3 className="text-xs tracking-wider mb-6 font-light lowercase text-gray-500">project write-up</h3>
               {hasContent && (
                 <>
                   {showFullDescription ? (
                     detailContent.map((block, index) => (
-                      <div key={index} className="mb-6">
+                      <div key={index} className="mb-8">
                         {block.heading && (
-                          <h4 className="text-xl font-semibold tracking-wide mb-4 lowercase">
+                          <h4 className="text-2xl font-semibold tracking-wide mb-4 lowercase">
                             {block.heading}
                           </h4>
                         )}
-                        <p className="text-gray-700 leading-relaxed font-light lowercase">
+                        <p className="text-gray-700 leading-relaxed font-light lowercase text-base">
                           {block.content}
                         </p>
                       </div>
@@ -195,13 +368,13 @@ export default function ProjectDetails() {
                   ) : (
                     <>
                       {detailContent.slice(0, 3).map((block, index) => (
-                        <div key={index} className="mb-6">
+                        <div key={index} className="mb-8">
                           {block.heading && (
-                            <h4 className="text-xl font-semibold tracking-wide mb-4 lowercase">
+                            <h4 className="text-2xl font-semibold tracking-wide mb-4 lowercase">
                               {block.heading}
                             </h4>
                           )}
-                          <p className="text-gray-700 leading-relaxed font-light lowercase">
+                          <p className="text-gray-700 leading-relaxed font-light lowercase text-base">
                             {block.content}
                           </p>
                         </div>
@@ -223,15 +396,38 @@ export default function ProjectDetails() {
         </div>
       </section>
 
-      <section 
+      {/* Mobile Full Details Section - Scrollable below the fold */}
+      <div className="md:hidden bg-white">
+        <div className="px-8 py-8 border-t border-gray-200">
+          <h3 className="text-xs tracking-wider mb-6 font-light lowercase text-gray-500">project write-up</h3>
+          {hasContent && (
+            <>
+              {detailContent.map((block, index) => (
+                <div key={index} className="mb-8">
+                  {block.heading && (
+                    <h4 className="text-xl font-semibold tracking-wide mb-3 lowercase">
+                      {block.heading}
+                    </h4>
+                  )}
+                  <p className="text-gray-700 leading-relaxed font-light lowercase text-base">
+                    {block.content}
+                  </p>
+                </div>
+              ))}
+            </>
+          )}
+        </div>
+      </div>
+
+      {/* Related Projects Section */}
+      <section
         ref={setRef('related')}
         data-section="related"
         className="bg-gray-50 py-32"
       >
         <div className="max-w-screen-2xl mx-auto px-8">
-          <h2 className={`text-3xl font-medium tracking-wider mb-16 transition-all duration-1000 ease-out ${
-            visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          }`}>
+          <h2 className={`text-3xl font-medium tracking-wider mb-16 transition-all duration-1000 ease-out ${visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}>
             related projects
           </h2>
 
@@ -240,9 +436,8 @@ export default function ProjectDetails() {
               <Link
                 key={relatedProject.id}
                 to={`/projects/${relatedProject.slug}`}
-                className={`group transition-all duration-1000 ease-out ${
-                  visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                }`}
+                className={`group transition-all duration-1000 ease-out ${visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                  }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
                 <div className="overflow-hidden mb-4">
@@ -265,6 +460,7 @@ export default function ProjectDetails() {
         </div>
       </section>
 
+      {/* Lightbox */}
       {lightboxOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center">
           <button

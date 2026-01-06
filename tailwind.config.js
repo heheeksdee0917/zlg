@@ -6,9 +6,6 @@ export default {
       fontFamily: {
         sans: [
           'Helvetica Neue',
-          'Helvetica',
-          'Arial',
-          'sans-serif',
         ],
       },
       fontWeight: {
@@ -22,5 +19,18 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      addUtilities({
+        '.font-light-italic': {
+          fontWeight: '300',
+          fontStyle: 'italic',
+        },
+        '.font-medium-italic': {
+          fontWeight: '500',
+          fontStyle: 'italic',
+        },
+      })
+    },
+  ],
 };

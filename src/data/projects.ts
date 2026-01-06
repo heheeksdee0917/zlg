@@ -151,28 +151,6 @@ export const projects: Project[] = [
   },
   {
     id: '4',
-    slug: 'sierramas-house',
-    title: 'sierramas house ',
-    year: 2021,
-    location: 'n/a',
-    shortDescription: 'n/a',
-    detailContent: [
-      {
-        type: 'text',
-        content: 'coming soon...'
-      },
-    ],
-    heroImage: 'AlpineMountainRetreat/AlpineMountainRetreatCoverPhoto',
-    images: [
-      'AlpineMountainRetreat/1',
-      'AlpineMountainRetreat/2',
-      'AlpineMountainRetreat/3',
-      'AlpineMountainRetreat/4',
-      'AlpineMountainRetreat/5',
-    ],
-  },
-  {
-    id: '5',
     slug: 'wangsa-ukay-residence',
     title: 'wangsa ukay residence',
     year: 2019,
@@ -208,7 +186,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: '6',
+    id: '5',
     slug: 'lantern-hotel',
     title: 'lantern hotel',
     year: 2015,
@@ -240,29 +218,6 @@ export const projects: Project[] = [
       '/projects/lantern-hotel/A3.avif',
       '/projects/lantern-hotel/A4.avif',
       '/projects/lantern-hotel/A5.avif',
-    ],
-  },
-  {
-    id: '7',
-    slug: 'tepian-tunku',
-    title: 'tepian tunku',
-    year: 2021,
-    location: 'n/a',
-    shortDescription: 'n/a',
-    detailContent: [
-      {
-        type: 'text',
-        content: 'coming soon...'
-      },
-    ],
-    heroImage: '/projects/tepian-tunku/CP.avif',
-    images: [
-      '/projects/tepian-tunku/CP.avif',
-      '/projects/tepian-tunku/A1.avif',
-      '/projects/tepian-tunku/A2.avif',
-      '/projects/tepian-tunku/A3.avif',
-      '/projects/tepian-tunku/A4.avif',
-      '/projects/tepian-tunku/A5.avif',
     ],
   },
 ];
