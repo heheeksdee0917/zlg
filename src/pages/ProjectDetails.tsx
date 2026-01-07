@@ -242,14 +242,6 @@ export default function ProjectDetails() {
         {/* Image Gallery - 90% with inner scroll */}
         <div className="h-[90vh] relative overflow-hidden">
           <div className="h-full overflow-y-auto" ref={mobileScrollContainerRef}>
-            {/* Scroll Progress Bar */}
-            <div className="sticky top-0 left-0 right-0 h-1 bg-gray-200 z-10">
-              <div
-                className="h-full bg-black transition-all duration-300"
-                style={{ width: `${scrollProgress}%` }}
-              />
-            </div>
-
             {project.images.map((image, index) => (
               <div
                 key={index}
@@ -268,22 +260,22 @@ export default function ProjectDetails() {
             ))}
           </div>
           {/* Dots Indicator - Vertical, Bottom-Left, Floating */}
-          <div className="fixed bottom-24 left-8 z-20 flex flex-col items-center gap-2 bg-black bg-opacity-60 px-2 py-3 rounded-full">
+          <div className="absolute bottom-24 left-8 z-20 flex flex-col items-center gap-3">
             {project.images.map((_, index) => (
               <div
                 key={index}
                 className={`rounded-full transition-all duration-300 ${index === activeImageIndex
-                    ? 'w-2 h-2 bg-white'
-                    : 'w-1.5 h-1.5 bg-white bg-opacity-50'
+                  ? 'w-2 h-2 bg-black'
+                  : 'w-2 h-2 bg-transparent border border-black'
                   }`}
               />
             ))}
           </div>
 
-          {/* Scroll Hint - Small popup with bounce animation */}
+          {/* Scroll Hint - Full width bar at bottom with fade in/out */}
           {showScrollHint && (
-            <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 z-10 bg-black bg-opacity-80 text-white px-2 py-1 rounded text-xs font-light animate-bounce">
-              scroll ↓
+            <div className="absolute bottom-0 left-0 right-0 z-10 bg-black bg-opacity-80 text-white py-3 text-center text-xs font-light tracking-wider animate-pulse">
+              scroll for more ↓
             </div>
           )}
         </div>
@@ -306,13 +298,13 @@ export default function ProjectDetails() {
         {/* Image Gallery - 45% on desktop */}
         <div className="w-[45%] overflow-y-auto h-screen relative" ref={desktopScrollContainerRef}>
           {/* Desktop Vertical Dots Indicator - Bottom-Left, Floating */}
-          <div className="fixed bottom-8 left-8 z-20 flex flex-col items-center gap-2 bg-black bg-opacity-60 px-2 py-3 rounded-full">
+          <div className="absolute bottom-24 left-8 z-20 flex flex-col items-center gap-3">
             {project.images.map((_, index) => (
               <div
                 key={index}
                 className={`rounded-full transition-all duration-300 ${index === activeDesktopImageIndex
-                  ? 'w-2 h-2 bg-white'
-                  : 'w-1.5 h-1.5 bg-white bg-opacity-50'
+                  ? 'w-2 h-2 bg-black'
+                  : 'w-2 h-2 bg-transparent border border-black'
                   }`}
               />
             ))}
@@ -419,46 +411,48 @@ export default function ProjectDetails() {
         </div>
       </div>
 
-      {/* Related Projects Section */}
-      <section
-        ref={setRef('related')}
-        data-section="related"
-        className="bg-gray-50 py-32"
-      >
-        <div className="max-w-screen-2xl mx-auto px-8">
-          <h2 className={`text-3xl font-medium tracking-wider mb-16 transition-all duration-1000 ease-out ${visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-            }`}>
-            related projects
-          </h2>
+{/* Related Projects Section */}
+<section
+  ref={setRef('related')}
+  data-section="related"
+  className="bg-gray-50 py-32"
+>
+  <div className="max-w-screen-2xl mx-auto px-8">
+    <h2 className={`text-3xl font-medium tracking-wider mb-16 transition-all duration-1000 ease-out ${visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+      }`}>
+      related projects
+    </h2>
+  </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {relatedProjects.map((relatedProject, index) => (
-              <Link
-                key={relatedProject.id}
-                to={`/projects/${relatedProject.slug}`}
-                className={`group transition-all duration-1000 ease-out ${visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                  }`}
-                style={{ transitionDelay: `${index * 150}ms` }}
-              >
-                <div className="overflow-hidden mb-4">
-                  <img
-                    src={relatedProject.heroImage}
-                    alt={relatedProject.title}
-                    className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-                <h3 className="text-xl font-light tracking-wide mb-2 group-hover:border-b border-black inline-block lowercase">
-                  {relatedProject.title}
-                </h3>
-                <p className="text-sm text-gray-600 font-light lowercase">
-                  {relatedProject.location} • {relatedProject.year}
-                </p>
-              </Link>
-            ))}
-          </div>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+    {relatedProjects.map((relatedProject, index) => (
+      <Link
+        key={relatedProject.id}
+        to={`/projects/${relatedProject.slug}`}
+        className={`group block relative overflow-hidden transition-all duration-1000 ease-out ${visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}
+        style={{ transitionDelay: `${index * 150}ms` }}
+      >
+        <div className="relative w-full" style={{ aspectRatio: '2/3' }}>
+          <img
+            src={relatedProject.heroImage}
+            alt={relatedProject.title}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+          />
         </div>
-      </section>
+        <div className="p-8 bg-white">
+          <h3 className="text-xl font-light tracking-wide mb-2 group-hover:border-b border-black inline-block lowercase">
+            {relatedProject.title}
+          </h3>
+          <p className="text-sm text-gray-600 font-light lowercase">
+            {relatedProject.location} • {relatedProject.year}
+          </p>
+        </div>
+      </Link>
+    ))}
+  </div>
+</section>
 
       {/* Lightbox */}
       {lightboxOpen && (

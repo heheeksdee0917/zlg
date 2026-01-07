@@ -178,7 +178,23 @@ export default function Home() {
           </Link>
         </div>
       </section>
-
+      {/* People Section */}
+      <section
+        ref={setRef('people')}
+        data-section="people"
+        className={`max-w-screen-2xl mx-auto px-2 py-32 text-center transition-all duration-1000 ease-out ${visibleSections.people ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+      >
+        <h2 className="text-4xl font-medium tracking-wider mb-8">people section</h2>
+        <div className="h-full flex flex-col items-center justify-center px-8 mx-auto text-center">
+          {/* Description */}
+          <div className={`transition-all mt-12 duration-1000 ease-out ${visibleSections.people ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`} style={{ transitionDelay: '200ms' }}>
+            <p className="text-lg md:text-xl text-gray-700 font-light italic leading-relaxed mb-8 max-w-6xl lowercase">
+              pending info...
+            </p>
+          </div>
+        </div>
+      </section>
       {/* Contact Section */}
       <section
         ref={setRef('contact')}

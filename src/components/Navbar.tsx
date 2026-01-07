@@ -42,6 +42,22 @@ export default function Navbar() {
       setLastScrollY(currentScrollY);
     };
 
+    // Also handle scroll events on any scrollable containers
+    const handleInnerScroll = (e: Event) => {
+      const target = e.target as HTMLElement;
+
+      // Check if it's a scrollable container
+      if (target.scrollHeight > target.clientHeight) {
+        const scrollY = target.scrollTop;
+
+        if (scrollY > 50) {
+          setIsVisible(false);
+        } else {
+          setIsVisible(true);
+        }
+      }
+    };
+
     // Throttle scroll events for better performance
     let timeoutId: NodeJS.Timeout | null = null;
     const throttledHandleScroll = () => {
@@ -54,8 +70,12 @@ export default function Navbar() {
 
     window.addEventListener('scroll', throttledHandleScroll, { passive: true });
 
+    // Listen to all scroll events (captures inner containers too)
+    document.addEventListener('scroll', handleInnerScroll, { passive: true, capture: true });
+
     return () => {
       window.removeEventListener('scroll', throttledHandleScroll);
+      document.removeEventListener('scroll', handleInnerScroll, { capture: true });
       if (timeoutId) clearTimeout(timeoutId);
     };
   }, [lastScrollY]);
