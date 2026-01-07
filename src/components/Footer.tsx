@@ -47,7 +47,7 @@ export default function Footer() {
 
           <div>
             <h4 className="text-xs tracking-wider mb-4 font-light">locate us</h4>
-            <div className="flex items-start space-x-2 text-xs text-gray-600">
+            <div className="flex items-start space-x-2 text-xs text-gray-600 lowercase">
               <a
                 href="https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=my&sa=X&geocode=KduUg9cRSMwxMZi5ZMdOXRTA&daddr=1-8,+Bangunan+Perdagangan+D7,+800,+Jln+Sentul,+Sentul,+51000+Kuala+Lumpur,+Federal+Territory+of+Kuala+Lumpur"
                 target="_blank"
