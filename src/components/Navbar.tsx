@@ -90,7 +90,7 @@ export default function Navbar() {
           <div className="flex items-center space-x-12">
             <Link to="/" className="flex items-center" onClick={closeMobileMenu}>
               <img
-                src="/public/logo.png"
+                src="/logo.png"
                 alt="ZLG Design"
                 className="h-6"
               />
