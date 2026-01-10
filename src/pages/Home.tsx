@@ -80,12 +80,12 @@ export default function Home() {
           >
             {isVideoPaused ? <Play size={20} /> : <Pause size={20} />}
           </button>
-          <div className="absolute inset-0 bg-black bg-opacity-30 flex items-end justify-center pb-16">
-            <div className="text-center text-white px-8">
-              <h1 className="text-3xl md:text-4xl font-bold tracking-wider mb-4">
+          <div className="absolute inset-0 bg-black bg-opacity-30 flex items-end justify-start pb-16 pl-8">
+            <div className="text-left text-white">
+              <h1 className="text-base font-normal tracking-wider mb-2 underline">
                 zlg design
               </h1>
-              <p className="text-base md:text-lg font-light tracking-wide">
+              <p className="text-base font-light tracking-wide">
                 crafting timeless spaces
               </p>
             </div>
@@ -97,13 +97,13 @@ export default function Home() {
       <section
         ref={setRef('philosophy')}
         data-section="philosophy"
-        className={`bg-white  transition-all duration-1000 ease-out ${visibleSections.philosophy ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+        className={`bg-white transition-all duration-1000 ease-out ${visibleSections.philosophy ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
       >
-        <div className="h-full flex flex-col items-center justify-center px-8 mx-auto text-center">
+        <div className="max-w-screen-2xl mx-auto px-8 py-16">
           {/* Description */}
-          <div className={`transition-all mt-12 duration-1000 ease-out ${visibleSections.philosophy ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          <div className={`transition-all duration-1000 ease-out ${visibleSections.philosophy ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`} style={{ transitionDelay: '200ms' }}>
-            <p className="text-lg md:text-xl text-gray-700 font-light italic leading-relaxed mb-8 max-w-6xl lowercase">
+            <p className="text-base text-gray-700 font-light italic leading-relaxed mb-8 lowercase text-left">
               True design connects deeply, like great art or music.
               <br />We nurture only concepts rich in tension, juxtaposition, and poetic resonance, revealing lasting emotional depth in every built form.
             </p>
@@ -114,12 +114,32 @@ export default function Home() {
             }`} style={{ transitionDelay: '400ms' }}>
             <Link
               to="/philosophy"
-              className="inline-flex items-center space-x-2 text-sm tracking-wide px-12 py-4 border border-black font-light relative overflow-hidden group"
+              className="inline-flex items-center space-x-2 text-sm tracking-wide font-light group"
             >
-              <span className="absolute inset-0 bg-black transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-              <span className="relative z-10 group-hover:text-white transition-colors duration-300">learn more about our philosophy</span>
-              <ArrowRight size={16} className="relative z-10 group-hover:text-white transition-colors duration-300" />
+              <span className="relative">
+                explore our philosophy
+                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
+              </span>
+              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* People Section */}
+      <section
+        ref={setRef('people')}
+        data-section="people"
+        className={`max-w-screen-2xl mx-auto px-8 py-16 transition-all duration-1000 ease-out ${visibleSections.people ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+      >
+        <h2 className="text-base font-normal tracking-wider mb-4 underline">people section</h2>
+        <div>
+          {/* Description */}
+          <div className={`transition-all duration-1000 ease-out ${visibleSections.people ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`} style={{ transitionDelay: '200ms' }}>
+            <p className="text-base text-gray-700 font-light italic leading-relaxed lowercase text-left">
+              pending info...
+            </p>
           </div>
         </div>
       </section>
@@ -147,71 +167,77 @@ export default function Home() {
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-500"></div>
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent text-white lowercase">
-                <h3 className="text-xl font-light tracking-wide mb-2 relative inline-block">
+                <h3 className="text-base font-light tracking-wide mb-2 relative inline-block">
                   {project.title}
                   <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-white transition-all duration-500 ease-out group-hover:w-full"></span>
                 </h3>
-                <p className="text-sm mb-2 font-light opacity-90">
+                <p className="text-base mb-2 font-light opacity-90">
                   {project.location} • {project.year}
                 </p>
-                <p className="text-sm line-clamp-2 font-light opacity-80">
+                <p className="text-base line-clamp-2 font-light opacity-80">
                   {project.shortDescription}
                 </p>
               </div>
             </Link>
           ))}
         </div>
-        <div className="mb-12 text-center max-w-screen-2xl mx-auto px-4 mt-12">
-          <p className="text-gray-600 max-w-2xl font-light mx-auto mb-8">
+        <div className="mb-12 max-w-screen-2xl mx-auto px-8 mt-12">
+          <p className="text-base text-gray-600 font-light text-left mb-8">
             explore our portfolio of transformative architectural works that blend innovation, sustainability, and timeless elegance.
           </p>
         </div>
-        {/* Centered button with underline animation */}
-        <div className="flex items-center justify-center mt-8">
+        {/* Left-aligned button */}
+        <div className="max-w-screen-2xl mx-auto px-8">
           <Link
             to="/projects"
-            className="inline-flex items-center space-x-2 text-sm tracking-wide px-12 py-4 border border-black font-light relative overflow-hidden group"
+            className="inline-flex items-center space-x-2 text-sm tracking-wide font-light group"
           >
-            <span className="absolute inset-0 bg-black transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-            <span className="relative z-10 group-hover:text-white transition-colors duration-300">view all projects</span>
-            <ArrowRight size={16} className="relative z-10 group-hover:text-white transition-colors duration-300" />
+            <span className="relative">
+              our projects
+              <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
+            </span>
+            <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </div>
       </section>
-      {/* People Section */}
+
+      {/* Publications Section */}
       <section
-        ref={setRef('people')}
-        data-section="people"
-        className={`max-w-screen-2xl mx-auto px-2 py-32 text-center transition-all duration-1000 ease-out ${visibleSections.people ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+        ref={setRef('publications')}
+        data-section="publications"
+        className={`max-w-screen-2xl mx-auto px-8 py-16 transition-all duration-1000 ease-out ${visibleSections.publications ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
       >
-        <h2 className="text-4xl font-medium tracking-wider mb-8">people section</h2>
-        <div className="h-full flex flex-col items-center justify-center px-8 mx-auto text-center">
+        <h2 className="text-base font-normal tracking-wider mb-4 underline">publications section</h2>
+        <div>
           {/* Description */}
-          <div className={`transition-all mt-12 duration-1000 ease-out ${visibleSections.people ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          <div className={`transition-all mt-4 duration-1000 ease-out ${visibleSections.publications ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`} style={{ transitionDelay: '200ms' }}>
-            <p className="text-lg md:text-xl text-gray-700 font-light italic leading-relaxed mb-8 max-w-6xl lowercase">
+            <p className="text-base text-gray-700 font-light italic leading-relaxed lowercase text-left">
               pending info...
             </p>
           </div>
         </div>
       </section>
+
       {/* Contact Section */}
       <section
         ref={setRef('contact')}
         data-section="contact"
-        className={`max-w-screen-2xl mx-auto px-2 py-32 text-center transition-all duration-1000 ease-out ${visibleSections.contact ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+        className={`max-w-screen-2xl mx-auto px-8 py-16 transition-all duration-1000 ease-out ${visibleSections.contact ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}
       >
-        <h2 className="text-4xl font-medium tracking-wider mb-8">start your project</h2>
-        <p className="text-lg text-gray-700 max-w-2xl mx-auto mb-12 font-light">
+        <h2 className="text-base font-normal tracking-wider mb-4 underline">start your project</h2>
+        <p className="text-base text-gray-700 font-light mb-8 text-left">
           let's collaborate to create spaces that inspire, endure, and transform. reach out to discuss your vision.
         </p>
         <a
           href="mailto:info@zlgdesign.com"
-          className="inline-block text-sm tracking-wide px-12 py-4 border border-black font-light relative overflow-hidden group"
+          className="inline-flex items-center space-x-2 text-sm tracking-wide font-light group"
         >
-          <span className="absolute inset-0 bg-black transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-          <span className="relative z-10 group-hover:text-white transition-colors duration-300">contact us</span>
+          <span className="relative">
+            contact us
+            <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
+          </span>
         </a>
       </section>
     </div>

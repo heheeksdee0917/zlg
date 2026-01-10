@@ -10,7 +10,7 @@ const Philosophy = lazy(() => import('./pages/Philosophy'));
 const Projects = lazy(() => import('./pages/Projects'));
 const ProjectDetails = lazy(() => import('./pages/ProjectDetails'));
 const People = lazy(() => import('./pages/People'));
-const Partnerships = lazy(() => import('./pages/Partnerships'));
+const Partner = lazy(() => import('./pages/Partner'));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -40,7 +40,7 @@ function App() {
               <Route path="/projects" element={<Projects />} />
               <Route path="/projects/:slug" element={<ProjectDetails />} />
               <Route path="/people" element={<People />} />
-              <Route path="/partnerships" element={<Partnerships />} />
+              <Route path="/partner" element={<Partner />} />
             </Routes>
           </Suspense>
         </main>

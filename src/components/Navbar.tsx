@@ -138,12 +138,12 @@ export default function Navbar() {
                 ></span>
               </Link>
               <Link
-                to="/partnerships"
+                to="/partner"
                 className="text-sm tracking-wide font-light text-black relative group"
               >
-                partnerships
+                partner
                 <span
-                  className={`absolute bottom-0 left-0 h-px bg-black transition-all duration-300 ease-out ${isActive('/partnerships') ? 'w-full' : 'w-0 group-hover:w-full'
+                  className={`absolute bottom-0 left-0 h-px bg-black transition-all duration-300 ease-out ${isActive('/partner') ? 'w-full' : 'w-0 group-hover:w-full'
                     }`}
                 ></span>
               </Link>
@@ -219,11 +219,11 @@ export default function Navbar() {
               ></span>
             </Link>
             <Link
-              to="/partnerships"
+              to="/partner"
               onClick={closeMobileMenu}
               className="text-2xl tracking-wide font-light text-black relative group"
             >
-              partnerships
+              partner
               <span
                 className={`absolute -bottom-1 left-0 h-0.5 bg-black transition-all duration-300 ease-out ${isActive('/partnerships') ? 'w-full' : 'w-0 group-hover:w-full'
                   }`}

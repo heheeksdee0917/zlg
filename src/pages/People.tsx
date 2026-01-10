@@ -93,23 +93,25 @@ export default function People() {
           className="w-full h-full object-cover"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-          <h1 className="text-5xl md:text-6xl font-light tracking-wider text-white lowercase">
-            People
-          </h1>
+        <div className="absolute inset-0 bg-black bg-opacity-30 flex items-end justify-start pb-16 pl-8">
+          <div className="text-left text-white">
+            <h1 className="text-base font-normal tracking-wider underline lowercase">
+              People
+            </h1>
+          </div>
         </div>
       </section>
 
       <section 
         ref={setRef('intro')}
         data-section="intro"
-        className="max-w-screen-2xl mx-auto px-8 py-32"
+        className="max-w-screen-2xl mx-auto px-8 py-16"
       >
-        <div className={`max-w-3xl mx-auto text-center mb-24 transition-all duration-1000 ease-out ${
+        <div className={`mb-16 transition-all duration-1000 ease-out ${
           visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
         }`}>
-          <h2 className="text-3xl font-light tracking-wider mb-8 lowercase">Our Team</h2>
-          <p className="text-lg text-gray-700 leading-relaxed lowercase">
+          <h2 className="text-base font-normal tracking-wider mb-4 lowercase underline">Our Team</h2>
+          <p className="text-base text-gray-700 leading-relaxed lowercase text-left">
             ZLG Design is a collective of architects, designers, and thinkers united by a shared passion for creating meaningful spaces. Our diverse backgrounds and expertise enable us to approach each project with fresh perspectives and rigorous craft.
           </p>
         </div>
@@ -125,7 +127,7 @@ export default function People() {
               }`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <div className="overflow-hidden mb-6 ">
+              <div className="overflow-hidden mb-6">
                 <img
                   src={member.image}
                   alt={member.name}
@@ -134,9 +136,9 @@ export default function People() {
                 />
               </div>
 
-              <h3 className="text-xl font-light tracking-wide mb-1 lowercase">{member.name}</h3>
-              <p className="text-sm text-gray-600 mb-4 tracking-wide lowercase">{member.role}</p>
-              <p className="text-sm text-gray-700 leading-relaxed lowercase">{member.bio}</p>
+              <h3 className="text-base font-normal tracking-wide mb-1 lowercase underline">{member.name}</h3>
+              <p className="text-base text-gray-600 mb-4 tracking-wide lowercase">{member.role}</p>
+              <p className="text-base text-gray-700 leading-relaxed lowercase text-left">{member.bio}</p>
             </div>
           ))}
         </div>
@@ -145,14 +147,14 @@ export default function People() {
       <section 
         ref={setRef('cta')}
         data-section="cta"
-        className="bg-gray-50 py-32"
+        className="bg-gray-50 py-16"
       >
         <div className="max-w-screen-2xl mx-auto px-8">
-          <div className={`max-w-3xl mx-auto text-center transition-all duration-1000 ease-out ${
+          <div className={`text-left transition-all duration-1000 ease-out ${
             visibleSections.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}>
-            <h2 className="text-3xl font-light tracking-wider mb-8 lowercase">Join Our Team</h2>
-            <p className="text-lg text-gray-700 leading-relaxed mb-12 lowercase">
+            <h2 className="text-base font-normal tracking-wider mb-4 lowercase underline">Join Our Team</h2>
+            <p className="text-base text-gray-700 leading-relaxed mb-8 lowercase text-left">
               We are always seeking talented architects and designers who share our commitment to excellence, sustainability, and thoughtful design. If you are passionate about creating spaces that matter, we would love to hear from you.
             </p>
             <a
