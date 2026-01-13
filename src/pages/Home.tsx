@@ -230,15 +230,19 @@ export default function Home() {
         <p className="text-base text-gray-700 font-light mb-8 text-left">
           let's collaborate to create spaces that inspire, endure, and transform. reach out to discuss your vision.
         </p>
-        <a
-          href="mailto:info@zlgdesign.com"
-          className="inline-flex items-center space-x-2 text-sm tracking-wide font-light group"
-        >
-          <span className="relative">
-            contact us
-            <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
-          </span>
-        </a>
+        <div className={`transition-all duration-1000 ease-out ${visibleSections.contact ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`} style={{ transitionDelay: '400ms' }}>
+            <Link
+              to="/contact"
+              className="inline-flex items-center space-x-2 text-sm tracking-wide font-light group"
+            >
+              <span className="relative">
+                contact us
+                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
+              </span>
+              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+          </div>
       </section>
     </div>
   );

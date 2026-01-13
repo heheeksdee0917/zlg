@@ -41,9 +41,9 @@ export default function Projects() {
   return (
     <div className={`min-h-screen pt-20 transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
       <section className="max-w-screen-2xl mx-auto px-8 py-8">
-        <div className="mb-16">
-          <h1 className="text-4xl md:text-5xl font-light tracking-wider mb-6">projects</h1>
-          <p className="text-lg text-gray-600 max-w-full">
+        <div className="mb-16 text-left">
+          <h1 className="text-base font-normal tracking-wider mb-4 underline lowercase">projects</h1>
+          <p className="text-base text-gray-600 lowercase text-left">
             our portfolio represents a diverse range of architectural typologies, from intimate residences to large-scale urban interventions. each project is a unique response to site, program, and client aspirations.
           </p>
         </div>
@@ -61,28 +61,28 @@ export default function Projects() {
               }}
             >
               <div className="overflow-hidden mb-6 bg-gray-200">
-                <img
+              <img
                   src={project.heroImage}
                   alt={project.title}
-                  className="w-full h-[500px] object-cover transition-opacity duration-700 object-[center_90%]"
+                  className="w-full aspect-[2/3] object-cover transition-opacity duration-700 object-center"
                   loading="lazy"
                   decoding="async"
                 />
               </div>
 
-              <div className="space-y-3">
-                <h2 className="text-2xl font-light tracking-wide relative inline-block lowercase">
+              <div className="space-y-3 text-left">
+                <h2 className="text-base font-normal tracking-wide relative inline-block lowercase">
                   {project.title}
                   <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
                 </h2>
 
-                <div className="flex items-center space-x-4 text-sm text-gray-600 lowercase">
+                <div className="flex items-center space-x-4 text-base text-gray-600 lowercase">
                   <span>{project.year}</span>
                   <span>•</span>
                   <span>{project.location}</span>
                 </div>
 
-                <p className="text-gray-700 leading-relaxed lowercase">
+                <p className="text-base text-gray-700 leading-relaxed lowercase text-left">
                   {project.shortDescription}
                 </p>
               </div>

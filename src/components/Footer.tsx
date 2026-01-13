@@ -1,4 +1,4 @@
-import { Linkedin, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import { Linkedin, Instagram, Mail, MapPin } from 'lucide-react';
 import React from 'react';
 
 export default function Footer() {
@@ -47,12 +47,12 @@ export default function Footer() {
 
           <div>
             <h4 className="text-xs tracking-wider mb-4 font-light">locate us</h4>
-            <div className="flex items-start space-x-2 text-xs text-gray-600 lowercase">
+            <div className="flex items-start space-x-2 text-xs text-gray-600 lowercase mb-4">
               <a
-                href="https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=my&sa=X&geocode=KduUg9cRSMwxMZi5ZMdOXRTA&daddr=1-8,+Bangunan+Perdagangan+D7,+800,+Jln+Sentul,+Sentul,+51000+Kuala+Lumpur,+Federal+Territory+of+Kuala+Lumpur"
+                href="https://maps.app.goo.gl/XU8fK6RHEw2pYWqD6"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-start space-x-2 text-xs text-gray-600 hover:text-black transition-colors group"
+                className="flex items-start space-x-2 hover:text-black transition-colors group"
               >
                 <MapPin size={14} className="mt-0.5 flex-shrink-0" />
                 <address className="not-italic leading-relaxed">
@@ -61,6 +61,20 @@ export default function Footer() {
                   Federal Territory of Kuala Lumpur
                 </address>
               </a>
+            </div>
+
+            {/* Embedded Google Map – compact & responsive */}
+            <div className="w-full h-48 sm:h-56 md:h-64 rounded-md overflow-hidden border border-gray-200 shadow-sm">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.671222744767!2d101.68941977497126!3d3.1809137967943784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc4811d78394db%3A0xc0145d4ec764b998!2sZLG%20Design!5e0!3m2!1sen!2smy!4v1768297314380!5m2!1sen!2smy"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="zlg design location - Bangunan Perdagangan D7, Sentul"
+              ></iframe>
             </div>
           </div>
         </div>

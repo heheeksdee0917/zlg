@@ -131,7 +131,7 @@ export default function People() {
                 <img
                   src={member.image}
                   alt={member.name}
-                  className="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full aspect-[2/3] object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
               </div>

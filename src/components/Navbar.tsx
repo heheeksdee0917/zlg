@@ -151,13 +151,13 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center space-x-4">
-            <a
-              href="mailto:info@zlgdesign.com"
+            <Link
+              to="/contact"
               className="hidden md:inline-block text-sm tracking-wide px-6 py-2 border border-black font-light text-black relative overflow-hidden group"
             >
               <span className="absolute inset-0 bg-black transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
               <span className="relative z-10 group-hover:text-white transition-colors duration-300">contact us</span>
-            </a>
+            </Link>
 
             <button
               onClick={toggleMobileMenu}
@@ -225,18 +225,18 @@ export default function Navbar() {
             >
               partner
               <span
-                className={`absolute -bottom-1 left-0 h-0.5 bg-black transition-all duration-300 ease-out ${isActive('/partnerships') ? 'w-full' : 'w-0 group-hover:w-full'
+                className={`absolute -bottom-1 left-0 h-0.5 bg-black transition-all duration-300 ease-out ${isActive('/partner') ? 'w-full' : 'w-0 group-hover:w-full'
                   }`}
               ></span>
             </Link>
-            <a
-              href="mailto:info@zlgdesign.com"
+            <Link
+              to="/contact"
               className="text-lg tracking-wide px-8 py-3 border-2 border-black font-light text-black mt-8 relative overflow-hidden group"
               onClick={closeMobileMenu}
             >
               <span className="absolute inset-0 bg-black transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
               <span className="relative z-10 group-hover:text-white transition-colors duration-300">contact us</span>
-            </a>
+            </Link>
           </div>
         </div>
       )}

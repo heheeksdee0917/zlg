@@ -11,12 +11,13 @@ const Projects = lazy(() => import('./pages/Projects'));
 const ProjectDetails = lazy(() => import('./pages/ProjectDetails'));
 const People = lazy(() => import('./pages/People'));
 const Partner = lazy(() => import('./pages/Partner'));
+const ContactUs = lazy(() => import('./pages/ContactUs'));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
   }, [pathname]);
 
   return null;
@@ -41,6 +42,7 @@ function App() {
               <Route path="/projects/:slug" element={<ProjectDetails />} />
               <Route path="/people" element={<People />} />
               <Route path="/partner" element={<Partner />} />
+              <Route path="/contact" element={<ContactUs />} />
             </Routes>
           </Suspense>
         </main>
