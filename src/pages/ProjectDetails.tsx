@@ -139,8 +139,8 @@ export default function ProjectDetails() {
     return (
       <div className="min-h-screen pt-10 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold tracking-wider mb-4">project not found</h1>
-          <Link to="/projects" className="text-sm border-b border-black hover:border-gray-400 font-light">
+          <h1 className="text-base font-bold tracking-wider mb-4">project not found</h1>
+          <Link to="/projects" className="text-base border-b border-black hover:border-gray-400 font-light">
             return to projects
           </Link>
         </div>
@@ -197,7 +197,7 @@ export default function ProjectDetails() {
 
           {/* Scroll Hint */}
           {showScrollHint && (
-            <div className="absolute bottom-0 left-0 right-0 z-10 bg-black bg-opacity-80 text-white py-3 text-center text-xs font-light tracking-wider animate-pulse">
+            <div className="absolute bottom-0 left-0 right-0 z-10 bg-black bg-opacity-80 text-white py-3 text-center text-base font-light tracking-wider animate-pulse">
               scroll for more ↓
             </div>
           )}
@@ -206,10 +206,10 @@ export default function ProjectDetails() {
         {/* Project Info - 10% */}
         <div className="h-[10vh] bg-white overflow-y-auto">
           <div className="px-8 py-4">
-            <h1 className="text-2xl font-bold tracking-wider mb-1 lowercase leading-tight">
+            <h1 className="text-base font-bold tracking-wider mb-1 lowercase leading-tight">
               {project.title}
             </h1>
-            <p className="text-xs text-gray-600 font-light lowercase">
+            <p className="text-base text-gray-600 font-light lowercase">
               {project.location}, {project.year}
             </p>
           </div>
@@ -256,7 +256,7 @@ export default function ProjectDetails() {
         <div className="w-[55%] bg-white sticky top-20 h-screen overflow-y-auto custom-scrollbar">
           <div className="p-8 md:p-16">
             <div className="mb-12">
-              <h1 className="text-4xl md:text-5xl font-bold tracking-wider mb-2 lowercase leading-tight">
+              <h1 className="text-base font-bold tracking-wider mb-2 lowercase leading-tight">
                 {project.title}
               </h1>
               <p className="text-base text-gray-600 font-light lowercase">
@@ -265,7 +265,7 @@ export default function ProjectDetails() {
             </div>
 
             <div className="border-t border-gray-200 pt-8">
-              <h3 className="text-xs tracking-wider mb-6 font-light lowercase text-gray-500">
+              <h3 className="text-base tracking-wider mb-6 font-light lowercase text-gray-500">
                 project write-up
               </h3>
               {hasContent && (
@@ -274,7 +274,7 @@ export default function ProjectDetails() {
                     detailContent.map((block, index) => (
                       <div key={index} className="mb-8">
                         {block.heading && (
-                          <h4 className="text-2xl font-semibold tracking-wide mb-4 lowercase">
+                          <h4 className="text-base font-semibold tracking-wide mb-4 lowercase">
                             {block.heading}
                           </h4>
                         )}
@@ -288,7 +288,7 @@ export default function ProjectDetails() {
                       {detailContent.slice(0, 3).map((block, index) => (
                         <div key={index} className="mb-8">
                           {block.heading && (
-                            <h4 className="text-2xl font-semibold tracking-wide mb-4 lowercase">
+                            <h4 className="text-base font-semibold tracking-wide mb-4 lowercase">
                               {block.heading}
                             </h4>
                           )}
@@ -302,7 +302,7 @@ export default function ProjectDetails() {
                   {shouldShowToggle && (
                     <button
                       onClick={toggleDescription}
-                      className="mt-2 text-sm text-black border-b border-black hover:border-gray-400 transition-colors font-light"
+                      className="mt-2 text-base text-black border-b border-black hover:border-gray-400 transition-colors font-light"
                     >
                       {showFullDescription ? 'show less' : 'show more'}
                     </button>
@@ -317,7 +317,7 @@ export default function ProjectDetails() {
       {/* Mobile Full Details Section */}
       <div className="md:hidden bg-white">
         <div className="px-8 py-8 border-t border-gray-200">
-          <h3 className="text-xs tracking-wider mb-6 font-light lowercase text-gray-500">
+          <h3 className="text-base tracking-wider mb-6 font-light lowercase text-gray-500">
             project write-up
           </h3>
           {hasContent && (
@@ -325,7 +325,7 @@ export default function ProjectDetails() {
               {detailContent.map((block, index) => (
                 <div key={index} className="mb-8">
                   {block.heading && (
-                    <h4 className="text-xl font-semibold tracking-wide mb-3 lowercase">
+                    <h4 className="text-base font-semibold tracking-wide mb-3 lowercase">
                       {block.heading}
                     </h4>
                   )}
@@ -343,10 +343,10 @@ export default function ProjectDetails() {
       <section
         ref={setRef('related')}
         data-section="related"
-        className="bg-gray-50 py-32"
+        className="bg-gray-50 py-32 pb-0"
       >
         <div className="max-w-screen-2xl mx-auto px-8">
-          <h2 className={`text-3xl font-medium tracking-wider mb-16 transition-all duration-1000 ease-out ${
+          <h2 className={`text-base font-medium tracking-wider mb-16 transition-all duration-1000 ease-out ${
             visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}>
             related projects
@@ -372,10 +372,10 @@ export default function ProjectDetails() {
                 />
               </div>
               <div className="p-8 bg-white">
-                <h3 className="text-xl font-light tracking-wide mb-2 group-hover:border-b border-black inline-block lowercase">
+                <h3 className="text-base font-light tracking-wide mb-2 group-hover:border-b border-black inline-block lowercase">
                   {relatedProject.title}
                 </h3>
-                <p className="text-sm text-gray-600 font-light lowercase">
+                <p className="text-base text-gray-600 font-light lowercase">
                   {relatedProject.location} • {relatedProject.year}
                 </p>
               </div>
@@ -408,7 +408,7 @@ export default function ProjectDetails() {
             >
               <ZoomOut size={24} />
             </button>
-            <span className="text-white font-light">{Math.round(zoom * 100)}%</span>
+            <span className="text-white font-light text-base">{Math.round(zoom * 100)}%</span>
             <button
               onClick={handleZoomIn}
               disabled={zoom >= 3}
@@ -439,7 +439,7 @@ export default function ProjectDetails() {
             </button>
           )}
 
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white font-light text-sm z-10">
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white font-light text-base z-10">
             {currentImageIndex + 1} / {project.images.length}
           </div>
 

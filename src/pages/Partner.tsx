@@ -60,7 +60,7 @@ export default function partners() {
 
   return (
     <div className={`min-h-screen transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
-      {/* Parallax Hero Section */}
+      {/* Parallax Hero Section 
       <section className="relative h-screen overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center bg-fixed"
@@ -76,7 +76,7 @@ export default function partners() {
           </div>
         </div>
       </section>
-
+*/}
       <section
         ref={setRef('intro')}
         data-section="intro"
@@ -159,7 +159,7 @@ export default function partners() {
         <div
           className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{
-            backgroundImage: 'url(https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1920)',
+            backgroundImage: 'url(/poster_1.jpg)',
           }}
         />
         <div className="absolute inset-0 bg-white bg-opacity-80 flex items-center justify-start pl-8">

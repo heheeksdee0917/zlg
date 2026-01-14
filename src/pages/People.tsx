@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 
 export default function People() {
   const [fadeIn, setFadeIn] = useState(false);
-  const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
+  const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({
+    intro: true
+  });
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
   useEffect(() => {
@@ -86,22 +88,6 @@ export default function People() {
 
   return (
     <div className={`min-h-screen transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
-      <section className="relative h-96">
-        <img
-          src="https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&cs=tinysrgb&w=1920"
-          alt="ZLG Design team"
-          className="w-full h-full object-cover"
-          loading="eager"
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-30 flex items-end justify-start pb-16 pl-8">
-          <div className="text-left text-white">
-            <h1 className="text-base font-normal tracking-wider underline lowercase">
-              People
-            </h1>
-          </div>
-        </div>
-      </section>
-
       <section 
         ref={setRef('intro')}
         data-section="intro"
