@@ -44,46 +44,65 @@ export default function People() {
   const team = [
     {
       id: 1,
-      name: 'Huat Lim',
-      role: 'Founding Principal',
-      bio: 'With over 20 years of experience, Zara leads the firm design vision and strategic direction. Her work has been recognized with numerous international awards, including the Pritzker Prize nomination. She believes architecture should serve both people and planet.',
-      image: 'https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg?auto=compress&cs=tinysrgb&w=800',
+      name: 'Huat Lim & SUSANNE ZEIDLER',
+      role: 'Managing Director & Executive Director',
+      image: '/People/HuatandSusanne.jpeg',
     },
     {
       id: 2,
-      name: 'Lucas Grant',
-      role: 'Design Director',
-      bio: 'Lucas brings a passion for sustainable innovation and material research. He oversees the firm design development process, ensuring every project meets the highest standards of craftsmanship and environmental responsibility. His expertise spans residential, cultural, and commercial typologies.',
-      image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800',
+      name: 'shu herng',
+      role: 'BA Arch. (Hons) ESALA, RIBA Part I',
+      image: 'People/shu.jpeg',
     },
     {
       id: 3,
-      name: 'Grace Torres',
-      role: 'Project Architect',
-      bio: 'Grace leads project teams from concept through construction, coordinating consultants and ensuring design intent is realized. Her attention to detail and collaborative approach have made her invaluable to the firm most complex projects.',
-      image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=800',
+      name: 'REVATHY SIVA',
+      role: 'B. Arch (Hons) UMK, LAM Part I',
+      image: 'People/revathy.jpeg',
     },
     {
       id: 4,
-      name: 'Michael Chen',
-      role: 'Senior Architect',
-      bio: 'Michael specializes in adaptive reuse and historic preservation, bringing sensitivity and creativity to projects that honor existing structures. His work demonstrates that old and new can coexist beautifully.',
-      image: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=800',
+      name: 'Hester Chang',
+      role: 'BSc. Arch (Hons) Taylor’s, LAM Part I',
+      image: 'People/hester.jpeg',
     },
     {
       id: 5,
-      name: 'Sophia Andersson',
-      role: 'Sustainability Consultant',
-      bio: 'Sophia ensures every project meets rigorous environmental standards through energy modeling, material selection, and certification processes. Her technical expertise enables the firm to push boundaries in sustainable design.',
-      image: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=800',
+      name: 'Ahirah Yen',
+      role: 'LAM AG/A 678, BSc. Arch (Hons) Taylor’s, M. Arch UM, LAM/RIBA PART II',
+      image: 'People/athirah.jpeg',
     },
     {
       id: 6,
-      name: 'David Okafor',
-      role: 'Architectural Designer',
-      bio: 'David innovative approach to digital fabrication and parametric design expands the firm capabilities. He bridges traditional craft with cutting-edge technology, exploring new possibilities in form and construction.',
-      image: 'https://images.pexels.com/photos/2182975/pexels-photo-2182975.jpeg?auto=compress&cs=tinysrgb&w=800',
+      name: 'daphne wee',
+      role: 'B Arch. (Hons) SEGi, LAM Part I',
+       image: 'People/daphne.jpeg',
     },
+    {
+      id: 7,
+      name: 'haziqah ngasri',
+      role: 'B. Arch (Hons) UITM, LAM/RIBA Part I',
+      image: 'People/haziqah.jpeg',
+    },
+    {
+      id: 6,
+      name: 'yusof hafiz',
+      role: 'BSc. Arch (Hons), MSc. Applied Arch. & Design QUEENS, RIBA/ARB/LAM Part II',
+      image: 'People/yusof.jpeg',
+    },
+    {
+      id: 8,
+      name: '',
+      role: 'Architectural Designer',
+      image: 'People/.jpeg',
+    },
+    {
+      id: 9,
+      name: '',
+      role: 'Architectural Designer',
+      image: 'People/.jpeg',
+    },
+
   ];
 
   return (
@@ -124,7 +143,6 @@ export default function People() {
 
               <h3 className="text-base font-normal tracking-wide mb-1 lowercase underline">{member.name}</h3>
               <p className="text-base text-gray-600 mb-4 tracking-wide lowercase">{member.role}</p>
-              <p className="text-base text-gray-700 leading-relaxed lowercase text-left">{member.bio}</p>
             </div>
           ))}
         </div>
