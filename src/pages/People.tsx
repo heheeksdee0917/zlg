@@ -81,7 +81,7 @@ export default function People() {
     {
       id: 7,
       name: 'haziqah ngasri',
-      role: 'B. Arch (Hons) UITM, LAM/RIBA Part I',
+      role: 'Dipl. Fine Art, Bsc. Arch (Hons) UITM, LAM Part I',
       image: 'People/haziqah.jpeg',
     },
     {
@@ -92,15 +92,15 @@ export default function People() {
     },
     {
       id: 8,
-      name: '',
-      role: 'Architectural Designer',
-      image: 'People/.jpeg',
+      name: 'VIKTOR ZEIDLER LIM',
+      role: 'BSc. Arch (Hons) Taylor’s, LAM Part Ir',
+      image: 'People/viktor.jpeg',
     },
     {
       id: 9,
-      name: '',
-      role: 'Architectural Designer',
-      image: 'People/.jpeg',
+      name: 'brandon ngiau',
+      role: 'Bsc. Arch (Hons) Taylor’s, LAM Part I',
+      image: 'People/brandon.jpeg',
     },
 
   ];

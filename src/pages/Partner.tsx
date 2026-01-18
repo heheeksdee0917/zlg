@@ -45,8 +45,8 @@ export default function partners() {
   const keyPartners = [
     {
       name: 'Huat LIM',
-      role: 'Founding Partner',
-      image: 'Public/People/huatlimwhiteteeshirt.jpg',
+      role: ' Managing Director',
+      image: 'People/huatsolo.jpeg',
       bio: [
         'Huat Lim studied at the Architectural Association in London from 1981 to 1984. He has been a member of the Architects Registration Board and the Royal Institute of British Architects since 1987. Among his tutors at the AA were Peter Cook, Christine Hawley, Peter Salter, Ron Herron, Rodrigo Pérez de Arce and Gordon Pask, probably his most influential mentor.',
         'Huat taught briefly at the Bartlett London, with Sir Peter Cook and David Dunster. Huat LIM has been employed to work on very large and complex buildings, a career spanning over 22 years, principally at Lord Foster London Stansted Airport, the Nimes Mediateque Museum, HKSB HQ at Canary Wharf, the Masterplan for King Cross Redevelopment, and later at Imagination Limited Jubilee Line Extension for London with the late Ron Herron of Archigram fame.',
@@ -55,8 +55,8 @@ export default function partners() {
     },
     {
       name: 'Susanne ZEIDLER',
-      role: 'Executive Director & Senior Partner',
-      image: 'Public/People/susanne_portrait.jpg',
+      role: 'Executive Director',
+      image: 'People/susannesolo.jpeg',
       bio: [
         'Susanne ZEIDLER hails from Frankfurt and studied art history before her postgraduate term at the Staedle Schule under the tutorship of Professor Peter COOK, and later at the Bartlett School of Architecture, London. Susanne moved to Malaysia in 1992, and now lives in Kuala Lumpur and is Executive Director and Senior Partner at zlgdesign.',
         'Her most significant contribution to zlgdesign is the BOH Visitor Centre which has since won wide public recognition. Susanne is no less of an architect than she is a designer, having delivered most of the interior design projects for the firm, namely the I-Zen, Puncak Dana and the MK Land Interiors and Show Unit designs.',
@@ -65,7 +65,7 @@ export default function partners() {
     },
   ];
 
-const companyTimeline = [
+  const companyTimeline = [
     {
       year: '1981',
       events: [
@@ -304,6 +304,7 @@ const companyTimeline = [
       ],
     },
   ];
+
   return (
     <div className={`min-h-screen transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
       <section
@@ -344,7 +345,7 @@ const companyTimeline = [
                 <img
                   src={partner.image}
                   alt={partner.name}
-                  className="w-full h-[500px] object-cover"
+                  className="aspect-[2/3] w-full h-[500px] object-cover"
                   loading="lazy"
                 />
               </div>
@@ -387,68 +388,72 @@ const companyTimeline = [
         </div>
       </section>
 
-      {/* Company Timeline Section */}
-      <section
-        ref={setRef('timeline')}
-        data-section="timeline"
-        className="relative bg-white py-16"
-      >
-        <div className="max-w-screen-2xl mx-auto px-8">
-          <div className={`mb-12 transition-all duration-1000 ease-out ${visibleSections.timeline ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-            }`}>
-            <h2 className="text-base font-normal tracking-wider mb-4 lowercase underline">Our Journey</h2>
-            <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left">
-              four decades of architectural innovation and creative collaboration
-            </p>
-          </div>
+{/* Company Timeline Section */}
+<section
+  ref={setRef('timeline')}
+  data-section="timeline"
+  className="relative bg-white py-16"
+>
+  <div className="max-w-screen-2xl mx-auto px-8">
+    <div className={`mb-12 transition-all duration-1000 ease-out ${visibleSections.timeline ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+      }`}>
+      <h2 className="text-base font-normal tracking-wider mb-4 lowercase underline">Our Journey</h2>
+      <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left">
+        four decades of architectural innovation and creative collaboration
+      </p>
+    </div>
 
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-0 md:left-1/2 transform md:-translate-x-px h-full w-0.5 bg-gray-200"></div>
+    <div className="relative">
+      {/* Timeline line */}
+      <div className="absolute left-0 md:left-1/2 transform md:-translate-x-px h-full w-0.5 bg-gray-200"></div>
 
-            <div className="space-y-12">
-              {companyTimeline.map((milestone, index) => (
-                <div
-                  key={milestone.year}
-                  ref={setRef(`timeline-${index}`)}
-                  data-section={`timeline-${index}`}
-                  className={`relative transition-all duration-1000 ease-out ${
-                    visibleSections[`timeline-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                  }`}
-                >
-                  <div className={`flex flex-col md:flex-row gap-8 items-start ${
-                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                  }`}>
-                    {/* Content */}
-                    <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:text-left md:pl-12'}`}>
-                      <div className="space-y-3">
-                        {milestone.events.map((event, eventIndex) => (
-                          <div key={eventIndex} className="bg-gray-50 p-4 rounded">
-                            <p className="text-sm text-gray-700 leading-relaxed font-light lowercase">
-                              {event}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
+      <div className="space-y-12">
+        {companyTimeline.map((milestone, index) => (
+          <div
+            key={milestone.year}
+            ref={setRef(`timeline-${index}`)}
+            data-section={`timeline-${index}`}
+            className={`relative transition-all duration-1000 ease-out ${visibleSections[`timeline-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              }`}
+          >
+            <div className={`flex flex-col md:flex-row gap-4 items-start ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+              }`}>
+              {/* Content */}
+              <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right md:pr-4' : 'md:text-left md:pl-4'}`}>
+                <div className="space-y-3">
+                  {milestone.events.map((event, eventIndex) => (
+                    <div key={eventIndex} className="bg-gray-50 p-4 rounded">
+                      <p className="text-sm text-gray-700 leading-relaxed font-light lowercase">
+                        {event}
+                      </p>
                     </div>
-
-                    {/* Year marker */}
-                    <div className="relative flex-shrink-0 w-24 text-center">
-                      <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 -translate-y-1/2 top-0">
-                        <div className="w-4 h-4 bg-black rounded-full border-4 border-white shadow"></div>
-                      </div>
-                      <span className="text-base font-normal tracking-wider lowercase">{milestone.year}</span>
-                    </div>
-
-                    {/* Spacer for alignment */}
-                    <div className="flex-1 hidden md:block"></div>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              {/* Year marker - centered on timeline with border */}
+              <div className="relative flex-shrink-0 flex justify-center items-center">
+                <span className="text-base font-normal tracking-wider lowercase border border-black px-3 py-1 bg-white">
+                  {milestone.year}
+                </span>
+              </div>
+
+              {/* Spacer for alignment */}
+              <div className="flex-1 hidden md:block"></div>
             </div>
           </div>
+        ))}
+
+        {/* Present marker at the end */}
+        <div className="relative flex justify-center items-center pt-8">
+          <span className="text-base font-normal tracking-wider lowercase border border-black px-3 py-1 bg-white">
+            present
+          </span>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
 
       <section
         ref={setRef('projects')}
