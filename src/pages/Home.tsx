@@ -207,14 +207,72 @@ export default function Home() {
         data-section="publications"
         className={`max-w-screen-2xl mx-auto px-8 py-16 transition-all duration-1000 ease-out ${visibleSections.publications ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
       >
-        <h2 className="text-base font-normal tracking-wider mb-4 underline">publications section</h2>
-        <div>
-          {/* Description */}
-          <div className={`transition-all mt-4 duration-1000 ease-out ${visibleSections.publications ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        <h2 className="text-base font-normal tracking-wider mb-12 underline">publications</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Publication 1 */}
+          <div className={`border border-gray-200 p-6 transition-all duration-1000 ease-out hover:shadow-lg flex flex-col ${visibleSections.publications ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`} style={{ transitionDelay: '200ms' }}>
-            <p className="text-base text-gray-700 font-light italic leading-relaxed lowercase text-left">
-              pending info...
+            <div className="aspect-[3/4] bg-gray-100 mb-4"></div>
+            <h3 className="text-sm font-normal tracking-wide mb-2 uppercase">ethos: biographical essays 2015-2023</h3>
+            <p className="text-sm text-gray-600 font-light leading-relaxed mb-4 flex-grow">
+              The essays are generously illustrated with photographs, making the book both a theoretical and visual exploration of his experiences, ideas, and the people who have influenced him.
             </p>
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-2 text-xs tracking-wide font-light group self-start"
+            >
+              <span className="relative">
+                learn more
+                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
+              </span>
+              <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
+          </div>
+
+          {/* Publication 2 */}
+          <div className={`border border-gray-200 p-6 transition-all duration-1000 ease-out hover:shadow-lg flex flex-col ${visibleSections.publications ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`} style={{ transitionDelay: '300ms' }}>
+            <div className="aspect-[3/4] bg-gray-100 mb-4"></div>
+            <h3 className="text-sm font-normal tracking-wide mb-2 uppercase">Typology: The Genealogy of Buildings and Their Emergent Types, 2025</h3>
+            <p className="text-sm text-gray-600 font-light leading-relaxed mb-4 flex-grow">
+              a personal study and reflection on building types. The book is structured as a series of interconnected essays that reflect on type as more than just form or function; it's a way to see buildings as part of a genealogy of forms, linked with history, culture, and human activity.
+            </p>
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-2 text-xs tracking-wide font-light group self-start"
+            >
+              <span className="relative">
+                learn more
+                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
+              </span>
+              <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
+          </div>
+
+          {/* Publication 3 */}
+          <div className={`border border-gray-200 p-6 transition-all duration-1000 ease-out hover:shadow-lg flex flex-col ${visibleSections.publications ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`} style={{ transitionDelay: '400ms' }}>
+            <div className="aspect-[3/4] bg-gray-100 mb-4"></div>
+            <h3 className="text-sm font-normal tracking-wide mb-2 uppercase">automatism: in philosophy art and culture, 2022</h3>
+            <p className="text-sm text-gray-600 font-light leading-relaxed mb-4 flex-grow">
+              It's an essay exploring the concept of automatism — a term often linked with creative processes where intuition and subconscious processes play a role, rather than strict rational control.
+            </p>
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-2 text-xs tracking-wide font-light group self-start"
+            >
+              <span className="relative">
+                learn more
+                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
+              </span>
+              <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
           </div>
         </div>
       </section>
@@ -231,18 +289,18 @@ export default function Home() {
           let's collaborate to create spaces that inspire, endure, and transform. reach out to discuss your vision.
         </p>
         <div className={`transition-all duration-1000 ease-out ${visibleSections.contact ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`} style={{ transitionDelay: '400ms' }}>
-            <Link
-              to="/contact"
-              className="inline-flex items-center space-x-2 text-sm tracking-wide font-light group"
-            >
-              <span className="relative">
-                contact us
-                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
-              </span>
-              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-          </div>
+          }`} style={{ transitionDelay: '400ms' }}>
+          <Link
+            to="/contact"
+            className="inline-flex items-center space-x-2 text-sm tracking-wide font-light group"
+          >
+            <span className="relative">
+              contact us
+              <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
+            </span>
+            <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
+        </div>
       </section>
     </div>
   );

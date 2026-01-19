@@ -56,7 +56,7 @@ export default function Philosophy() {
               in 1992 when susanne and me started thinking of doing competitions our focus was only design and ever since our work revolved around ideas and concepts that go beyond what was then always a pre-defined architectural pursuit or entity. we had simply wanted to do architecture that would not only engage the human spirit, but also something with a deep philosophy behind the work.
             </p>
             <p className="text-base text-gray-700 leading-relaxed lowercase">
-              up to this day, there has been a little problem i have to solve in my head, and that is that i think architecture is taking much longer to becoming like what good art is, it is not so generative and it is not always assuming an emotive role, like a good work of art does. we think that it is possible for us to connect to our buildings as easily as we can connect to art, or to our music, or to things that we adore, like our children or our books.
+              i think architecture is taking much longer to becoming like what good art is, it is not so generative and it is not always assuming an emotive role, like a good work of art does. we think that it is possible for us to connect to our buildings as easily as we can connect to art, or to our music, or to things that we adore, like our children or our books.
             </p>
           </div>
 
