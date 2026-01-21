@@ -60,16 +60,6 @@ export default function Philosophy() {
             </p>
           </div>
 
-          <div
-            ref={setRef('image1')}
-            data-section="image1"
-            className={`relative transition-all duration-1000 ease-out ${visibleSections.image1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
-          >
-            <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
-              <span className="text-gray-400 text-sm tracking-wide">image placeholder</span>
-            </div>
-          </div>
 
           <div
             ref={setRef('intelligence')}
@@ -87,17 +77,6 @@ export default function Philosophy() {
             <p className="text-base text-gray-700 leading-relaxed lowercase text-left">
               their work embrace and thereafter adopt and develop to maturity whatever comes in the way of development of their designs, whether this makes sensible methodology or not. these processes are not ends but means to create something new, something unique, specific and exclusive to the project. the duyong project for instance, is definitely of the place, echoing the arts and culture of the fishing village of trengganu, whereas the aar centre contemplates the essence of the site to inform the shape of the built form.
             </p>
-          </div>
-
-          <div
-            ref={setRef('image2')}
-            data-section="image2"
-            className={`relative transition-all duration-1000 ease-out ${visibleSections.image2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
-          >
-            <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
-              <span className="text-gray-400 text-sm tracking-wide">image placeholder</span>
-            </div>
           </div>
 
           <div
@@ -122,17 +101,6 @@ export default function Philosophy() {
           </blockquote>
 
           <div
-            ref={setRef('image3')}
-            data-section="image3"
-            className={`relative transition-all duration-1000 ease-out ${visibleSections.image3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
-          >
-            <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
-              <span className="text-gray-400 text-sm tracking-wide">image placeholder</span>
-            </div>
-          </div>
-
-          <div
             ref={setRef('contrast')}
             data-section="contrast"
             className="grid md:grid-cols-2 gap-16"
@@ -150,17 +118,6 @@ export default function Philosophy() {
               <p className="text-base text-gray-700 leading-relaxed lowercase text-left">
                 the contrast or tension resulting from these associations and juxtapositions in their work is a constant characteristic feature in recent and upcoming projects. these explorations of bringing together things from the past and those brought out of new technology or research has become a constant inspiration.
               </p>
-            </div>
-          </div>
-
-          <div
-            ref={setRef('image4')}
-            data-section="image4"
-            className={`relative transition-all duration-1000 ease-out ${visibleSections.image4 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
-          >
-            <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
-              <span className="text-gray-400 text-sm tracking-wide">image placeholder</span>
             </div>
           </div>
 
@@ -189,17 +146,6 @@ export default function Philosophy() {
             <p className="text-base text-gray-700 leading-relaxed lowercase text-left">
               thought is a form of necessary action, a precursor to a possible work of art. and if you can't imagine it in your head, it's not likely to get built. getting that image in the mind's eye, and then executing it is what it's really all about. we usually start off with a sketch.
             </p>
-          </div>
-
-          <div
-            ref={setRef('image5')}
-            data-section="image5"
-            className={`relative transition-all duration-1000 ease-out ${visibleSections.image5 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
-          >
-            <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
-              <span className="text-gray-400 text-sm tracking-wide">image placeholder</span>
-            </div>
           </div>
         </div>
       </section>
