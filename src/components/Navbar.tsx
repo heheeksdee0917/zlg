@@ -173,7 +173,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-40 bg-white pt-20">
-          <div className="flex flex-col items-center justify-center h-full space-y-8 px-8">
+          <div className="flex flex-col items-start justify-start h-full space-y-8 px-8 py-12">
             <Link
               to="/"
               onClick={closeMobileMenu}
@@ -223,7 +223,7 @@ export default function Navbar() {
               onClick={closeMobileMenu}
               className="text-2xl tracking-wide font-light text-black relative group"
             >
-              partner
+              partners
               <span
                 className={`absolute -bottom-1 left-0 h-0.5 bg-black transition-all duration-300 ease-out ${isActive('/partner') ? 'w-full' : 'w-0 group-hover:w-full'
                   }`}

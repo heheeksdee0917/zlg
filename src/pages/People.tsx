@@ -14,16 +14,18 @@ export default function People() {
   }, []);
 
   useEffect(() => {
-    const observerOptions = {
+    const observerOptions: IntersectionObserverInit = {
       threshold: 0.15,
       rootMargin: '0px 0px -100px 0px'
     };
 
-    const observerCallback = (entries) => {
+    const observerCallback: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const sectionId = entry.target.getAttribute('data-section');
-          setVisibleSections(prev => ({ ...prev, [sectionId]: true }));
+          if (sectionId) {
+            setVisibleSections(prev => ({ ...prev, [sectionId]: true }));
+          }
         }
       });
     };
@@ -37,7 +39,7 @@ export default function People() {
     return () => observer.disconnect();
   }, []);
 
-  const setRef = (id) => (el) => {
+  const setRef = (id: string) => (el: HTMLElement | null) => {
     sectionRefs.current[id] = el;
   };
 
@@ -142,7 +144,7 @@ export default function People() {
               </div>
 
               <h3 className="text-base font-normal tracking-wide mb-1 lowercase underline">{member.name}</h3>
-              <p className="text-base text-gray-600 mb-4 tracking-wide lowercase">{member.role}</p>
+              <p className="text-base text-gray-600 mb-4 tracking-wide">{member.role}</p>
             </div>
           ))}
         </div>

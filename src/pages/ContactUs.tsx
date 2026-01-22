@@ -12,16 +12,18 @@ export default function ContactUs() {
     }, []);
 
     useEffect(() => {
-        const observerOptions = {
+        const observerOptions: IntersectionObserverInit = {
             threshold: 0.15,
             rootMargin: '0px 0px -100px 0px'
         };
 
-        const observerCallback = (entries) => {
+        const observerCallback: IntersectionObserverCallback = (entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     const sectionId = entry.target.getAttribute('data-section');
-                    setVisibleSections(prev => ({ ...prev, [sectionId]: true }));
+                    if (sectionId) {
+                        setVisibleSections(prev => ({ ...prev, [sectionId]: true }));
+                    }
                 }
             });
         };
@@ -35,30 +37,12 @@ export default function ContactUs() {
         return () => observer.disconnect();
     }, []);
 
-    const setRef = (id) => (el) => {
+    const setRef = (id: string) => (el: HTMLElement | null) => {
         sectionRefs.current[id] = el;
     };
 
     return (
         <div className={`transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
-            {/* Hero Section 
-      <section className="relative h-screen overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-fixed"
-          style={{
-            backgroundImage: 'url(https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1920)',
-          }}
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-30 flex items-end justify-start pb-16 pl-8">
-          <div className="text-left text-white">
-            <h1 className="text-base font-normal tracking-wider underline lowercase">
-              contact us
-            </h1>
-          </div>
-        </div>
-      </section>
-      */}
-
             {/* Main Content */}
             <section
                 ref={setRef('intro')}
@@ -108,10 +92,6 @@ export default function ContactUs() {
                     </div>
                 </div>
             </section>
-
-
-
-
         </div>
     );
 }

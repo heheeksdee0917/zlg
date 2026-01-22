@@ -265,9 +265,6 @@ export default function ProjectDetails() {
             </div>
 
             <div className="border-t border-gray-200 pt-8">
-              <h3 className="text-base tracking-wider mb-6 font-light lowercase text-gray-500">
-                project write-up
-              </h3>
               {hasContent && (
                 <>
                   {showFullDescription ? (

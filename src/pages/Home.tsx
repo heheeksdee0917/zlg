@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Play, Pause } from 'lucide-react';
+import { Play, Pause } from 'lucide-react';
 import { projects } from '../data/projects';
 import React, { useState, useEffect, useRef } from 'react';
 
@@ -12,6 +12,7 @@ export default function Home() {
 
   const featuredProjects = projects.slice(0, 3);
 
+  
   const toggleVideo = () => {
     if (videoRef.current) {
       if (isVideoPaused) {
@@ -32,16 +33,18 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const observerOptions = {
+    const observerOptions: IntersectionObserverInit = {
       threshold: 0.15,
       rootMargin: '0px 0px -100px 0px'
     };
 
-    const observerCallback = (entries) => {
+    const observerCallback: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const sectionId = entry.target.getAttribute('data-section');
-          setVisibleSections(prev => ({ ...prev, [sectionId]: true }));
+          if (sectionId) {
+            setVisibleSections(prev => ({ ...prev, [sectionId]: true }));
+          }
         }
       });
     };
@@ -55,7 +58,7 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  const setRef = (id) => (el) => {
+  const setRef = (id: string) => (el: HTMLElement | null) => {
     sectionRefs.current[id] = el;
   };
 
@@ -83,7 +86,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-black bg-opacity-30 flex items-end justify-start pb-16 pl-8">
             <div className="text-left text-white">
               <h1 className="text-base font-normal tracking-wider mb-2 underline">
-                zlg design
+                zlgdesign
               </h1>
               <p className="text-base font-light tracking-wide">
                 crafting timeless spaces
@@ -114,32 +117,11 @@ export default function Home() {
             }`} style={{ transitionDelay: '400ms' }}>
             <Link
               to="/philosophy"
-              className="inline-flex items-center space-x-2 text-sm tracking-wide font-light group"
+              className="inline-block text-sm tracking-wide px-12 py-4 border border-black font-light relative overflow-hidden group lowercase"
             >
-              <span className="relative">
-                explore our philosophy
-                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
-              </span>
-              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+              <span className="absolute inset-0 bg-black transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+              <span className="relative z-10 group-hover:text-white transition-colors duration-300">explore our philosophy</span>
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* People Section */}
-      <section
-        ref={setRef('people')}
-        data-section="people"
-        className={`max-w-screen-2xl mx-auto px-8 py-16 transition-all duration-1000 ease-out ${visibleSections.people ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
-      >
-        <h2 className="text-base font-normal tracking-wider mb-4 underline">people section</h2>
-        <div>
-          {/* Description */}
-          <div className={`transition-all duration-1000 ease-out ${visibleSections.people ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`} style={{ transitionDelay: '200ms' }}>
-            <p className="text-base text-gray-700 font-light italic leading-relaxed lowercase text-left">
-              pending info...
-            </p>
           </div>
         </div>
       </section>
@@ -190,13 +172,10 @@ export default function Home() {
         <div className="max-w-screen-2xl mx-auto px-8">
           <Link
             to="/projects"
-            className="inline-flex items-center space-x-2 text-sm tracking-wide font-light group"
+            className="inline-block text-sm tracking-wide px-12 py-4 border border-black font-light relative overflow-hidden group lowercase"
           >
-            <span className="relative">
-              our projects
-              <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
-            </span>
-            <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+            <span className="absolute inset-0 bg-black transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+            <span className="relative z-10 group-hover:text-white transition-colors duration-300">our projects</span>
           </Link>
         </div>
       </section>
@@ -212,67 +191,28 @@ export default function Home() {
           {/* Publication 1 */}
           <div className={`border border-gray-200 p-6 transition-all duration-1000 ease-out hover:shadow-lg flex flex-col ${visibleSections.publications ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`} style={{ transitionDelay: '200ms' }}>
-            <div className="aspect-[3/4] bg-gray-100 mb-4"></div>
-            <h3 className="text-sm font-normal tracking-wide mb-2 uppercase">ethos: biographical essays 2015-2023</h3>
-            <p className="text-sm text-gray-600 font-light leading-relaxed mb-4 flex-grow">
+            <h3 className="text-sm font-normal tracking-wide mb-2 lowercase">ethos: biographical essays 2015-2023</h3>
+            <p className="text-sm text-gray-600 font-light leading-relaxed text-left">
               The essays are generously illustrated with photographs, making the book both a theoretical and visual exploration of his experiences, ideas, and the people who have influenced him.
             </p>
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 text-xs tracking-wide font-light group self-start"
-            >
-              <span className="relative">
-                learn more
-                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
-              </span>
-              <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
           </div>
 
           {/* Publication 2 */}
           <div className={`border border-gray-200 p-6 transition-all duration-1000 ease-out hover:shadow-lg flex flex-col ${visibleSections.publications ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`} style={{ transitionDelay: '300ms' }}>
-            <div className="aspect-[3/4] bg-gray-100 mb-4"></div>
-            <h3 className="text-sm font-normal tracking-wide mb-2 uppercase">Typology: The Genealogy of Buildings and Their Emergent Types, 2025</h3>
-            <p className="text-sm text-gray-600 font-light leading-relaxed mb-4 flex-grow">
+            <h3 className="text-sm font-normal tracking-wide mb-2 lowercase">Typology: The Genealogy of Buildings and Their Emergent Types, 2025</h3>
+            <p className="text-sm text-gray-600 font-light leading-relaxed text-left">
               a personal study and reflection on building types. The book is structured as a series of interconnected essays that reflect on type as more than just form or function; it's a way to see buildings as part of a genealogy of forms, linked with history, culture, and human activity.
             </p>
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 text-xs tracking-wide font-light group self-start"
-            >
-              <span className="relative">
-                learn more
-                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
-              </span>
-              <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
           </div>
 
           {/* Publication 3 */}
           <div className={`border border-gray-200 p-6 transition-all duration-1000 ease-out hover:shadow-lg flex flex-col ${visibleSections.publications ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`} style={{ transitionDelay: '400ms' }}>
-            <div className="aspect-[3/4] bg-gray-100 mb-4"></div>
-            <h3 className="text-sm font-normal tracking-wide mb-2 uppercase">automatism: in philosophy art and culture, 2022</h3>
-            <p className="text-sm text-gray-600 font-light leading-relaxed mb-4 flex-grow">
+            <h3 className="text-sm font-normal tracking-wide mb-2 lowercase">automatism: in philosophy art and culture, 2022</h3>
+            <p className="text-sm text-gray-600 font-light leading-relaxed text-left">
               It's an essay exploring the concept of automatism — a term often linked with creative processes where intuition and subconscious processes play a role, rather than strict rational control.
             </p>
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 text-xs tracking-wide font-light group self-start"
-            >
-              <span className="relative">
-                learn more
-                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
-              </span>
-              <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
           </div>
         </div>
       </section>
@@ -292,13 +232,10 @@ export default function Home() {
           }`} style={{ transitionDelay: '400ms' }}>
           <Link
             to="/contact"
-            className="inline-flex items-center space-x-2 text-sm tracking-wide font-light group"
+            className="inline-block text-sm tracking-wide px-12 py-4 border border-black font-light relative overflow-hidden group lowercase"
           >
-            <span className="relative">
-              contact us
-              <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
-            </span>
-            <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+            <span className="absolute inset-0 bg-black transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+            <span className="relative z-10 group-hover:text-white transition-colors duration-300">contact us</span>
           </Link>
         </div>
       </section>
