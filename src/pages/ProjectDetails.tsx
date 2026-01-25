@@ -314,9 +314,6 @@ export default function ProjectDetails() {
       {/* Mobile Full Details Section */}
       <div className="md:hidden bg-white">
         <div className="px-8 py-8 border-t border-gray-200">
-          <h3 className="text-base tracking-wider mb-6 font-light lowercase text-gray-500">
-            project write-up
-          </h3>
           {hasContent && (
             <>
               {detailContent.map((block, index) => (
@@ -340,7 +337,7 @@ export default function ProjectDetails() {
       <section
         ref={setRef('related')}
         data-section="related"
-        className="bg-gray-50 py-32 pb-0"
+        className="bg-gray-50 py-16 pb-0"
       >
         <div className="max-w-screen-2xl mx-auto px-8">
           <h2 className={`text-base font-medium tracking-wider mb-16 transition-all duration-1000 ease-out ${

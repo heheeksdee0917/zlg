@@ -6,6 +6,13 @@ export interface Partner {
     bio: string[];
 }
 
+export interface Team {
+  id: number;
+  role: string;
+  name: string;
+  image: string;
+}
+
 export interface JourneyPartner {
     name: string;
     title: string;
@@ -15,6 +22,69 @@ export interface TimelineMilestone {
     year: string;
     events: string[];
 }
+
+export const team: Team[] = [
+    {
+      id: 1,
+      name: 'Huat Lim & SUSANNE ZEIDLER',
+      role: 'Managing Director & Executive Director',
+      image: '/People/HuatandSusanne.jpeg',
+    },
+    {
+      id: 2,
+      name: 'shu herng',
+      role: 'BA Arch. (Hons) ESALA, RIBA Part I',
+      image: 'People/shu.jpeg',
+    },
+    {
+      id: 3,
+      name: 'REVATHY SIVA',
+      role: 'B. Arch (Hons) UMK, LAM Part I',
+      image: 'People/revathy.jpeg',
+    },
+    {
+      id: 4,
+      name: 'Hester Chang',
+      role: 'BSc. Arch (Hons) Taylor‘s, LAM Part I',
+      image: 'People/hester.jpeg',
+    },
+    {
+      id: 5,
+      name: 'Ahirah Yen',
+      role: 'LAM AG/A 678, BSc. Arch (Hons) Taylor‘s, M. Arch UM, LAM/RIBA PART II',
+      image: 'People/athirah.jpeg',
+    },
+    {
+      id: 6,
+      name: 'daphne wee',
+      role: 'B Arch. (Hons) SEGi, LAM Part I',
+      image: 'People/daphne.jpeg',
+    },
+    {
+      id: 7,
+      name: 'haziqah ngasri',
+      role: 'Dipl. Fine Art, Bsc. Arch (Hons) UITM, LAM Part I',
+      image: 'People/haziqah.jpeg',
+    },
+    {
+      id: 8,
+      name: 'yusof hafiz',
+      role: 'BSc. Arch (Hons), MSc. Applied Arch. & Design QUEENS, RIBA/ARB/LAM Part II',
+      image: 'People/yusof.jpeg',
+    },
+    {
+      id: 9,
+      name: 'VIKTOR ZEIDLER LIM',
+      role: 'BSc. Arch (Hons) Taylor’s, LAM Part I',
+      image: 'People/viktor.jpeg',
+    },
+    {
+      id: 10,
+      name: 'brandon ngiau',
+      role: 'Bsc. Arch (Hons) Taylor‘s, LAM Part I',
+      image: 'People/brandon.jpeg',
+    },
+]
 
 // Key Partners data
 export const keyPartners: Partner[] = [

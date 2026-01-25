@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { team } from '../data/partner';
+import type { Team } from '../data/partner';
+import LazyLoading from '../components/LazyLoading';
 
 export default function People() {
   const [fadeIn, setFadeIn] = useState(false);
@@ -43,70 +46,6 @@ export default function People() {
     sectionRefs.current[id] = el;
   };
 
-  const team = [
-    {
-      id: 1,
-      name: 'Huat Lim & SUSANNE ZEIDLER',
-      role: 'Managing Director & Executive Director',
-      image: '/People/HuatandSusanne.jpeg',
-    },
-    {
-      id: 2,
-      name: 'shu herng',
-      role: 'BA Arch. (Hons) ESALA, RIBA Part I',
-      image: 'People/shu.jpeg',
-    },
-    {
-      id: 3,
-      name: 'REVATHY SIVA',
-      role: 'B. Arch (Hons) UMK, LAM Part I',
-      image: 'People/revathy.jpeg',
-    },
-    {
-      id: 4,
-      name: 'Hester Chang',
-      role: 'BSc. Arch (Hons) Taylor’s, LAM Part I',
-      image: 'People/hester.jpeg',
-    },
-    {
-      id: 5,
-      name: 'Ahirah Yen',
-      role: 'LAM AG/A 678, BSc. Arch (Hons) Taylor’s, M. Arch UM, LAM/RIBA PART II',
-      image: 'People/athirah.jpeg',
-    },
-    {
-      id: 6,
-      name: 'daphne wee',
-      role: 'B Arch. (Hons) SEGi, LAM Part I',
-       image: 'People/daphne.jpeg',
-    },
-    {
-      id: 7,
-      name: 'haziqah ngasri',
-      role: 'Dipl. Fine Art, Bsc. Arch (Hons) UITM, LAM Part I',
-      image: 'People/haziqah.jpeg',
-    },
-    {
-      id: 6,
-      name: 'yusof hafiz',
-      role: 'BSc. Arch (Hons), MSc. Applied Arch. & Design QUEENS, RIBA/ARB/LAM Part II',
-      image: 'People/yusof.jpeg',
-    },
-    {
-      id: 8,
-      name: 'VIKTOR ZEIDLER LIM',
-      role: 'BSc. Arch (Hons) Taylor’s, LAM Part Ir',
-      image: 'People/viktor.jpeg',
-    },
-    {
-      id: 9,
-      name: 'brandon ngiau',
-      role: 'Bsc. Arch (Hons) Taylor’s, LAM Part I',
-      image: 'People/brandon.jpeg',
-    },
-
-  ];
-
   return (
     <div className={`min-h-screen transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
       <section 
@@ -123,31 +62,40 @@ export default function People() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {team.map((member, index) => (
-            <div 
-              key={member.id} 
-              ref={index === 0 ? setRef('team') : undefined}
-              data-section={index === 0 ? 'team' : undefined}
-              className={`group transition-all duration-1000 ease-out ${
-                visibleSections.team ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
-              style={{ transitionDelay: `${index * 150}ms` }}
-            >
-              <div className="overflow-hidden mb-6">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full aspect-[2/3] object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
+        <LazyLoading 
+          items={team} 
+          initialCount={3} 
+          loadMoreCount={3}
+          visibleSections={visibleSections}
+        >
+          {(displayedTeam) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+              {displayedTeam.map((member: Team, index: number) => (
+                <div 
+                  key={member.id} 
+                  ref={index === 0 ? setRef('team') : undefined}
+                  data-section={index === 0 ? 'team' : undefined}
+                  className={`group transition-all duration-1000 ease-out ${
+                    visibleSections.team ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                  }`}
+                  style={{ transitionDelay: `${index * 150}ms` }}
+                >
+                  <div className="overflow-hidden mb-6">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full aspect-[2/3] object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading={index < 3 ? 'eager' : 'lazy'}
+                    />
+                  </div>
 
-              <h3 className="text-base font-normal tracking-wide mb-1 lowercase underline">{member.name}</h3>
-              <p className="text-base text-gray-600 mb-4 tracking-wide">{member.role}</p>
+                  <h3 className="text-base font-normal tracking-wide mb-1 lowercase underline">{member.name}</h3>
+                  <p className="text-base text-gray-600 mb-4 tracking-wide">{member.role}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          )}
+        </LazyLoading>
       </section>
 
       <section 

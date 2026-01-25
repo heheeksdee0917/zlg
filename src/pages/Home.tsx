@@ -12,7 +12,7 @@ export default function Home() {
 
   const featuredProjects = projects.slice(0, 3);
 
-  
+
   const toggleVideo = () => {
     if (videoRef.current) {
       if (isVideoPaused) {
@@ -215,6 +215,41 @@ export default function Home() {
             </p>
           </div>
         </div>
+      </section>
+
+      {/* People/Team Section */}
+      <section
+        ref={setRef('people')}
+        data-section="people"
+        className={`relative h-screen overflow-hidden transition-all duration-1000 ease-out ${visibleSections.people ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+      >
+        <Link to="/people" className="group block relative w-full h-full">
+          <div className="flex w-full h-full">
+            {/* Image on left - 60% width */}
+            <div className="w-[60%] h-full relative overflow-hidden">
+              <img
+                src="/People/zlg_group.jpeg"
+                alt="ZLG Design Team"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            {/* Content on right - 40% width */}
+            <div className="w-[40%] h-full flex items-center justify-start bg-white pl-12">
+              <div className="text-left text-black">
+                <h2 className="text-2xl font-normal tracking-wider mb-4 lowercase underline">meet our team</h2>
+                <p className="text-base font-light tracking-wide mb-6 lowercase">
+                  the minds behind zlgdesign
+                </p>
+                <span className="inline-block text-sm tracking-wide px-12 py-4 border border-black font-light relative overflow-hidden lowercase">
+                  <span className="absolute inset-0 bg-black transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                  <span className="relative z-10 group-hover:text-white transition-colors duration-300">discover our people</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </Link>
       </section>
 
       {/* Contact Section */}
