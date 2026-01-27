@@ -64,12 +64,12 @@ export default function People() {
 
         <LazyLoading 
           items={team} 
-          initialCount={3} 
-          loadMoreCount={3}
+          initialCount={4} 
+          loadMoreCount={4}
           visibleSections={visibleSections}
         >
           {(displayedTeam) => (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
               {displayedTeam.map((member: Team, index: number) => (
                 <div 
                   key={member.id} 

@@ -51,8 +51,8 @@ export default function Philosophy() {
             className={`text-left transition-all duration-1000 ease-out ${visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
               }`}
           >
-            <h2 className="text-base font-normal tracking-wider mb-4 lowercase">
-              our philosophy
+            <h2 className="text-base font-normal tracking-wider mb-4">
+              zlgdesign's Philosophy
             </h2>
             <p className="text-base text-gray-700 leading-relaxed mb-6">
               In 1992 when susanne and me started thinking of doing competitions our focus was only design and ever since our work revolved around ideas and concepts that go beyond what was then always a pre-defined architectural pursuit or entity. We had simply wanted to do architecture that would not only engage the human spirit, but also something with a deep philosophy behind the work.
@@ -69,7 +69,7 @@ export default function Philosophy() {
             className={`transition-all duration-1000 ease-out ${visibleSections.intelligence ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
               }`}
           >
-            <h3 className="text-base font-normal tracking-wide mb-4 lowercase">
+            <h3 className="text-base font-normal tracking-wide mb-4">
               The Shock of the New
             </h3>
             <p className="text-base text-gray-700 leading-relaxed mb-4 text-left">
@@ -88,8 +88,8 @@ export default function Philosophy() {
             className={`transition-all duration-1000 ease-out ${visibleSections.ourethos ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
               }`}
           >
-            <h3 className="text-base font-normal tracking-wide mb-4 lowercase">
-              our ethos
+            <h3 className="text-base font-normal tracking-wide mb-4">
+              Our Ethos
             </h3>
             <p className="text-base text-gray-700 leading-relaxed mb-4 text-left">
               ZLG is committed to a practice that combines the best of craft practices with the possibilities offered by technological innovation. We strive to encompass sustainability and ecology in all aspects of our design projects. We deliberately embrace nature to be a part of the experience, and deliver this optimally with available resources. Awakening to the call for greener buildings and more sustainable forms of development gives us an ethos to produce designs that are both aesthetically exciting and socially and environmentally responsible, created for the benefit of future generations.
@@ -166,43 +166,39 @@ export default function Philosophy() {
         </div>
       </section>
 
+      {/* Publications Section */}
       <section
-        ref={setRef('principles')}
-        data-section="principles"
-        className="bg-gray-50 py-16"
+        ref={setRef('publications')}
+        data-section="publications"
+        className={`max-w-screen-2xl mx-auto px-8 py-16 transition-all duration-1000 ease-out bg-white relative z-40 ${visibleSections.publications ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
       >
-        <div className="max-w-screen-2xl mx-auto px-8">
-          <div className="max-w-4xl">
-            <h2 className={`text-base font-normal tracking-wider mb-8 text-left lowercase underline transition-all duration-1000 ease-out ${visibleSections.principles ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}>
-              core principles
-            </h2>
+        <h2 className="text-base font-normal tracking-wider mb-4">Publications</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Publication 1 */}
+          <div className={`border border-gray-200 p-6 transition-all duration-1000 ease-out hover:shadow-lg flex flex-col ${visibleSections.publications ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`} style={{ transitionDelay: '200ms' }}>
+            <h3 className="text-sm font-normal tracking-wide mb-2 lowercase">ethos: biographical essays 2015-2023</h3>
+            <p className="text-sm text-gray-600 font-light leading-relaxed text-left">
+              The essays are generously illustrated with photographs, making the book both a theoretical and visual exploration of his experiences, ideas, and the people who have influenced him.
+            </p>
+          </div>
 
-            <div className="grid md:grid-cols-3 gap-12">
-              <div className={`text-left transition-all duration-1000 ease-out ${visibleSections.principles ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                }`} style={{ transitionDelay: '200ms' }}>
-                <h4 className="text-base font-normal tracking-wide mb-4 lowercase">emotion over style</h4>
-                <p className="text-base text-gray-700 leading-relaxed lowercase">
-                  architecture must engage the human spirit and connect emotionally, transcending mere aesthetics.
-                </p>
-              </div>
+          {/* Publication 2 */}
+          <div className={`border border-gray-200 p-6 transition-all duration-1000 ease-out hover:shadow-lg flex flex-col ${visibleSections.publications ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`} style={{ transitionDelay: '300ms' }}>
+            <h3 className="text-sm font-normal tracking-wide mb-2 lowercase">Typology: The Genealogy of Buildings and Their Emergent Types, 2025</h3>
+            <p className="text-sm text-gray-600 font-light leading-relaxed text-left">
+              a personal study and reflection on building types. The book is structured as a series of interconnected essays that reflect on type as more than just form or function; it's a way to see buildings as part of a genealogy of forms, linked with history, culture, and human activity.
+            </p>
+          </div>
 
-              <div className={`text-left transition-all duration-1000 ease-out ${visibleSections.principles ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                }`} style={{ transitionDelay: '400ms' }}>
-                <h4 className="text-base font-normal tracking-wide mb-4 lowercase">Design intelligence</h4>
-                <p className="text-base text-gray-700 leading-relaxed lowercase">
-                  A customized exploration technique developed through critical investigation and intellectual discourse.
-                </p>
-              </div>
-
-              <div className={`text-left transition-all duration-1000 ease-out ${visibleSections.principles ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                }`} style={{ transitionDelay: '600ms' }}>
-                <h4 className="text-base font-normal tracking-wide mb-4 lowercase">Hybrid spaces</h4>
-                <p className="text-base text-gray-700 leading-relaxed lowercase">
-                  Creating ambiguous third spaces that exhibit multiple typologies and purposes.
-                </p>
-              </div>
-            </div>
+          {/* Publication 3 */}
+          <div className={`border border-gray-200 p-6 transition-all duration-1000 ease-out hover:shadow-lg flex flex-col ${visibleSections.publications ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`} style={{ transitionDelay: '400ms' }}>
+            <h3 className="text-sm font-normal tracking-wide mb-2 lowercase">automatism: in philosophy art and culture, 2022</h3>
+            <p className="text-sm text-gray-600 font-light leading-relaxed text-left">
+              It's an essay exploring the concept of automatism — a term often linked with creative processes where intuition and subconscious processes play a role, rather than strict rational control.
+            </p>
           </div>
         </div>
       </section>

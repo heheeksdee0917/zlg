@@ -62,20 +62,6 @@ export default function Footer() {
                 </address>
               </a>
             </div>
-
-            {/* Embedded Google Map – compact & responsive */}
-            <div className="w-full h-48 sm:h-56 md:h-64 rounded-md overflow-hidden border border-gray-200 shadow-sm">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.671222744767!2d101.68941977497126!3d3.1809137967943784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc4811d78394db%3A0xc0145d4ec764b998!2sZLG%20Design!5e0!3m2!1sen!2smy!4v1768297314380!5m2!1sen!2smy"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="zlg design location - Bangunan Perdagangan D7, Sentul"
-              ></iframe>
-            </div>
           </div>
         </div>
 

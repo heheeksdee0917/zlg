@@ -206,7 +206,7 @@ export default function ProjectDetails() {
         {/* Project Info - 10% */}
         <div className="h-[10vh] bg-white overflow-y-auto">
           <div className="px-8 py-4">
-            <h1 className="text-base font-bold tracking-wider mb-1 lowercase leading-tight">
+            <h1 className="text-base font-bold mb-1 lowercase leading-tight">
               {project.title}
             </h1>
             <p className="text-base text-gray-600 font-light lowercase">
@@ -256,7 +256,7 @@ export default function ProjectDetails() {
         <div className="w-[55%] bg-white sticky top-20 h-screen overflow-y-auto custom-scrollbar">
           <div className="p-8 md:p-16">
             <div className="mb-12">
-              <h1 className="text-base font-bold tracking-wider mb-2 lowercase leading-tight">
+              <h1 className="text-base font-bold mb-2 lowercase leading-tight">
                 {project.title}
               </h1>
               <p className="text-base text-gray-600 font-light lowercase">
@@ -337,10 +337,10 @@ export default function ProjectDetails() {
       <section
         ref={setRef('related')}
         data-section="related"
-        className="bg-gray-50 py-16 pb-0"
+        className="bg-gray-50 py-4 pb-0"
       >
-        <div className="max-w-screen-2xl mx-auto px-8">
-          <h2 className={`text-base font-medium tracking-wider mb-16 transition-all duration-1000 ease-out ${
+        <div className="max-w-screen-2xl mx-auto px-4">
+          <h2 className={`text-base font-medium tracking-wider mb-4 transition-all duration-1000 ease-out ${
             visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}>
             related projects
@@ -366,7 +366,7 @@ export default function ProjectDetails() {
                 />
               </div>
               <div className="p-8 bg-white">
-                <h3 className="text-base font-light tracking-wide mb-2 group-hover:border-b border-black inline-block lowercase">
+                <h3 className="text-base font-light mb-2 group-hover:border-b border-black inline-block lowercase">
                   {relatedProject.title}
                 </h3>
                 <p className="text-base text-gray-600 font-light lowercase">

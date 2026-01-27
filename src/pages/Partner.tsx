@@ -122,7 +122,7 @@ export default function Partners() {
           <div className={`text-left px-8 transition-all duration-1000 ease-out delay-300 ${visibleSections.legacy ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
             }`}>
             <h2 className="text-base font-normal tracking-wider text-black lowercase underline">
-              Legacy of Excellence
+              break section (refresh purpose)....
             </h2>
           </div>
         </div>
