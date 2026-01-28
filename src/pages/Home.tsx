@@ -1,7 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function Home() {
   const [hoveredColumn, setHoveredColumn] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    // Trigger animations after component mounts
+    setTimeout(() => setIsLoaded(true), 100);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const columns = [
     {
@@ -38,46 +54,55 @@ export default function Home() {
 
   const getColumnWidth = (index: number) => {
     if (hoveredColumn === null) {
-      return '20%'; // Equal distribution when no hover
+      return '20%';
     }
     if (hoveredColumn === index) {
-      return '100%'; // Full screen expansion
+      return '100%';
     }
-    return '0%'; // Hide other columns
+    return '0%';
   };
 
   return (
-    <div className="h-screen w-full flex overflow-hidden">
+    <div className="h-screen w-full flex md:flex-row flex-col overflow-hidden">
       {columns.map((column, index) => (
         <a
           key={column.id}
           href={column.link}
-          className="relative overflow-hidden transition-all duration-500 ease-in-out"
-          style={{ width: getColumnWidth(index) }}
-          onMouseEnter={() => setHoveredColumn(index)}
-          onMouseLeave={() => setHoveredColumn(null)}
+          className="relative overflow-hidden"
+          style={{ 
+            width: isMobile ? '100%' : getColumnWidth(index),
+            height: isMobile ? '20%' : '100%',
+            transform: isLoaded ? 'translateX(0) translateY(0)' : (isMobile ? 'translateX(-100%)' : 'translateY(-100%)'),
+            transition: isLoaded 
+              ? `width 500ms ease-in-out, height 500ms ease-in-out` 
+              : `transform 800ms ease-in-out ${index * 150}ms`,
+          }}
+          onMouseEnter={() => !isMobile && setHoveredColumn(index)}
+          onMouseLeave={() => !isMobile && setHoveredColumn(null)}
         >
           {/* Background Image */}
           <div
             className="absolute inset-0 bg-cover bg-center transition-transform duration-700"
             style={{
               backgroundImage: `url(${column.image})`,
-              transform: hoveredColumn === index ? 'scale(1.05)' : 'scale(1)'
+              transform: hoveredColumn === index && !isMobile ? 'scale(1.05)' : 'scale(1)'
             }}
           />
 
           {/* Overlay */}
           <div className="absolute inset-0 bg-black transition-opacity duration-500"
-            style={{ opacity: hoveredColumn === index ? 0.3 : 0.5 }}
+            style={{ opacity: hoveredColumn === index && !isMobile ? 0.3 : 0.5 }}
           />
 
-          {/* Title - Bottom Left (visible when not hovered or when no column is hovered) */}
+          {/* Title - Bottom Left (always visible on mobile) */}
           <div
-            className="absolute z-10 transition-opacity duration-500"
+            className="absolute z-10 transition-all duration-700"
             style={{
               bottom: '2rem',
               left: '2rem',
-              opacity: hoveredColumn === null || hoveredColumn !== index ? 1 : 0
+              opacity: isLoaded && (isMobile || hoveredColumn === null || hoveredColumn !== index) ? 1 : 0,
+              transform: isLoaded ? 'translateY(0)' : 'translateY(20px)',
+              transitionDelay: `${index * 150 + 400}ms`
             }}
           >
             <h2
@@ -91,27 +116,29 @@ export default function Home() {
             </h2>
           </div>
 
-          {/* Title - Center (fades in only when THIS column is hovered) */}
-          <div
-            className="absolute z-10 transition-opacity duration-500"
-            style={{
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              opacity: hoveredColumn === index ? 1 : 0,
-              pointerEvents: hoveredColumn === index ? 'auto' : 'none'
-            }}
-          >
-            <h2
-              className="text-white font-light tracking-wider lowercase"
+          {/* Title - Center (only on desktop hover) */}
+          {!isMobile && (
+            <div
+              className="absolute z-10 transition-opacity duration-500"
               style={{
-                fontSize: '2.5rem',
-                letterSpacing: '0.2em'
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                opacity: hoveredColumn === index ? 1 : 0,
+                pointerEvents: hoveredColumn === index ? 'auto' : 'none'
               }}
             >
-              {column.title}
-            </h2>
-          </div>
+              <h2
+                className="text-white font-light tracking-wider lowercase"
+                style={{
+                  fontSize: '2.5rem',
+                  letterSpacing: '0.2em'
+                }}
+              >
+                {column.title}
+              </h2>
+            </div>
+          )}
         </a>
       ))}
     </div>
