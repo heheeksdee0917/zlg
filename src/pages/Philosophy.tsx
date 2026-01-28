@@ -45,7 +45,7 @@ export default function Philosophy() {
   const renderSection = (section: typeof philosophySections[0], index: number) => {
     const isVisible = visibleSections[section.id];
     const isLastSection = index === philosophySections.length - 1;
-
+  
     switch (section.type) {
       case 'text-image':
         return (
@@ -53,19 +53,23 @@ export default function Philosophy() {
             <section
               ref={setRef(section.id)}
               data-section={section.id}
-              className={`md:sticky md:top-0 md:h-screen bg-white z-${section.zIndex} flex items-center py-8 md:py-0`}
+              className={`md:sticky md:top-0 md:h-screen bg-white flex items-center py-8 md:py-0`}
+              style={{ zIndex: section.zIndex }}
             >
               <div className="max-w-screen-2xl mx-auto px-8 w-full">
-                <div className={`grid md:grid-cols-2 gap-8 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                  }`}>
+                <div className={`grid md:grid-cols-2 gap-8`}>
                   {section.content.imagePosition === 'left' ? (
                     <>
-                      <div className="flex items-center justify-center">
+                      <div className={`flex items-center justify-center transition-all duration-1000 ease-out ${
+                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                      }`}>
                         <div className="w-full" style={{ aspectRatio: '2/3' }}>
                           <img src={section.content.image} alt={section.title} className="w-full h-full object-cover" />
                         </div>
                       </div>
-                      <div className="flex flex-col justify-center">
+                      <div className={`flex flex-col justify-center transition-all duration-1000 ease-out ${
+                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                      }`} style={{ transitionDelay: '200ms' }}>
                         <h3 className="text-base font-normal tracking-wide mb-4">{section.title}</h3>
                         {section.content.text?.map((paragraph, i) => (
                           <p key={i} className="text-base text-gray-700 leading-relaxed mb-4 last:mb-0">{paragraph}</p>
@@ -74,13 +78,17 @@ export default function Philosophy() {
                     </>
                   ) : (
                     <>
-                      <div className="flex flex-col justify-center">
+                      <div className={`flex flex-col justify-center transition-all duration-1000 ease-out ${
+                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                      }`}>
                         <h2 className="text-base font-normal tracking-wider mb-4">{section.title}</h2>
                         {section.content.text?.map((paragraph, i) => (
                           <p key={i} className="text-base text-gray-700 leading-relaxed mb-6 last:mb-0">{paragraph}</p>
                         ))}
                       </div>
-                      <div className="flex items-center justify-center">
+                      <div className={`flex items-center justify-center transition-all duration-1000 ease-out ${
+                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                      }`} style={{ transitionDelay: '200ms' }}>
                         <div className="w-full" style={{ aspectRatio: '2/3' }}>
                           <img src={section.content.image} alt={section.title} className="w-full h-full object-cover" />
                         </div>
@@ -90,40 +98,44 @@ export default function Philosophy() {
                 </div>
               </div>
             </section>
-            {!isLastSection && <div className="md:h-screen"></div>}
+            {!isLastSection && <div className="h-32 md:h-64"></div>}
           </>
         );
-
+  
       case 'quote-contrast':
         return (
           <>
             <section
               ref={setRef(section.id)}
               data-section={section.id}
-              className={`md:sticky md:top-0 md:h-screen bg-white z-${section.zIndex} flex items-center py-8 md:py-0`}
+              className={`md:sticky md:top-0 md:h-screen bg-white flex items-center py-8 md:py-0`}
+              style={{ zIndex: section.zIndex }}
             >
               <div className="max-w-screen-2xl mx-auto px-8 w-full">
                 <div className="space-y-16">
                   {/* First Quote */}
-                  <blockquote className={`text-base font-light text-left italic text-gray-800 py-8 border-t border-b border-gray-300 transition-all duration-1000 ease-out lowercase ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                    }`}>
+                  <blockquote className={`text-base font-light text-left italic text-gray-800 py-8 border-t border-b border-gray-300 transition-all duration-1000 ease-out lowercase ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  }`}>
                     {section.content.quotes?.[0].quote}
                   </blockquote>
-
+  
                   {/* Contrast Columns */}
                   <div className="grid md:grid-cols-2 gap-16">
                     {section.content.columns?.map((col, i) => (
-                      <div key={i} className={`transition-all duration-1000 ease-out ${i === 1 ? 'delay-300' : ''} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                        }`}>
+                      <div key={i} className={`transition-all duration-1000 ease-out ${
+                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                      }`} style={{ transitionDelay: `${(i + 2) * 100}ms` }}>
                         <h3 className="text-base font-normal tracking-wide mb-4">{col.title}</h3>
                         <p className="text-base text-gray-700 leading-relaxed text-left">{col.text}</p>
                       </div>
                     ))}
                   </div>
-
+  
                   {/* Second Quote */}
-                  <blockquote className={`text-base font-light text-left italic text-gray-800 py-8 border-t border-b border-gray-300 transition-all duration-1000 ease-out lowercase ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                    }`} style={{ transitionDelay: '400ms' }}>
+                  <blockquote className={`text-base font-light text-left italic text-gray-800 py-8 border-t border-b border-gray-300 transition-all duration-1000 ease-out lowercase ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  }`} style={{ transitionDelay: '400ms' }}>
                     {section.content.quotes?.[1].quote}
                     {section.content.quotes?.[1].author && (
                       <span className="block text-base not-italic mt-4 text-gray-600">{section.content.quotes?.[1].author}</span>
@@ -132,21 +144,23 @@ export default function Philosophy() {
                 </div>
               </div>
             </section>
-            {!isLastSection && <div className="md:h-screen"></div>}
+            {!isLastSection && <div className="h-32 md:h-64"></div>}
           </>
         );
-
+  
       case 'text-only':
         return (
           <>
             <section
               ref={setRef(section.id)}
               data-section={section.id}
-              className={`md:sticky md:top-0 md:h-screen bg-white z-${section.zIndex} flex items-center py-8 md:py-0`}
+              className={`md:sticky md:top-0 md:h-screen bg-white flex items-center py-8 md:py-0`}
+              style={{ zIndex: section.zIndex }}
             >
               <div className="max-w-screen-2xl mx-auto px-8 w-full">
-                <div className={`text-left transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                  }`}>
+                <div className={`text-left transition-all duration-1000 ease-out ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}>
                   <h3 className="text-base font-normal tracking-wide mb-4">{section.title}</h3>
                   {section.content.text?.map((paragraph, i) => (
                     <p key={i} className="text-base text-gray-700 leading-relaxed mb-4 last:mb-0">{paragraph}</p>
@@ -154,9 +168,10 @@ export default function Philosophy() {
                 </div>
               </div>
             </section>
-            {!isLastSection && <div className="md:h-screen"></div>}
+            {!isLastSection && <div className="h-32 md:h-64"></div>}
           </>
         );
+  
 
       case 'publications':
         return (

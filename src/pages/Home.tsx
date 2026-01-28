@@ -22,8 +22,8 @@ export default function Home() {
   const columns = [
     {
       id: 1,
-      title: 'Projects',
-      link: '/projects',
+      title: 'Prople',
+      link: '/people',
       image: '/poster_1.jpg'
     },
     {
@@ -34,20 +34,20 @@ export default function Home() {
     },
     {
       id: 3,
-      title: 'People',
-      link: '/people',
+      title: 'place',
+      link: '/place',
       image: '/poster_1.jpg'
     },
     {
       id: 4,
-      title: 'Partners',
-      link: '/partners',
+      title: 'projects',
+      link: '/projects',
       image: '/poster_1.jpg'
     },
     {
       id: 5,
-      title: 'Contact',
-      link: '/contact',
+      title: 'partners',
+      link: '/partners',
       image: '/poster_1.jpg'
     }
   ];

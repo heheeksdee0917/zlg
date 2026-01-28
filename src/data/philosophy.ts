@@ -69,7 +69,7 @@ export interface PhilosophySection {
     },
     {
       id: 'quotes-contrast',
-      title: '',
+      title: 'Quotes',
       type: 'quote-contrast',
       zIndex: 40,
       content: {
