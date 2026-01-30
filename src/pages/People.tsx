@@ -89,7 +89,7 @@ export default function People() {
                     />
                   </div>
 
-                  <h3 className="text-base font-normal tracking-wide mb-1 lowercase underline">{member.name}</h3>
+                  <h3 className="text-base font-normal tracking-wide mb-1 lowercase">{member.name}</h3>
                   <p className="text-base text-gray-600 mb-4 tracking-wide">{member.role}</p>
                 </div>
               ))}

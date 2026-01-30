@@ -72,7 +72,7 @@ export default function UnderConstruction() {
       </div>
 
       {/* Custom animation keyframes */}
-      <style jsx>{`
+      <style>{`
         @keyframes progress {
           0%, 100% {
             transform: translateX(-10%);

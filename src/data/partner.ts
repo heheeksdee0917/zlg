@@ -32,15 +32,15 @@ export const team: Team[] = [
     },
     {
       id: 2,
-      name: 'shu herng',
-      role: 'BA Arch. (Hons) ESALA, RIBA Part I',
-      image: 'People/shu.jpeg',
+      name: 'Ar. Athirah Yen',
+      role: 'LAM AG/A 678, BSc. Arch (Hons) Taylor‘s, M. Arch UM, LAM/RIBA PART II',
+      image: 'People/athirah.jpeg',
     },
     {
       id: 3,
-      name: 'REVATHY SIVA',
-      role: 'B. Arch (Hons) UMK, LAM Part I',
-      image: 'People/revathy.jpeg',
+      name: 'haziqah ngasri',
+      role: 'Dipl. Fine Art, Bsc. Arch (Hons) UITM, LAM Part I',
+      image: 'People/haziqah.jpeg',
     },
     {
       id: 4,
@@ -50,40 +50,42 @@ export const team: Team[] = [
     },
     {
       id: 5,
-      name: 'Ahirah Yen',
-      role: 'LAM AG/A 678, BSc. Arch (Hons) Taylor‘s, M. Arch UM, LAM/RIBA PART II',
-      image: 'People/athirah.jpeg',
+      name: 'shu herng',
+      role: 'BA Arch. (Hons) ESALA, RIBA Part I',
+      image: 'People/shu.jpeg',
     },
     {
       id: 6,
+      name: 'brandon ngiau',
+      role: 'Bsc. Arch (Hons) Taylor‘s, LAM Part I',
+      image: 'People/brandon.jpeg',
+    },
+    {
+      id: 7,
+      name: 'REVATHY SIVA',
+      role: 'B. Arch (Hons) UMK, LAM Part I',
+      image: 'People/revathy.jpeg',
+    },
+    {
+      id: 8,
       name: 'daphne wee',
       role: 'B Arch. (Hons) SEGi, LAM Part I',
       image: 'People/daphne.jpeg',
     },
+
     {
-      id: 7,
-      name: 'haziqah ngasri',
-      role: 'Dipl. Fine Art, Bsc. Arch (Hons) UITM, LAM Part I',
-      image: 'People/haziqah.jpeg',
-    },
-    {
-      id: 8,
+      id: 9,
       name: 'yusof hafiz',
       role: 'BSc. Arch (Hons), MSc. Applied Arch. & Design QUEENS, RIBA/ARB/LAM Part II',
       image: 'People/yusof.jpeg',
     },
     {
-      id: 9,
+      id: 10,
       name: 'VIKTOR ZEIDLER LIM',
       role: 'BSc. Arch (Hons) Taylor’s, LAM Part I',
       image: 'People/viktor.jpeg',
     },
-    {
-      id: 10,
-      name: 'brandon ngiau',
-      role: 'Bsc. Arch (Hons) Taylor‘s, LAM Part I',
-      image: 'People/brandon.jpeg',
-    },
+
 ]
 
 // Key Partners data

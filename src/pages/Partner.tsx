@@ -82,22 +82,26 @@ export default function Partners() {
       {/* Spacer */}
       <div className="md:h-screen"></div>
 
-      {/* Introduction Section - Z-20 */}
-      <section
-        ref={setRef('intro')}
-        data-section="intro"
-        className="md:sticky md:top-0 md:h-screen bg-white flex items-center py-8 md:py-0"
-        style={{ zIndex: 20 }}
-      >
-        <div className="max-w-screen-2xl mx-auto px-8 w-full">
-          <div className={`max-w-4xl mx-auto transition-all duration-1000 ease-out ${
-            visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          }`}>
-            <h2 className="text-2xl font-light tracking-wider mb-8 lowercase">Our Partnership Philosophy</h2>
-            <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left mb-6">
+{/* Introduction Section - Z-20 */}
+<section
+  ref={setRef('intro')}
+  data-section="intro"
+  className="md:sticky md:top-0 md:h-screen bg-white flex items-center py-8 md:py-0"
+  style={{ zIndex: 20 }}
+>
+  <div className="w-full h-full flex flex-col">
+    <div className={`grid md:grid-cols-2 gap-0 transition-all duration-1000 ease-out ${
+      visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+    }`} style={{ height: '60%' }}>
+      {/* Left side - Text content */}
+      <div className="pt-16 pl-16 pr-8 md:pr-16 pb-8 flex items-start">
+        <div>
+          <h2 className="text-2xl font-light tracking-wider mb-8 lowercase">Our Partnership Philosophy</h2>
+          <div className="space-y-6">
+            <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left">
               zlg partners with a number of universities and design colleges among them the one academy and taylor's university. we believe in continuous research and lairing all practical work sharpened through a deep understanding of ongoing issues such as carbon storage and climate change, and global conservation efforts.
             </p>
-            <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left mb-6">
+            <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left">
               our partners include individuals who share similar interests, often clients. among them are artists and artisans alike, and furniture makers and retailers such as atmos, bnr, TMOG and GTA interior designers.
             </p>
             <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left">
@@ -105,7 +109,27 @@ export default function Partners() {
             </p>
           </div>
         </div>
-      </section>
+      </div>
+
+      {/* Right side - Image */}
+      <img
+        src='/poster_1.jpg'
+        alt="Partnership"
+        className="w-full h-full object-cover"
+        loading="lazy"
+      />
+    </div>
+
+    {/* Bottom full-width image - 40% height */}
+    <img
+      src='/poster_1.jpg'
+      alt="Partnership bottom"
+      className="w-full object-cover"
+      style={{ height: '40%' }}
+      loading="lazy"
+    />
+  </div>
+</section>
 
       {/* Spacer */}
       <div className="md:h-screen"></div>
