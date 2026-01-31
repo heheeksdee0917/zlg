@@ -53,7 +53,7 @@ export default function Philosophy() {
             <section
               ref={setRef(section.id)}
               data-section={section.id}
-              className={`md:sticky md:top-0 md:h-screen bg-white flex items-center py-8 md:py-0`}
+              className={`md:sticky md:top-0 md:h-screen bg-white flex items-center md:py-0`}
               style={{ zIndex: section.zIndex }}
             >
               <div className="max-w-screen-2xl mx-auto px-8 w-full">
@@ -98,7 +98,7 @@ export default function Philosophy() {
                 </div>
               </div>
             </section>
-            {!isLastSection && <div className="h-32 md:h-64"></div>}
+            {!isLastSection && <div className="hidden md:block md:h-64"></div>}
           </>
         );
   
@@ -108,7 +108,7 @@ export default function Philosophy() {
             <section
               ref={setRef(section.id)}
               data-section={section.id}
-              className={`md:sticky md:top-0 md:h-screen bg-white flex items-center py-8 md:py-0`}
+              className={`md:sticky md:top-0 md:h-screen bg-white flex items-center md:py-0`}
               style={{ zIndex: section.zIndex }}
             >
               <div className="max-w-screen-2xl mx-auto px-8 w-full">
@@ -144,7 +144,7 @@ export default function Philosophy() {
                 </div>
               </div>
             </section>
-            {!isLastSection && <div className="h-32 md:h-64"></div>}
+            {!isLastSection && <div className="hidden md:block md:h-64"></div>}
           </>
         );
   
@@ -154,7 +154,7 @@ export default function Philosophy() {
             <section
               ref={setRef(section.id)}
               data-section={section.id}
-              className={`md:sticky md:top-0 md:h-screen bg-white flex items-center py-8 md:py-0`}
+              className={`md:sticky md:top-0 md:h-screen bg-white flex items-center md:py-0`}
               style={{ zIndex: section.zIndex }}
             >
               <div className="max-w-screen-2xl mx-auto px-8 w-full">
@@ -168,7 +168,7 @@ export default function Philosophy() {
                 </div>
               </div>
             </section>
-            {!isLastSection && <div className="h-32 md:h-64"></div>}
+            {!isLastSection && <div className="hidden md:block md:h-64"></div>}
           </>
         );
   
@@ -214,7 +214,8 @@ export default function Philosophy() {
   };
 
   return (
-    <div className={`transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
+    <div className={`transition-opacity duration-500 flex flex-col gap-4 md:gap-0`}>
+      <div className="h-16 md:h-0"></div>
       {philosophySections.map((section, index) => (
         <React.Fragment key={section.id}>
           {renderSection(section, index)}
