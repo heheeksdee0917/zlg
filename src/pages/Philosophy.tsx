@@ -173,29 +173,40 @@ export default function Philosophy() {
         );
   
 
-      case 'publications':
-        return (
-          <section
-            ref={setRef(section.id)}
-            data-section={section.id}
-            className={`relative bg-white py-16 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
-            style={{ zIndex: section.zIndex }}
-          >
-            <div className="max-w-screen-2xl mx-auto px-8">
-              <h2 className="text-base font-normal tracking-wider mb-4">{section.title}</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {section.content.publications?.map((pub, i) => (
-                  <div key={i} className={`border border-gray-200 p-6 transition-all duration-1000 ease-out hover:shadow-lg flex flex-col ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                    }`} style={{ transitionDelay: `${(i + 2) * 100}ms` }}>
-                    <h3 className="text-sm font-normal tracking-wide mb-2 lowercase">{pub.title}</h3>
-                    <p className="text-sm text-gray-600 font-light leading-relaxed text-left">{pub.description}</p>
-                  </div>
-                ))}
+        case 'publications':
+          return (
+            <section
+              ref={setRef(section.id)}
+              data-section={section.id}
+              className={`relative bg-white py-16 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                }`}
+              style={{ zIndex: section.zIndex }}
+            >
+              <div className="max-w-screen-2xl mx-auto px-8">
+                <h2 className="text-base font-normal tracking-wider mb-4">{section.title}</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  {section.content.publications?.map((pub, i) => (
+                    <div key={i} className={`border border-gray-200 transition-all duration-1000 ease-out hover:shadow-lg flex flex-col overflow-hidden ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                      }`} style={{ transitionDelay: `${(i + 2) * 100}ms` }}>
+                      {/* Image holder - 2:3 aspect ratio */}
+                      <div className="w-full aspect-[2/3] bg-gray-100 overflow-hidden">
+                        <img 
+                          src={pub.image} 
+                          alt={pub.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      {/* Content */}
+                      <div className="p-6">
+                        <h3 className="text-sm font-normal tracking-wide mb-2 lowercase">{pub.title}</h3>
+                        <p className="text-sm text-gray-600 font-light leading-relaxed text-left">{pub.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
-        );
+            </section>
+          );
 
       default:
         return null;

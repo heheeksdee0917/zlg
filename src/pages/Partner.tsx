@@ -62,14 +62,13 @@ export default function Partners() {
             transform: 'scale(1.1)'
           }}
         />
-        
+
         {/* Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>
 
         {/* Content */}
-        <div className={`relative z-10 text-center px-8 max-w-4xl mx-auto transition-all duration-1000 ease-out ${
-          visibleSections.hero ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-        }`}>
+        <div className={`relative z-10 text-center px-8 max-w-4xl mx-auto transition-all duration-1000 ease-out ${visibleSections.hero ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}>
           <h1 className="text-4xl md:text-5xl font-light tracking-wider mb-6 text-white lowercase">
             Key Partners
           </h1>
@@ -80,59 +79,58 @@ export default function Partners() {
       </section>
 
       {/* Spacer */}
-      <div className="md:h-screen"></div>
+      <div className="h-8 md:h-16"></div>
 
-{/* Introduction Section - Z-20 */}
-<section
-  ref={setRef('intro')}
-  data-section="intro"
-  className="md:sticky md:top-0 md:h-screen bg-white flex items-center py-8 md:py-0"
-  style={{ zIndex: 20 }}
->
-  <div className="w-full h-full flex flex-col">
-    <div className={`grid md:grid-cols-2 gap-0 transition-all duration-1000 ease-out ${
-      visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-    }`} style={{ height: '60%' }}>
-      {/* Left side - Text content */}
-      <div className="pt-16 pl-16 pr-8 md:pr-16 pb-8 flex items-start">
-        <div>
-          <h2 className="text-2xl font-light tracking-wider mb-8 lowercase">Our Partnership Philosophy</h2>
-          <div className="space-y-6">
-            <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left">
-              zlg partners with a number of universities and design colleges among them the one academy and taylor's university. we believe in continuous research and lairing all practical work sharpened through a deep understanding of ongoing issues such as carbon storage and climate change, and global conservation efforts.
-            </p>
-            <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left">
-              our partners include individuals who share similar interests, often clients. among them are artists and artisans alike, and furniture makers and retailers such as atmos, bnr, TMOG and GTA interior designers.
-            </p>
-            <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left">
-              zlg also works closely with researchers and specialists often working together on life long relationships on projects. among them are scientists such as dr daniel cicuzza, dr brandon chee and dr nike baetzner.
-            </p>
+      {/* Introduction Section - Z-20 */}
+      <section
+        ref={setRef('intro')}
+        data-section="intro"
+        className="md:sticky md:top-0 md:h-screen bg-white flex items-center py-8 md:py-0"
+        style={{ zIndex: 20 }}
+      >
+        <div className="w-full h-full flex flex-col">
+          <div className={`grid md:grid-cols-2 gap-0 transition-all duration-1000 ease-out ${visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`} style={{ height: '60%' }}>
+            {/* Left side - Text content */}
+            <div className="pt-16 pl-16 pr-8 md:pr-16 pb-8 flex items-start">
+              <div>
+                <h2 className="text-2xl font-light tracking-wider mb-8 lowercase">Our Partnership Philosophy</h2>
+                <div className="space-y-6">
+                  <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left">
+                    zlg partners with a number of universities and design colleges among them the one academy and taylor's university. we believe in continuous research and lairing all practical work sharpened through a deep understanding of ongoing issues such as carbon storage and climate change, and global conservation efforts.
+                  </p>
+                  <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left">
+                    our partners include individuals who share similar interests, often clients. among them are artists and artisans alike, and furniture makers and retailers such as atmos, bnr, TMOG and GTA interior designers.
+                  </p>
+                  <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left">
+                    zlg also works closely with researchers and specialists often working together on life long relationships on projects. among them are scientists such as dr daniel cicuzza, dr brandon chee and dr nike baetzner.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right side - Image */}
+            <img
+              src='/poster_1.jpg'
+              alt="Partnership"
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
           </div>
+
+          {/* Bottom full-width image - 40% height */}
+          <img
+            src='/poster_1.jpg'
+            alt="Partnership bottom"
+            className="w-full object-cover"
+            style={{ height: '40%' }}
+            loading="lazy"
+          />
         </div>
-      </div>
-
-      {/* Right side - Image */}
-      <img
-        src='/poster_1.jpg'
-        alt="Partnership"
-        className="w-full h-full object-cover"
-        loading="lazy"
-      />
-    </div>
-
-    {/* Bottom full-width image - 40% height */}
-    <img
-      src='/poster_1.jpg'
-      alt="Partnership bottom"
-      className="w-full object-cover"
-      style={{ height: '40%' }}
-      loading="lazy"
-    />
-  </div>
-</section>
+      </section>
 
       {/* Spacer */}
-      <div className="md:h-screen"></div>
+      <div className="h-8 md:h-16"></div>
 
       {/* Key Partners Section - Individual cards with sticky */}
       {keyPartners.map((partner, index) => (
@@ -144,9 +142,8 @@ export default function Partners() {
             style={{ zIndex: 30 + index }}
           >
             <div className="max-w-screen-2xl mx-auto px-8 w-full">
-              <div className={`grid md:grid-cols-2 gap-16 items-center transition-all duration-1000 ease-out ${
-                visibleSections[`partner-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}>
+              <div className={`grid md:grid-cols-2 gap-16 items-center transition-all duration-1000 ease-out ${visibleSections[`partner-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                }`}>
                 {index % 2 === 0 ? (
                   <>
                     <div>
@@ -191,7 +188,7 @@ export default function Partners() {
               </div>
             </div>
           </section>
-          <div className="md:h-screen"></div>
+          <div className="h-8 md:h-16"></div>
         </React.Fragment>
       ))}
 
@@ -203,9 +200,8 @@ export default function Partners() {
         style={{ zIndex: 30 + keyPartners.length }}
       >
         <div className="max-w-screen-2xl mx-auto px-8 w-full">
-          <div className={`max-w-4xl mx-auto transition-all duration-1000 ease-out ${
-            visibleSections.projects ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          }`}>
+          <div className={`max-w-4xl mx-auto transition-all duration-1000 ease-out ${visibleSections.projects ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}>
             <div className="grid md:grid-cols-2 gap-12 mb-16">
               <div>
                 <h4 className="text-base font-normal tracking-wide mb-4 lowercase">partners along the journey</h4>
@@ -240,7 +236,7 @@ export default function Partners() {
       </section>
 
       {/* Spacer */}
-      <div className="md:h-screen"></div>
+      <div className="h-8 md:h-16"></div>
 
       {/* CTA Section - Final section */}
       <section
@@ -250,9 +246,8 @@ export default function Partners() {
         style={{ zIndex: 30 + keyPartners.length + 1 }}
       >
         <div className="max-w-screen-2xl mx-auto px-8">
-          <div className={`text-left max-w-4xl mx-auto transition-all duration-1000 ease-out ${
-            visibleSections.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          }`}>
+          <div className={`text-left max-w-4xl mx-auto transition-all duration-1000 ease-out ${visibleSections.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}>
             <h2 className="text-base font-normal tracking-wider mb-4 lowercase">Become a Partner</h2>
             <p className="text-base text-gray-700 leading-relaxed mb-8 font-light lowercase text-left">
               We're always interested in connecting with talented consultants, engineers, contractors, and fabricators who share our values. If you believe in design excellence and collaborative practice, let's talk.

@@ -18,8 +18,8 @@ export default function Footer() {
             <ul className="space-y-2 text-xs text-gray-600">
               <li className="flex items-center space-x-2">
                 <Mail size={14} />
-                <a href="mailto:info@zlgdesign.com" className="hover:text-black transition-colors">
-                  info@zlgdesign.com
+                <a href="mailto:huatlim@zlgdesign.com" className="hover:text-black transition-colors">
+                  huatlim@zlgdesign.com
                 </a>
               </li>
             </ul>

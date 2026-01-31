@@ -18,6 +18,7 @@ export interface PhilosophySection {
       publications?: Array<{
         title: string;
         description: string;
+        image?:string;
       }>;
     };
   }
@@ -116,15 +117,18 @@ export interface PhilosophySection {
         publications: [
           {
             title: 'ethos: biographical essays 2015-2023',
-            description: "The essays are generously illustrated with photographs, making the book both a theoretical and visual exploration of his experiences, ideas, and the people who have influenced him."
+            description: "The essays are generously illustrated with photographs, making the book both a theoretical and visual exploration of his experiences, ideas, and the people who have influenced him.",
+            image:'/publication/ethos.avif',
           },
           {
             title: 'Typology: The Genealogy of Buildings and Their Emergent Types, 2025',
-            description: "a personal study and reflection on building types. The book is structured as a series of interconnected essays that reflect on type as more than just form or function."
+            description: "a personal study and reflection on building types. The book is structured as a series of interconnected essays that reflect on type as more than just form or function.",
+            image:'/publication/typology.avif',
           },
           {
             title: 'automatism: in philosophy art and culture, 2022',
-            description: "It's an essay exploring the concept of automatism — a term often linked with creative processes where intuition and subconscious processes play a role."
+            description: "It's an essay exploring the concept of automatism — a term often linked with creative processes where intuition and subconscious processes play a role.",
+            image:'/publication/automatism.avif',
           }
         ]
       }

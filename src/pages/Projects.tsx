@@ -1,42 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
+import LazyLoading from '../components/LazyLoading';
 
 export default function Projects() {
   const [fadeIn, setFadeIn] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(8);
-  const [loading, setLoading] = useState(false);
-  const observerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     const timer = setTimeout(() => setFadeIn(true), 50);
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && visibleCount < projects.length && !loading) {
-          setLoading(true);
-          // Reduced delay from 500ms to 200ms for faster loading
-          setTimeout(() => {
-            setVisibleCount(prev => Math.min(prev + 8, projects.length));
-            setLoading(false);
-          }, 200);
-        }
-      },
-      { threshold: 0.1, rootMargin: '200px' } // Added rootMargin to trigger earlier
-    );
-
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [visibleCount, loading]);
-
-  const visibleProjects = projects.slice(0, visibleCount);
 
   return (
     <div className={`min-h-screen pt-10 transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
@@ -48,58 +22,57 @@ export default function Projects() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {visibleProjects.map((project, index) => (
-            <Link
-              key={project.id}
-              to={`/projects/${project.slug}`}
-              className="group block transition-all duration-500 ease-out hover:scale-105 hover:-translate-y-2"
-              style={{
-                animation: 'fadeInUp 0.6s ease-out forwards',
-                animationDelay: `${(index % 8) * 0.05}s`,
-                opacity: 0
-              }}
-            >
-              <div className="overflow-hidden mb-6 bg-gray-200">
-              <img
-                  src={project.heroImage}
-                  alt={project.title}
-                  className="w-full aspect-[2/3] object-cover transition-opacity duration-700 object-center"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
+        <LazyLoading
+          items={projects}
+          initialCount={8}
+          loadMoreCount={8}
+          visibleSections={{}}
+          threshold={0.1}
+        >
+          {(visibleProjects) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              {visibleProjects.map((project, index) => (
+                <Link
+                  key={project.id}
+                  to={`/projects/${project.slug}`}
+                  className="group block transition-all duration-500 ease-out hover:scale-105 hover:-translate-y-2"
+                  style={{
+                    animation: 'fadeInUp 0.6s ease-out forwards',
+                    animationDelay: `${(index % 8) * 0.05}s`,
+                    opacity: 0
+                  }}
+                >
+                  <div className="overflow-hidden mb-6 bg-gray-200">
+                    <img
+                      src={project.heroImage}
+                      alt={project.title}
+                      className="w-full aspect-[2/3] object-cover transition-opacity duration-700 object-center"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
 
-              <div className="space-y-3 text-left">
-                <h2 className="text-base font-normal tracking-wide relative inline-block lowercase">
-                  {project.title}
-                  <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
-                </h2>
+                  <div className="space-y-3 text-left">
+                    <h2 className="text-base font-normal tracking-wide relative inline-block lowercase">
+                      {project.title}
+                      <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
+                    </h2>
 
-                <div className="flex items-center space-x-4 text-base text-gray-600 lowercase">
-                  <span>{project.year}</span>
-                  <span>•</span>
-                  <span>{project.location}</span>
-                </div>
+                    <div className="flex items-center space-x-4 text-base text-gray-600 lowercase">
+                      <span>{project.year}</span>
+                      <span>•</span>
+                      <span>{project.location}</span>
+                    </div>
 
-                <p className="text-base text-gray-700 leading-relaxed lowercase text-left">
-                  {project.shortDescription}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Intersection Observer Target */}
-        <div ref={observerRef} className="h-20 flex items-center justify-center mt-12">
-          {loading && (
-            <div className="flex space-x-2">
-              <div className="w-3 h-3 bg-gray-400 rounded-full animate-bounce"></div>
-              <div className="w-3 h-3 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-              <div className="w-3 h-3 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    <p className="text-base text-gray-700 leading-relaxed lowercase text-left">
+                      {project.shortDescription}
+                    </p>
+                  </div>
+                </Link>
+              ))}
             </div>
           )}
-        </div>
+        </LazyLoading>
       </section>
 
       <style>{`

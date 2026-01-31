@@ -5,7 +5,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 // Lazy load page components
-const Home = lazy(() => import('./pages/Home'));
+const Home = lazy(() => import('./components/Home/Index'));
 const Philosophy = lazy(() => import('./pages/Philosophy'));
 const Projects = lazy(() => import('./pages/Projects'));
 const ProjectDetails = lazy(() => import('./pages/ProjectDetails'));
