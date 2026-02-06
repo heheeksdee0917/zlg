@@ -13,7 +13,7 @@ export default function HomeDesktop() {
       id: 1,
       title: 'People',
       link: '/people',
-      image: '/poster_1.jpg'
+      image: '/images/Image2.avif'
     },
     {
       id: 2,
@@ -74,7 +74,8 @@ export default function HomeDesktop() {
             className="absolute inset-0 bg-cover bg-center transition-transform duration-700"
             style={{
               backgroundImage: `url(${column.image})`,
-              transform: hoveredColumn === index ? 'scale(1.05)' : 'scale(1)'
+              transform: hoveredColumn === index ? 'scale(1.05)' : 'scale(1)',
+              filter: 'grayscale(100%)' 
             }}
           />
 

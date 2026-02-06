@@ -53,15 +53,22 @@ export default function Partners() {
         className="md:sticky md:top-0 h-screen flex items-center justify-center bg-white py-8 md:py-0"
         style={{ zIndex: 10 }}
       >
-        {/* Blurred Background Image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
+        {/* Blurred Background Video */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
           style={{
-            backgroundImage: 'url(/poster_1.jpg)',
-            filter: 'blur(8px)',
+            filter: 'blur(2px)',
             transform: 'scale(1.1)'
           }}
-        />
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
+          <source src="/zlg_v2.mp4" type="video/mp4" />
+          {/* Fallback for browsers that don't support video */}
+          Your browser does not support the video tag.
+        </video>
 
         {/* Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>
@@ -85,47 +92,35 @@ export default function Partners() {
       <section
         ref={setRef('intro')}
         data-section="intro"
-        className="md:sticky md:top-0 md:h-screen bg-white flex items-center py-8 md:py-0"
+        className="md:sticky md:top-0 md:h-screen bg-white flex items-start py-8 md:py-0 relative"
         style={{ zIndex: 20 }}
       >
-        <div className="w-full h-full flex flex-col">
-          <div className={`grid md:grid-cols-2 gap-0 transition-all duration-1000 ease-out ${visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-            }`} style={{ height: '60%' }}>
-            {/* Left side - Text content */}
-            <div className="pt-16 pl-16 pr-8 md:pr-16 pb-8 flex items-start">
-              <div>
-                <h2 className="text-2xl font-light tracking-wider mb-8 lowercase">Our Partnership Philosophy</h2>
-                <div className="space-y-6">
-                  <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left">
-                    zlg partners with a number of universities and design colleges among them the one academy and taylor's university. we believe in continuous research and lairing all practical work sharpened through a deep understanding of ongoing issues such as carbon storage and climate change, and global conservation efforts.
-                  </p>
-                  <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left">
-                    our partners include individuals who share similar interests, often clients. among them are artists and artisans alike, and furniture makers and retailers such as atmos, bnr, TMOG and GTA interior designers.
-                  </p>
-                  <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left">
-                    zlg also works closely with researchers and specialists often working together on life long relationships on projects. among them are scientists such as dr daniel cicuzza, dr brandon chee and dr nike baetzner.
-                  </p>
-                </div>
-              </div>
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: 'url(/images/langkawi.avif)',
+            opacity: 0.6 // Adjust this value (0.0 to 1.0)
+          }}
+        />
+
+        {/* Content */}
+        <div className={`relative z-10 w-full pt-8 md:pt-12 pl-16 pr-8 md:pr-16 pb-8 transition-all duration-1000 ease-out ${visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}>
+          <div className="max-w-2xl">
+            <h2 className="text-2xl font-light tracking-wider mb-8 lowercase text-black">Our Partnership Philosophy</h2>
+            <div className="space-y-6">
+              <p className="text-base text-black leading-relaxed font-light lowercase text-left">
+                zlg partners with a number of universities and design colleges among them the one academy and taylor's university. we believe in continuous research and lairing all practical work sharpened through a deep understanding of ongoing issues such as carbon storage and climate change, and global conservation efforts.
+              </p>
+              <p className="text-base text-black leading-relaxed font-light lowercase text-left">
+                our partners include individuals who share similar interests, often clients. among them are artists and artisans alike, and furniture makers and retailers such as atmos, bnr, TMOG and GTA interior designers.
+              </p>
+              <p className="text-base text-black leading-relaxed font-light lowercase text-left">
+                zlg also works closely with researchers and specialists often working together on life long relationships on projects. among them are scientists such as dr daniel cicuzza, dr brandon chee and dr nike baetzner.
+              </p>
             </div>
-
-            {/* Right side - Image */}
-            <img
-              src='/poster_1.jpg'
-              alt="Partnership"
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
           </div>
-
-          {/* Bottom full-width image - 40% height */}
-          <img
-            src='/poster_1.jpg'
-            alt="Partnership bottom"
-            className="w-full object-cover"
-            style={{ height: '40%' }}
-            loading="lazy"
-          />
         </div>
       </section>
 

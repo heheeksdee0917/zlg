@@ -12,13 +12,13 @@ export default function HomeMobile() {
       id: 1,
       title: 'People',
       link: '/people',
-      image: '/poster_1.jpg'
+      image: '/images/Image2.avif'
     },
     {
       id: 2,
       title: 'Philosophy',
       link: '/philosophy',
-      image: '/poster_1.jpg'
+      image: '/images/Image2.avif'
     },
     {
       id: 3,
@@ -59,6 +59,7 @@ export default function HomeMobile() {
             className="absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage: `url(${column.image})`,
+              filter: 'grayscale(100%)' 
             }}
           />
 
