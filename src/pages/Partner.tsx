@@ -100,12 +100,12 @@ export default function Partners() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: 'url(/images/langkawi.avif)',
-            opacity: 0.6 // Adjust this value (0.0 to 1.0)
+            opacity: 0.2 // Adjust this value (0.0 to 1.0)
           }}
         />
 
         {/* Content */}
-        <div className={`relative z-10 w-full pt-8 md:pt-12 pl-16 pr-8 md:pr-16 pb-8 transition-all duration-1000 ease-out ${visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+        <div className={`relative z-10 w-full pt-8 md:pt-12 pl-16 md:pl-28 pr-8 md:pr-16 pb-8 transition-all duration-1000 ease-out ${visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}>
           <div className="max-w-2xl">
             <h2 className="text-2xl font-light tracking-wider mb-8 lowercase text-black">Our Partnership Philosophy</h2>
@@ -133,23 +133,23 @@ export default function Partners() {
           <section
             ref={setRef(`partner-${index}`)}
             data-section={`partner-${index}`}
-            className="md:sticky md:top-0 md:h-screen bg-white flex items-center py-8 md:py-0"
+            className="md:sticky md:top-0 md:min-h-screen bg-white flex items-center py-8 md:py-16"
             style={{ zIndex: 30 + index }}
           >
             <div className="max-w-screen-2xl mx-auto px-8 w-full">
-              <div className={`grid md:grid-cols-2 gap-16 items-center transition-all duration-1000 ease-out ${visibleSections[`partner-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              <div className={`grid md:grid-cols-2 gap-8 lg:gap-16 items-center transition-all duration-1000 ease-out ${visibleSections[`partner-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
                 }`}>
                 {index % 2 === 0 ? (
                   <>
-                    <div>
+                    <div className="w-full max-h-[70vh] md:max-h-[80vh] flex items-center">
                       <img
                         src={partner.image}
                         alt={partner.name}
-                        className="w-full aspect-[2/3] object-cover"
+                        className="w-full h-full aspect-[2/3] object-cover object-center"
                         loading="lazy"
                       />
                     </div>
-                    <div>
+                    <div className="flex flex-col justify-center">
                       <h3 className="text-base font-normal tracking-wide mb-2 lowercase">{partner.name}</h3>
                       <p className="text-base text-gray-600 mb-8 tracking-wide font-light lowercase">{partner.role}</p>
                       <div className="space-y-6 text-gray-700 leading-relaxed font-light lowercase text-left">
@@ -161,7 +161,7 @@ export default function Partners() {
                   </>
                 ) : (
                   <>
-                    <div>
+                    <div className="flex flex-col justify-center order-2 md:order-1">
                       <h3 className="text-base font-normal tracking-wide mb-2 lowercase">{partner.name}</h3>
                       <p className="text-base text-gray-600 mb-8 tracking-wide font-light lowercase">{partner.role}</p>
                       <div className="space-y-6 text-gray-700 leading-relaxed font-light lowercase text-left">
@@ -170,11 +170,11 @@ export default function Partners() {
                         ))}
                       </div>
                     </div>
-                    <div>
+                    <div className="w-full max-h-[70vh] md:max-h-[80vh] flex items-center order-1 md:order-2">
                       <img
                         src={partner.image}
                         alt={partner.name}
-                        className="w-full aspect-[2/3] object-cover"
+                        className="w-full h-full aspect-[2/3] object-cover object-center"
                         loading="lazy"
                       />
                     </div>

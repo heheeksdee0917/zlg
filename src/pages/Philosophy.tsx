@@ -154,12 +154,12 @@ export default function Philosophy() {
                 className="absolute inset-0 bg-cover bg-center"
                 style={{
                   backgroundImage: `url(${section.content.image})`,
-                  opacity: 0.8
+                  opacity: 0.5
                 }}
               />
 
               {/* Text Content - Positioned at top */}
-              <div className={`relative z-10 w-full pt-8 md:pt-12 px-8 md:px-16 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              <div className={`relative z-10 w-full pt-8 md:pt-12 px-8 md:pl-28 md:pr-16 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}>
                 <div className="max-w-3xl">
                   <h3 className="text-2xl font-light tracking-wide mb-6 text-black lowercase">{section.title}</h3>

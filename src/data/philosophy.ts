@@ -64,7 +64,7 @@ export const philosophySections: PhilosophySection[] = [
         "ZLG has an enormous well of experience gained through more than thirty years of working in various built environments at different scales. This means we are very versatile and responsive in the way we interpret each unique brief. Whether working to a house design or a masterplan, we always develop strategic ways to make each project special in its own way.",
         "Bioclimatic design and ecological architecture are a major thrust of our practice—integrating environmental sensibility with building design to create structures that minimise negative impacts. At the same time, we continue to search for durable building typologies that coexist harmoniously with nature."
       ],
-      image: '/images/Sketch14.avif',
+      image: '/images/centre.avif',
       imagePosition: 'right'
     }
   },

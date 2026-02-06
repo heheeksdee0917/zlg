@@ -59,7 +59,7 @@ export default function HomeMobile() {
             className="absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage: `url(${column.image})`,
-              filter: 'grayscale(100%)' 
+              filter: 'grayscale(50%)' 
             }}
           />
 

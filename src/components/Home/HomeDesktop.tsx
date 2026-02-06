@@ -75,7 +75,7 @@ export default function HomeDesktop() {
             style={{
               backgroundImage: `url(${column.image})`,
               transform: hoveredColumn === index ? 'scale(1.05)' : 'scale(1)',
-              filter: 'grayscale(100%)' 
+              filter: 'grayscale(50%)' 
             }}
           />
 
