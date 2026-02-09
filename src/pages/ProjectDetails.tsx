@@ -217,7 +217,7 @@ export default function ProjectDetails() {
       </div>
 
       {/* Desktop Layout - 45/55 */}
-      <section className="hidden md:flex gap-0 min-h-screen pt-10">
+      <section className="hidden md:flex gap-0 min-h-screen">
         {/* Image Gallery - 45% on desktop */}
         <div className="w-[45%] overflow-y-auto h-screen relative" ref={desktopScrollContainerRef}>
           {/* Desktop Vertical Dots Indicator */}
@@ -253,7 +253,7 @@ export default function ProjectDetails() {
         </div>
 
         {/* Project Info - 55% on desktop */}
-        <div className="w-[55%] bg-white sticky top-20 h-screen overflow-y-auto custom-scrollbar">
+        <div className="w-[55%] bg-white sticky top-20 h-screen overflow-y-auto custom-scrollbar pt-28">
           <div className="p-8 md:p-16">
             <div className="mb-12">
               <h1 className="text-base font-bold mb-2 lowercase leading-tight">

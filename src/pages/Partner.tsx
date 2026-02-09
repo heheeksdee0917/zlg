@@ -50,7 +50,7 @@ export default function Partners() {
       <section
         ref={setRef('hero')}
         data-section="hero"
-        className="md:sticky md:top-0 h-screen flex items-center justify-center bg-white py-8 md:py-0"
+        className="md:sticky md:top-0 h-screen flex items-center justify-center bg-white pt-28 pb-8 md:pt-28 md:pb-0"
         style={{ zIndex: 10 }}
       >
         {/* Blurred Background Video */}

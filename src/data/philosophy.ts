@@ -34,7 +34,7 @@ export const philosophySections: PhilosophySection[] = [
         "In 1992 when susanne and me started thinking of doing competitions our focus was only design and ever since our work revolved around ideas and concepts that go beyond what was then always a pre-defined architectural pursuit or entity. We had simply wanted to do architecture that would not only engage the human spirit, but also something with a deep philosophy behind the work.",
         "I think architecture is taking much longer to becoming like what good art is, it is not so generative and it is not always assuming an emotive role, like a good work of art does. We think that it is possible for us to connect to our buildings as easily as we can connect to art, or to our music, or to things that we adore, like our children or our books."
       ],
-      image: '/images/Image1.avif',
+      image: '/images/Image6.avif',
       imagePosition: 'right'
     }
   },

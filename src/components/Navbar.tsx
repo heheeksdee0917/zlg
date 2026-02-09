@@ -6,6 +6,7 @@ import React from 'react';
 export default function Navbar() {
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
+  const isHomepage = location.pathname === '/';
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -80,6 +81,106 @@ export default function Navbar() {
     };
   }, [lastScrollY]);
 
+  // Homepage navbar - centered logo only
+  if (isHomepage) {
+    return (
+      <>
+        <nav
+          className={`fixed top-0 left-0 right-0 z-[500] transition-transform duration-300 shadow-md ${isVisible ? 'translate-y-0' : '-translate-y-full'
+            }`}
+          style={{ background: 'linear-gradient(to right, #336138 0%, #5a9d63 100%)' }}
+        >
+          <div className="max-w-screen-2xl mx-auto px-8 py-6 flex items-center justify-between">
+            <div className="flex items-center space-x-12">
+              <Link to="/" className="flex items-center">
+                <img
+                  src="/logo(white).png"
+                  alt="ZLG Design"
+                  className="h-6"
+                />
+              </Link>
+              <span className="text-sm tracking-wide font-light text-white lowercase">zlgdesign</span>
+            </div>
+          </div>
+        </nav>
+
+        {/* Mobile Menu (still available on homepage) */}
+        <div
+          className={`fixed inset-0 z-[499] transition-transform duration-500 ease-in-out ${mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
+            }`}
+          style={{ background: 'linear-gradient(to right, #336138 0%, #5a9d63 100%)' }}
+        >
+          <div className="flex flex-col items-start justify-start h-full space-y-8 px-8 py-24">
+            <Link
+              to="/"
+              onClick={closeMobileMenu}
+              className="text-2xl tracking-wide font-light text-white relative group"
+            >
+              home
+              <span
+                className={`absolute -bottom-1 left-0 h-0.5 bg-white transition-all duration-300 ease-out ${isActive('/') ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}
+              ></span>
+            </Link>
+            <Link
+              to="/philosophy"
+              onClick={closeMobileMenu}
+              className="text-2xl tracking-wide font-light text-white relative group"
+            >
+              philosophy
+              <span
+                className={`absolute -bottom-1 left-0 h-0.5 bg-white transition-all duration-300 ease-out ${isActive('/philosophy') ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}
+              ></span>
+            </Link>
+            <Link
+              to="/projects"
+              onClick={closeMobileMenu}
+              className="text-2xl tracking-wide font-light text-white relative group"
+            >
+              projects
+              <span
+                className={`absolute -bottom-1 left-0 h-0.5 bg-white transition-all duration-300 ease-out ${isActive('/projects') ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}
+              ></span>
+            </Link>
+            <Link
+              to="/people"
+              onClick={closeMobileMenu}
+              className="text-2xl tracking-wide font-light text-white relative group"
+            >
+              people
+              <span
+                className={`absolute -bottom-1 left-0 h-0.5 bg-white transition-all duration-300 ease-out ${isActive('/people') ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}
+              ></span>
+            </Link>
+            <Link
+              to="/partner"
+              onClick={closeMobileMenu}
+              className="text-2xl tracking-wide font-light text-white relative group"
+            >
+              partners
+              <span
+                className={`absolute -bottom-1 left-0 h-0.5 bg-white transition-all duration-300 ease-out ${isActive('/partner') ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}
+              ></span>
+            </Link>
+            <Link
+              to="/contact"
+              className="text-lg tracking-wide px-8 py-3 border-2 border-white font-light text-white mt-8 relative overflow-hidden group"
+              onClick={closeMobileMenu}
+            >
+              <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+              <span className="relative z-10 group-hover:text-black transition-colors duration-300">contact us</span>
+            </Link>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  // Regular navbar for all other pages
   return (
     <>
       <nav
@@ -87,7 +188,7 @@ export default function Navbar() {
           }`}
         style={{ background: 'linear-gradient(to right, #336138 0%, #5a9d63 100%)' }}
       >
-        <div className="max-w-screen-2xl mx-auto px-8 py-2 flex items-center justify-between">
+        <div className="max-w-screen-2xl mx-auto px-8 py-6 flex items-center justify-between">
           <div className="flex items-center space-x-12">
             <Link to="/" className="flex items-center" onClick={closeMobileMenu}>
               <img
@@ -167,19 +268,16 @@ export default function Navbar() {
             >
               <div className="relative w-6 h-6">
                 <span
-                  className={`absolute top-1/2 left-0 w-full h-0.5 bg-white transform transition-all duration-300 ${
-                    mobileMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-2'
-                  }`}
+                  className={`absolute top-1/2 left-0 w-full h-0.5 bg-white transform transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-2'
+                    }`}
                 ></span>
                 <span
-                  className={`absolute top-1/2 left-0 w-full h-0.5 bg-white transform transition-all duration-300 ${
-                    mobileMenuOpen ? 'opacity-0' : 'opacity-100'
-                  }`}
+                  className={`absolute top-1/2 left-0 w-full h-0.5 bg-white transform transition-all duration-300 ${mobileMenuOpen ? 'opacity-0' : 'opacity-100'
+                    }`}
                 ></span>
                 <span
-                  className={`absolute top-1/2 left-0 w-full h-0.5 bg-white transform transition-all duration-300 ${
-                    mobileMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-2'
-                  }`}
+                  className={`absolute top-1/2 left-0 w-full h-0.5 bg-white transform transition-all duration-300 ${mobileMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-2'
+                    }`}
                 ></span>
               </div>
             </button>
@@ -188,10 +286,9 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Menu */}
-      <div 
-        className={`fixed inset-0 z-[499] transition-transform duration-500 ease-in-out ${
-          mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
-        }`}
+      <div
+        className={`fixed inset-0 z-[499] transition-transform duration-500 ease-in-out ${mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
+          }`}
         style={{ background: 'linear-gradient(to right, #336138 0%, #5a9d63 100%)' }}
       >
         <div className="flex flex-col items-start justify-start h-full space-y-8 px-8 py-24">

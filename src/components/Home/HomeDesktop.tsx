@@ -41,79 +41,53 @@ export default function HomeDesktop() {
     }
   ];
 
-  const getColumnWidth = (index: number) => {
-    if (hoveredColumn === null) {
-      return '20%';
-    }
-    if (hoveredColumn === index) {
-      return '100%';
-    }
-    return '0%';
-  };
-
   return (
-    <div className="h-screen w-full flex overflow-hidden">
+    <div className="h-screen w-full flex overflow-visible">
       {columns.map((column, index) => (
         <a
           key={column.id}
           href={column.link}
-          className="relative overflow-hidden"
+          className="relative flex-1"
           style={{ 
-            width: getColumnWidth(index),
             height: '100%',
-            transform: isLoaded ? 'translateY(0)' : 'translateY(-100%)',
-            transition: isLoaded 
-              ? `width 500ms ease-in-out` 
-              : `transform 800ms ease-in-out ${index * 150}ms`,
+            zIndex: hoveredColumn === index ? 50 : 10,
           }}
           onMouseEnter={() => setHoveredColumn(index)}
           onMouseLeave={() => setHoveredColumn(null)}
         >
-          {/* Background Image */}
-          <div
-            className="absolute inset-0 bg-cover bg-center transition-transform duration-700"
-            style={{
-              backgroundImage: `url(${column.image})`,
-              transform: hoveredColumn === index ? 'scale(1.05)' : 'scale(1)',
-              filter: 'grayscale(50%)' 
-            }}
-          />
-
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black transition-opacity duration-500"
-            style={{ opacity: hoveredColumn === index ? 0.3 : 0.5 }}
-          />
-
-          {/* Title - Bottom Left */}
-          <div
-            className="absolute z-10 transition-all duration-700"
-            style={{
-              bottom: '2rem',
-              left: '2rem',
-              opacity: isLoaded && (hoveredColumn === null || hoveredColumn !== index) ? 1 : 0,
-              transform: isLoaded ? 'translateY(0)' : 'translateY(20px)',
-              transitionDelay: `${index * 150 + 400}ms`
-            }}
+          {/* Container - no scaling */}
+          <div 
+            className="absolute inset-0 overflow-hidden"
           >
-            <h2 className="text-white font-light tracking-wider lowercase text-2xl">
-              {column.title}
-            </h2>
-          </div>
+            {/* Background Image - scales on hover */}
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-all duration-700"
+              style={{
+                backgroundImage: `url(${column.image})`,
+                transform: hoveredColumn === index ? 'scale(1.15)' : 'scale(1)',
+                filter: hoveredColumn === index ? 'grayscale(0%) brightness(1.1)' : 'grayscale(50%) brightness(0.7)'
+              }}
+            />
 
-          {/* Title - Center */}
-          <div
-            className="absolute z-10 transition-opacity duration-500"
-            style={{
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              opacity: hoveredColumn === index ? 1 : 0,
-              pointerEvents: hoveredColumn === index ? 'auto' : 'none'
-            }}
-          >
-            <h2 className="text-white font-light tracking-wider lowercase text-4xl">
-              {column.title}
-            </h2>
+            {/* Overlay - creates stronger contrast */}
+            <div className="absolute inset-0 bg-black transition-opacity duration-500"
+              style={{ opacity: hoveredColumn === index ? 0.1 : 0.3 }}
+            />
+
+            {/* Title - Bottom Left, Fade In */}
+            <div
+              className="absolute z-20 bottom-8 left-8 transition-opacity duration-700"
+              style={{
+                opacity: isLoaded ? 1 : 0,
+                transitionDelay: `${index * 200}ms`
+              }}
+            >
+              <h2 
+                className="text-white font-light tracking-wider lowercase whitespace-nowrap text-2xl"
+              >
+                {column.title}
+              </h2>
+            </div>
           </div>
         </a>
       ))}

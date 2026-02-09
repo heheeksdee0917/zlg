@@ -51,7 +51,7 @@ export default function People() {
       <section 
         ref={setRef('intro')}
         data-section="intro"
-        className="max-w-screen-2xl mx-auto px-8 py-16"
+        className="max-w-screen-2xl mx-auto px-8 pt-28 pb-16"
       >
         <div className={`mb-16 transition-all duration-1000 ease-out ${
           visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
