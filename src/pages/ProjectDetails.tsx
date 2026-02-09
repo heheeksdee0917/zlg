@@ -181,8 +181,8 @@ export default function ProjectDetails() {
             ))}
           </div>
           
-          {/* Dots Indicator - Vertical, Bottom-Left, Floating */}
-          <div className="absolute bottom-24 left-8 z-20 flex flex-col items-center gap-3">
+          {/* Dots Indicator - Fixed Position, Outside Scroll Container */}
+          <div className="absolute bottom-24 left-8 z-20 flex flex-col items-center gap-3 pointer-events-none">
             {project.images.map((_, index) => (
               <div
                 key={index}
@@ -216,12 +216,12 @@ export default function ProjectDetails() {
         </div>
       </div>
 
-      {/* Desktop Layout - 45/55 */}
+      {/* Desktop Layout - 60/40 */}
       <section className="hidden md:flex gap-0 min-h-screen">
-        {/* Image Gallery - 45% on desktop */}
-        <div className="w-[45%] overflow-y-auto h-screen relative" ref={desktopScrollContainerRef}>
-          {/* Desktop Vertical Dots Indicator */}
-          <div className="absolute bottom-24 left-8 z-20 flex flex-col items-center gap-3">
+        {/* Image Gallery - 60% on desktop */}
+        <div className="w-[60%] h-screen relative">
+          {/* Desktop Vertical Dots Indicator - Fixed Position */}
+          <div className="absolute bottom-24 left-8 z-20 flex flex-col items-center gap-3 pointer-events-none">
             {project.images.map((_, index) => (
               <div
                 key={index}
@@ -234,26 +234,29 @@ export default function ProjectDetails() {
             ))}
           </div>
 
-          {project.images.map((image, index) => (
-            <div
-              key={index}
-              ref={setDesktopImageRef(index)}
-              data-image-index={index}
-              className="w-full cursor-pointer mb-[5px]"
-              onClick={() => openLightbox(index)}
-            >
-              <img
-                src={image}
-                alt={`${project.title} - Image ${index + 1}`}
-                className="w-full h-auto object-cover"
-                loading={index === 0 ? "eager" : "lazy"}
-              />
-            </div>
-          ))}
+          {/* Scrollable Image Container */}
+          <div className="w-full h-full overflow-y-auto" ref={desktopScrollContainerRef}>
+            {project.images.map((image, index) => (
+              <div
+                key={index}
+                ref={setDesktopImageRef(index)}
+                data-image-index={index}
+                className="w-full cursor-pointer mb-[5px]"
+                onClick={() => openLightbox(index)}
+              >
+                <img
+                  src={image}
+                  alt={`${project.title} - Image ${index + 1}`}
+                  className="w-full h-auto object-cover"
+                  loading={index === 0 ? "eager" : "lazy"}
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Project Info - 55% on desktop */}
-        <div className="w-[55%] bg-white sticky top-20 h-screen overflow-y-auto custom-scrollbar pt-28">
+        {/* Project Info - 40% on desktop */}
+        <div className="w-[40%] bg-white sticky top-20 h-screen overflow-y-auto custom-scrollbar pt-28">
           <div className="p-8 md:p-16">
             <div className="mb-12">
               <h1 className="text-base font-bold mb-2 lowercase leading-tight">

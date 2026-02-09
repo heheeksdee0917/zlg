@@ -30,7 +30,7 @@ export default function Projects() {
           threshold={0.1}
         >
           {(visibleProjects) => (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {visibleProjects.map((project, index) => (
                 <Link
                   key={project.id}
@@ -63,10 +63,6 @@ export default function Projects() {
                       <span>•</span>
                       <span>{project.location}</span>
                     </div>
-
-                    <p className="text-base text-gray-700 leading-relaxed lowercase text-left">
-                      {project.shortDescription}
-                    </p>
                   </div>
                 </Link>
               ))}

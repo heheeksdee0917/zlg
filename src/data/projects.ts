@@ -4,7 +4,6 @@ export interface Project {
   title: string;
   year: number;
   location: string;
-  shortDescription: string;
   detailContent?: Array<{
     type: string;
     heading?: string;
@@ -21,7 +20,6 @@ export const projects: Project[] = [
     title: 'tepian tunku',
     year: 2015,
     location: 'kuala lumpur',
-    shortDescription: 'A slender linear volume minimises site disturbance, framing uninterrupted garden and sunset views. Entry leads directly to the open kitchen-living terrace — the social core — with private realms above and play below, enveloped in lush greenery.',
     detailContent: [
       {
         type: 'text',
@@ -52,7 +50,6 @@ export const projects: Project[] = [
     title: 'point92',
     year: 2012,
     location: 'Damansara Perdana',
-    shortDescription: 'Elevated on a breezeway over sloping terrain, its raw, pitted concrete facade rejects banal cladding for brutalist honesty. Greenery abounds, views unfold dramatically upon arrival, density achieved without sacrificing presence or context.',
     detailContent: [
       {
         type: 'text',
@@ -107,7 +104,6 @@ export const projects: Project[] = [
     title: 'Boh Visitor Center',
     year: 2006,
     location: 'Cameron Highlands',
-    shortDescription: 'cantilevers boldly over the valley, preserving ancient trees while guiding visitors through landscape to tea-making heart. Phase 2 undulates along the slope, with glass louvres and cafeteria immersing one in the estate\'s expanse.',
     detailContent: [
       {
         type: 'text',
@@ -155,7 +151,6 @@ export const projects: Project[] = [
     title: 'wangsa ukay residence',
     year: 2019,
     location: 'kuala lumpur',
-    shortDescription: 'Over decades, we dissolved barriers — walls removed, doors vanished — yielding a home half open to elements. Sunlight penetrates deeply, breeze and rain circulate freely; architecture here is perpetual evolution, alive with light, air and inhabitation.',
     detailContent: [
       {
         type: 'text',
@@ -191,7 +186,6 @@ export const projects: Project[] = [
     title: 'lantern hotel',
     year: 2015,
     location: 'kuala lumpur',
-    shortDescription: 'In Chinatown\'s heritage fabric, we re-clad a weary structure in dark burnt bricks, resurrecting a fading craft. A triple-height atrium draws light from above, opening the interior to breath and continuity on a constrained budget.',
     detailContent: [
       {
         type: 'text',
@@ -218,6 +212,66 @@ export const projects: Project[] = [
       '/projects/lantern-hotel/A3.avif',
       '/projects/lantern-hotel/A4.avif',
       '/projects/lantern-hotel/A5.avif',
+    ],
+  },
+  {
+    id: '6',
+    slug: 'nimes-mediateque-museum',
+    title: 'Nimes Mediateque Museum',
+    year: 2015,
+    location: 'kuala lumpur',
+    detailContent: [
+      {
+        type: 'text',
+        content: 'the mediateque was originally a competition in which huat worked on when he was at foster 1984-87 based in london.' 
+      },
+      {
+        type: 'text',
+        content: 'huat was one of four english architects who moved to france to set up the foster team in lyons france under the direction of martin francis, norman connection based in south of france.'
+      },
+      {
+        type: 'text',
+        content: 'the mediatecque is unique for its location facing la maison carre andnits glass staircase and intricate rooflights. many sketches were produced by the team, among them a large axonometric which covered the entire wall of their studio in jardin de la fontaines in nimes.'
+      },
+    ],
+    heroImage: '/projects/nimes/CP.avif',
+    images: [
+      '/projects/nimes/CP.avif',
+      '/projects/nimes/A1.avif',
+      '/projects/nimes/A2.avif',
+      '/projects/nimes/A3.avif',
+      '/projects/nimes/A4.avif',
+      '/projects/nimes/A5.avif',
+    ],
+  },
+  {
+    id: '7',
+    slug: 'singapore-nlm',
+    title: 'Singapore National Library Competition',
+    year: 2015,
+    location: 'kuala lumpur',
+    detailContent: [
+      {
+        type: 'text',
+        content: 'the library was a competition which ken yeang entered together with zlg for the earliest part of the design. later huat joined ken yeang’s partner based in singapore and continued to work on tje detail design and working drawings. colin okashimo and huat worked towards the final stages of putting in a biophilc approach to the project. ' 
+      },
+      {
+        type: 'text',
+        content: 'the project is unique becuase otbwas designer to have two parts the forma and the informal - and in between this were public realms and general circulation which brought immense daylight into the center of the building.'
+      },
+      {
+        type: 'text',
+        content: 'huat produced hand drawings and sketches for the competition entry.'
+      },
+    ],
+    heroImage: '/projects/singapore-nlb/CP.avif',
+    images: [
+      '/projects/singapore-nlb/CP.avif',
+      '/projects/singapore-nlb/A1.avif',
+      '/projects/singapore-nlb/A2.avif',
+      '/projects/singapore-nlb/A3.avif',
+      '/projects/singapore-nlb/A4.avif',
+      '/projects/singapore-nlb/A5.avif',
     ],
   },
 ];
