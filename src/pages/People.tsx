@@ -11,7 +11,7 @@ export default function People() {
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
   useEffect(() => {
-    setFadeIn(false);
+    window.scrollTo(0, 0);
     const timer = setTimeout(() => setFadeIn(true), 50);
     return () => clearTimeout(timer);
   }, []);
@@ -84,8 +84,9 @@ export default function People() {
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="w-full aspect-[2/3] object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading={index < 3 ? 'eager' : 'lazy'}
+                      className="w-full aspect-[2/3] object-cover"
+                      loading={index < 4 ? 'eager' : 'lazy'}
+                      decoding="async"
                     />
                   </div>
 

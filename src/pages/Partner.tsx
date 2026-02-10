@@ -8,8 +8,12 @@ export default function Partners() {
   });
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
+  // Split journey partners into those with images and those without
+  const partnersWithImages = journeyPartners.filter(p => p.image);
+  const partnersTextOnly = journeyPartners.filter(p => !p.image);
+
   useEffect(() => {
-    setFadeIn(false);
+    window.scrollTo(0, 0);
     const timer = setTimeout(() => setFadeIn(true), 50);
     return () => clearTimeout(timer);
   }, []);
@@ -60,6 +64,8 @@ export default function Partners() {
             filter: 'blur(2px)',
             transform: 'scale(1.1)'
           }}
+          poster="/v2_thumbnail.avif"
+          preload="auto"
           autoPlay
           loop
           muted
@@ -100,25 +106,27 @@ export default function Partners() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: 'url(/images/langkawi.avif)',
-            opacity: 0.2 // Adjust this value (0.0 to 1.0)
+            opacity: 0.2
           }}
         />
 
         {/* Content */}
-        <div className={`relative z-10 w-full pt-8 md:pt-12 pl-16 md:pl-28 pr-8 md:pr-16 pb-8 transition-all duration-1000 ease-out ${visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+        <div className={`relative z-10 w-full pt-8 md:pt-12 px-8 md:px-8 pb-8 transition-all duration-1000 ease-out ${visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}>
-          <div className="max-w-2xl">
-            <h2 className="text-2xl font-light tracking-wider mb-8 lowercase text-black">Our Partnership Philosophy</h2>
-            <div className="space-y-6">
-              <p className="text-base text-black leading-relaxed font-light lowercase text-left">
-                zlg partners with a number of universities and design colleges among them the one academy and taylor's university. we believe in continuous research and lairing all practical work sharpened through a deep understanding of ongoing issues such as carbon storage and climate change, and global conservation efforts.
-              </p>
-              <p className="text-base text-black leading-relaxed font-light lowercase text-left">
-                our partners include individuals who share similar interests, often clients. among them are artists and artisans alike, and furniture makers and retailers such as atmos, bnr, TMOG and GTA interior designers.
-              </p>
-              <p className="text-base text-black leading-relaxed font-light lowercase text-left">
-                zlg also works closely with researchers and specialists often working together on life long relationships on projects. among them are scientists such as dr daniel cicuzza, dr brandon chee and dr nike baetzner.
-              </p>
+          <div className="max-w-screen-2xl mx-auto">
+            <div className="max-w-2xl">
+              <h2 className="text-2xl font-light tracking-wider mb-8 lowercase text-black">Our Partnership Philosophy</h2>
+              <div className="space-y-6">
+                <p className="text-base text-black leading-relaxed font-light lowercase text-left">
+                  zlg partners with a number of universities and design colleges among them the one academy and taylor's university. we believe in continuous research and lairing all practical work sharpened through a deep understanding of ongoing issues such as carbon storage and climate change, and global conservation efforts.
+                </p>
+                <p className="text-base text-black leading-relaxed font-light lowercase text-left">
+                  our partners include individuals who share similar interests, often clients. among them are artists and artisans alike, and furniture makers and retailers such as atmos, bnr, TMOG and GTA interior designers.
+                </p>
+                <p className="text-base text-black leading-relaxed font-light lowercase text-left">
+                  zlg also works closely with researchers and specialists often working together on life long relationships on projects. among them are scientists such as dr daniel cicuzza, dr brandon chee and dr nike baetzner.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -147,6 +155,7 @@ export default function Partners() {
                         alt={partner.name}
                         className="w-full h-full aspect-[2/3] object-cover object-center"
                         loading="lazy"
+                        decoding="async"
                       />
                     </div>
                     <div className="flex flex-col justify-center">
@@ -176,6 +185,7 @@ export default function Partners() {
                         alt={partner.name}
                         className="w-full h-full aspect-[2/3] object-cover object-center"
                         loading="lazy"
+                        decoding="async"
                       />
                     </div>
                   </>
@@ -187,43 +197,88 @@ export default function Partners() {
         </React.Fragment>
       ))}
 
-      {/* Projects Section - Z-index continues */}
+      {/* Partners Along the Journey & Signature Projects Section - Z-index continues */}
       <section
         ref={setRef('projects')}
         data-section="projects"
-        className="md:sticky md:top-0 md:h-screen bg-white flex items-center py-8 md:py-0"
+        className="md:sticky md:top-0 bg-white py-16"
         style={{ zIndex: 30 + keyPartners.length }}
       >
         <div className="max-w-screen-2xl mx-auto px-8 w-full">
-          <div className={`max-w-4xl mx-auto transition-all duration-1000 ease-out ${visibleSections.projects ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          <div className={`transition-all duration-1000 ease-out ${visibleSections.projects ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
             }`}>
-            <div className="grid md:grid-cols-2 gap-12 mb-16">
-              <div>
-                <h4 className="text-base font-normal tracking-wide mb-4 lowercase">partners along the journey</h4>
-                <ul className="space-y-3 text-gray-700 font-light lowercase text-left">
-                  {journeyPartners.map((partner, index) => (
-                    <li key={index} className="flex items-start text-base">
-                      <span className="mr-3">•</span>
-                      <span>{partner.name}{partner.title && `: ${partner.title}`}</span>
-                    </li>
-                  ))}
-                </ul>
+            
+            {/* Partners Along the Journey */}
+            <div className="mb-16">
+              <h4 className="text-base font-normal tracking-wide mb-8 lowercase">partners along the journey</h4>
+              
+              {/* 4 Partners with Images - 1 row, 4 columns */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                {partnersWithImages.map((partner, index) => (
+                  <div 
+                    key={partner.name}
+                    className="transition-all duration-1000 ease-out"
+                    style={{ transitionDelay: `${index * 100}ms` }}
+                  >
+                    <div className="w-full aspect-[2/3] bg-gray-100 overflow-hidden mb-4">
+                      <img
+                        src={partner.image}
+                        alt={partner.name}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                    <h5 className="text-base font-normal tracking-wide mb-1 lowercase">{partner.name}</h5>
+                    {partner.title && (
+                      <p className="text-sm text-gray-600 font-light lowercase">{partner.title}</p>
+                    )}
+                  </div>
+                ))}
               </div>
 
-              <div>
-                <h4 className="text-base font-normal tracking-wide mb-4 lowercase">Signature Projects</h4>
-                <ul className="space-y-3 text-gray-700 font-light lowercase text-left">
-                  {signatureProjects.map((project, index) => (
-                    <li key={index} className="flex items-start text-base">
-                      <span className="mr-3">•</span>
-                      <span>{project}</span>
-                    </li>
-                  ))}
-                </ul>
+              {/* Text-only Partners */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
+                {partnersTextOnly.map((partner, index) => (
+                  <div 
+                    key={partner.name}
+                    className="flex items-start text-base text-gray-700 font-light lowercase"
+                  >
+                    <span className="mr-3">•</span>
+                    <span>{partner.name}{partner.title && `: ${partner.title}`}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
-            <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left">
+            {/* Signature Projects */}
+            <div>
+              <h4 className="text-base font-normal tracking-wide mb-8 lowercase">Signature Projects</h4>
+              
+              {/* 3 Projects with Images - 1 row, 3 columns */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                {signatureProjects.map((project, index) => (
+                  <div 
+                    key={project.title}
+                    className="transition-all duration-1000 ease-out"
+                    style={{ transitionDelay: `${index * 100}ms` }}
+                  >
+                    <div className="w-full aspect-[2/3] bg-gray-100 overflow-hidden mb-4">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                    <h5 className="text-base font-normal tracking-wide lowercase">{project.title}</h5>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left mt-12">
               With over 22 years of experience working on very large and complex buildings across Europe and Asia, our partners bring unparalleled expertise in architectural design, interior design, and project delivery.
             </p>
           </div>
@@ -241,7 +296,7 @@ export default function Partners() {
         style={{ zIndex: 30 + keyPartners.length + 1 }}
       >
         <div className="max-w-screen-2xl mx-auto px-8">
-          <div className={`text-left max-w-4xl mx-auto transition-all duration-1000 ease-out ${visibleSections.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          <div className={`text-left transition-all duration-1000 ease-out ${visibleSections.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
             }`}>
             <h2 className="text-base font-normal tracking-wider mb-4 lowercase">Become a Partner</h2>
             <p className="text-base text-gray-700 leading-relaxed mb-8 font-light lowercase text-left">

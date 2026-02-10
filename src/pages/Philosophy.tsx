@@ -7,7 +7,7 @@ export default function Philosophy() {
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
   useEffect(() => {
-    setFadeIn(false);
+    window.scrollTo(0, 0);
     const timer = setTimeout(() => setFadeIn(true), 50);
     return () => clearTimeout(timer);
   }, []);
@@ -57,16 +57,22 @@ export default function Philosophy() {
               style={{ zIndex: section.zIndex }}
             >
               <div className="max-w-screen-2xl mx-auto px-8 w-full">
-                <div className={`grid md:grid-cols-2 gap-8`}>
+                <div className={`flex flex-col md:grid md:grid-cols-2 gap-8`}>
                   {section.content.imagePosition === 'left' ? (
                     <>
-                      <div className={`flex items-center justify-center transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                      <div className={`flex items-center justify-center transition-all duration-1000 ease-out order-2 md:order-1 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                         }`}>
                         <div className="w-full" style={{ aspectRatio: '2/3' }}>
-                          <img src={section.content.image} alt={section.title} className="w-full h-full object-cover" />
+                          <img 
+                            src={section.content.image} 
+                            alt={section.title} 
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                            decoding="async"
+                          />
                         </div>
                       </div>
-                      <div className={`flex flex-col justify-center transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                      <div className={`flex flex-col justify-center transition-all duration-1000 ease-out order-1 md:order-2 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                         }`} style={{ transitionDelay: '200ms' }}>
                         <h3 className="text-base font-normal tracking-wide mb-4">{section.title}</h3>
                         {section.content.text?.map((paragraph, i) => (
@@ -76,17 +82,23 @@ export default function Philosophy() {
                     </>
                   ) : (
                     <>
-                      <div className={`flex flex-col justify-center transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                      <div className={`flex flex-col justify-center transition-all duration-1000 ease-out order-1 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                         }`}>
                         <h2 className="text-base font-normal tracking-wider mb-4">{section.title}</h2>
                         {section.content.text?.map((paragraph, i) => (
                           <p key={i} className="text-base text-gray-700 leading-relaxed mb-6 last:mb-0">{paragraph}</p>
                         ))}
                       </div>
-                      <div className={`flex items-center justify-center transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                      <div className={`flex items-center justify-center transition-all duration-1000 ease-out order-2 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                         }`} style={{ transitionDelay: '200ms' }}>
                         <div className="w-full" style={{ aspectRatio: '2/3' }}>
-                          <img src={section.content.image} alt={section.title} className="w-full h-full object-cover" />
+                          <img 
+                            src={section.content.image} 
+                            alt={section.title} 
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                            decoding="async"
+                          />
                         </div>
                       </div>
                     </>
@@ -140,6 +152,7 @@ export default function Philosophy() {
             {!isLastSection && <div className="hidden md:block md:h-64"></div>}
           </>
         );
+
       case 'text-only':
         return (
           <>
@@ -173,7 +186,6 @@ export default function Philosophy() {
           </>
         );
 
-
       case 'publications':
         return (
           <section
@@ -195,6 +207,8 @@ export default function Philosophy() {
                         src={pub.image}
                         alt={pub.title}
                         className="w-full h-full object-cover"
+                        loading="lazy"
+                        decoding="async"
                       />
                     </div>
                     {/* Content */}
@@ -215,7 +229,7 @@ export default function Philosophy() {
   };
 
   return (
-    <div className={`transition-opacity duration-500 flex flex-col gap-4 md:gap-0`}>
+    <div className={`transition-opacity duration-500 flex flex-col gap-4 md:gap-0 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
       <div className="h-16 md:h-0"></div>
       {philosophySections.map((section, index) => (
         <React.Fragment key={section.id}>
