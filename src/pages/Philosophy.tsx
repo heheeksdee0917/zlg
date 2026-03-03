@@ -53,8 +53,7 @@ export default function Philosophy() {
             <section
               ref={setRef(section.id)}
               data-section={section.id}
-              className={`md:sticky md:top-0 md:h-screen bg-white flex items-center md:py-0`}
-              style={{ zIndex: section.zIndex }}
+              className={`bg-white flex items-center`}
             >
               <div className="max-w-screen-2xl mx-auto px-8 w-full">
                 <div className={`flex flex-col md:grid md:grid-cols-2 gap-8`}>
@@ -106,7 +105,7 @@ export default function Philosophy() {
                 </div>
               </div>
             </section>
-            {!isLastSection && <div className="hidden md:block md:h-64"></div>}
+            
           </>
         );
 
@@ -116,8 +115,7 @@ export default function Philosophy() {
             <section
               ref={setRef(section.id)}
               data-section={section.id}
-              className={`md:sticky md:top-0 md:h-screen bg-white flex items-center md:py-0`}
-              style={{ zIndex: section.zIndex }}
+              className={`bg-white flex items-center`}
             >
               <div className="max-w-screen-2xl mx-auto px-8 w-full">
                 <div className="space-y-16">
@@ -149,7 +147,7 @@ export default function Philosophy() {
                 </div>
               </div>
             </section>
-            {!isLastSection && <div className="hidden md:block md:h-64"></div>}
+            
           </>
         );
 
@@ -182,7 +180,7 @@ export default function Philosophy() {
                 </div>
               </div>
             </section>
-            {!isLastSection && <div className="hidden md:block md:h-64"></div>}
+            
           </>
         );
 

@@ -3,23 +3,23 @@ import React, { useState, useEffect } from 'react';
 
 const slides = [
   {
-    image: '/poster_1.jpg',
+    image: '/general/HomeCP_point92.avif',
     projectName: 'point 92',
     slug: 'point-92',
   },
   {
-    image: '/images/Image2.avif',
+    image: '/projects/boh-visitor/CP.avif',
     projectName: 'boh visitor centre',
     slug: 'boh-visitor-centre',
   },
   {
-    image: '/poster_1.jpg',
+    image: '/general/HomeCP_Lantern.avif',
     projectName: 'lantern hotel',
     slug: 'lantern-hotel',
   },
 ];
 
-const SLIDE_DURATION = 5000;
+const SLIDE_DURATION = 3000;
 
 export default function Home() {
   const [fadeIn, setFadeIn] = useState(false);
@@ -91,12 +91,12 @@ export default function Home() {
           ))}
 
           {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black/45 z-10" />
+          <div className="absolute inset-0 bg-black/25 z-10" />
 
           {/* Text — bottom, center-aligned */}
           <div className="absolute z-20 bottom-16 left-0 right-0 flex flex-col items-center text-white text-center px-8">
             <p
-              className="fade-up text-xs tracking-[0.3em] lowercase font-light mb-4 opacity-60"
+              className="fade-up text-xs tracking-[0.3em] lowercase font-light mb-1 opacity-60"
               style={{ animationDelay: '0.2s' }}
             >
               signature projects
@@ -104,7 +104,7 @@ export default function Home() {
 
             <h1
               key={nameKey}
-              className="fade-up text-4xl md:text-4xl font-extralight tracking-widest lowercase mb-8"
+              className="fade-up text-4xl md:text-4xl font-bold tracking-widest lowercase mb-8"
               style={{ animationDelay: '0.35s' }}
             >
               {slide.projectName}
@@ -127,9 +127,8 @@ export default function Home() {
                 onClick={() => { setCurrentSlide(i); setNameKey((k) => k + 1); }}
                 className="flex items-center gap-2 group"
               >
-                <span className={`block h-px transition-all duration-700 ease-in-out ${
-                  i === currentSlide ? 'w-10 bg-white' : 'w-4 bg-white/30 group-hover:bg-white/60 group-hover:w-6'
-                }`} />
+                <span className={`block h-px transition-all duration-700 ease-in-out ${i === currentSlide ? 'w-10 bg-white' : 'w-4 bg-white/30 group-hover:bg-white/60 group-hover:w-6'
+                  }`} />
               </button>
             ))}
           </div>
@@ -143,7 +142,45 @@ export default function Home() {
           </div>
 
         </section>
-      </div>
+        {/* Philosophy Section */}
+        <section className="relative w-full h-screen overflow-hidden flex">
+
+          {/* Image — left half */}
+          <div
+            className="w-1/2 h-full"
+            style={{
+              backgroundImage: `url('/general/HomeCP_Philosophy.avif')`,
+              backgroundSize: 'cover',
+              backgroundPosition: '10% center',
+              opacity: 0.6,
+            }}
+          />
+
+          {/* Right half — white background */}
+          <div className="w-1/2 h-full bg-white" />
+
+          {/* Text — overlaps image, centered vertically */}
+          <div className="absolute inset-0 z-10 flex items-center">
+            <div className="ml-[45%] max-w-3lg">
+              <p className="text-2xl md:text-3xl font-normal leading-relaxed lowercase tracking-wide text-gray-900 mb-3">
+                Thought is a form of necessary action,{' '}
+                <br />a precursor to a possible work of art.
+                <span className="text-xs tracking-widest font-light text-gray-80 ml-1 align-middle">
+                  huat lim
+                </span>
+              </p>
+              <a
+
+                href="/philosophy"
+                className="inline-block text-xs tracking-[0.25em] font-light border-b border-gray-400 pb-0.5 hover:border-gray-800 transition-all duration-300 lowercase text-gray-600 hover:text-gray-900 mt-4"
+              >
+                explore the mind
+              </a>
+            </div>
+          </div>
+
+        </section >
+      </div >
     </>
   );
 }
