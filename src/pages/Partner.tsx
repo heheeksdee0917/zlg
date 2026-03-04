@@ -65,7 +65,6 @@ export default function Partners() {
             transform: 'scale(1.1)'
           }}
           poster="/v2_thumbnail.avif"
-          preload="auto"
           autoPlay
           loop
           muted
@@ -132,70 +131,7 @@ export default function Partners() {
         </div>
       </section>
 
-      {/* Spacer */}
-      <div className="h-8 md:h-16"></div>
 
-      {/* Key Partners Section - Individual cards with sticky */}
-      {keyPartners.map((partner, index) => (
-        <React.Fragment key={partner.name}>
-          <section
-            ref={setRef(`partner-${index}`)}
-            data-section={`partner-${index}`}
-            className="md:sticky md:top-0 md:min-h-screen bg-white flex items-center py-8 md:py-16"
-            style={{ zIndex: 30 + index }}
-          >
-            <div className="max-w-screen-2xl mx-auto px-8 w-full">
-              <div className={`grid md:grid-cols-2 gap-8 lg:gap-16 items-center transition-all duration-1000 ease-out ${visibleSections[`partner-${index}`] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                }`}>
-                {index % 2 === 0 ? (
-                  <>
-                    <div className="w-full max-h-[70vh] md:max-h-[80vh] flex items-center">
-                      <img
-                        src={partner.image}
-                        alt={partner.name}
-                        className="w-full h-full aspect-[2/3] object-cover object-center"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
-                    <div className="flex flex-col justify-center">
-                      <h3 className="text-base font-normal tracking-wide mb-2 lowercase">{partner.name}</h3>
-                      <p className="text-base text-gray-600 mb-8 tracking-wide font-light lowercase">{partner.role}</p>
-                      <div className="space-y-6 text-gray-700 leading-relaxed font-light lowercase text-left">
-                        {partner.bio.map((paragraph, i) => (
-                          <p key={i} className="text-base">{paragraph}</p>
-                        ))}
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="flex flex-col justify-center order-2 md:order-1">
-                      <h3 className="text-base font-normal tracking-wide mb-2 lowercase">{partner.name}</h3>
-                      <p className="text-base text-gray-600 mb-8 tracking-wide font-light lowercase">{partner.role}</p>
-                      <div className="space-y-6 text-gray-700 leading-relaxed font-light lowercase text-left">
-                        {partner.bio.map((paragraph, i) => (
-                          <p key={i} className="text-base">{paragraph}</p>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="w-full max-h-[70vh] md:max-h-[80vh] flex items-center order-1 md:order-2">
-                      <img
-                        src={partner.image}
-                        alt={partner.name}
-                        className="w-full h-full aspect-[2/3] object-cover object-center"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-          </section>
-          <div className="h-8 md:h-16"></div>
-        </React.Fragment>
-      ))}
 
       {/* Partners Along the Journey & Signature Projects Section - Z-index continues */}
       <section

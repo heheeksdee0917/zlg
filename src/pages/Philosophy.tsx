@@ -66,8 +66,6 @@ export default function Philosophy() {
                             src={section.content.image} 
                             alt={section.title} 
                             className="w-full h-full object-cover"
-                            loading="lazy"
-                            decoding="async"
                           />
                         </div>
                       </div>

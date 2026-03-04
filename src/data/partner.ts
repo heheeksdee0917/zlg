@@ -31,18 +31,6 @@ export interface TimelineMilestone {
 
 export const team: Team[] = [
   {
-    id: 1,
-    name: 'Huat Lim & SUSANNE ZEIDLER',
-    role: 'Managing Director & Executive Director',
-    image: '/People/HuatandSusanne.jpeg',
-  },
-  {
-    id: 2,
-    name: 'Ar. Athirah Yen',
-    role: 'LAM AG/A 678, BSc. Arch (Hons) Taylor‘s, M. Arch UM, LAM/RIBA PART II',
-    image: 'People/athirah.jpeg',
-  },
-  {
     id: 3,
     name: 'haziqah ngasri',
     role: 'Dipl. Fine Art, Bsc. Arch (Hons) UITM, LAM Part I',
