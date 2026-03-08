@@ -142,44 +142,46 @@ export default function Home() {
           </div>
 
         </section>
+
         {/* Philosophy Section */}
         <section className="relative w-full h-screen overflow-hidden flex flex-col md:flex-row">
 
-{/* Image — full width on mobile, left half on desktop */}
-<div
-  className="w-full h-1/2 md:w-1/2 md:h-full"
-  style={{
-    backgroundImage: `url('/general/HomeCP_Philosophy.avif')`,
-    backgroundSize: 'cover',
-    backgroundPosition: '10% center',
-    opacity: 0.6,
-  }}
-/>
+          {/* Video — full width on mobile, left half on desktop */}
+          <video
+            className="w-full h-1/2 md:w-1/2 md:h-full object-cover"
+            style={{ opacity: 0.6, objectPosition: '10% center' }}
+            src="/general/HomeCP_Philosophy.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="/general/HomeCP_Philosophy.avif"
+          />
 
-{/* Bottom half on mobile, right half on desktop — white background */}
-<div className="w-full h-1/2 md:w-1/2 md:h-full bg-white" />
+          {/* Bottom half on mobile, right half on desktop — white background */}
+          <div className="w-full h-1/2 md:w-1/2 md:h-full bg-white" />
 
-{/* Text — bottom center on mobile, overlaps on desktop */}
-<div className="absolute inset-0 z-10 flex items-end md:items-center pb-[50%] md:pb-0 px-8 md:px-0">
-  <div className="md:ml-[45%] max-w-lg">
-    <p className="text-2xl md:text-3xl font-normal leading-relaxed lowercase tracking-wide text-gray-900 mb-3">
-      Thought is a form of necessary action,{' '}
-      <br />a precursor to a possible work of art.
-      <span className="text-xs tracking-widest font-light text-gray-500 ml-1 align-middle">
-        huat lim
-      </span>
-    </p>
-    <a
-      href="/philosophy"
-      className="inline-block text-xs tracking-[0.25em] font-light border-b border-gray-400 pb-0.5 hover:border-gray-800 transition-all duration-300 lowercase text-gray-600 hover:text-gray-900 mt-4"
-    >
-      explore the mind
-    </a>
-  </div>
-</div>
+          {/* Text — bottom center on mobile, overlaps on desktop */}
+          <div className="absolute inset-0 z-10 flex items-end md:items-center pb-[50%] md:pb-0 px-8 md:px-0">
+            <div className="md:ml-[45%] max-w-lg">
+              <p className="text-2xl md:text-3xl font-normal leading-relaxed lowercase tracking-wide text-gray-900 mb-3">
+                Thought is a form of necessary action,{' '}
+                <br />a precursor to a possible work of art.
+                <span className="text-xs tracking-widest font-light text-gray-500 ml-1 align-middle">
+                  huat lim
+                </span>
+              </p>
+              <a
+                href="/philosophy"
+                className="inline-block text-xs tracking-[0.25em] font-light border-b border-gray-400 pb-0.5 hover:border-gray-800 transition-all duration-300 lowercase text-gray-600 hover:text-gray-900 mt-4"
+              >
+                explore the mind
+              </a>
+            </div>
+          </div>
 
-</section>
-      </div >
+        </section>
+      </div>
     </>
   );
 }

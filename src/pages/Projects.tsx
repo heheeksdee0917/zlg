@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
-import LazyLoading from '../components/LazyLoading';
 
 export default function Projects() {
   const [fadeIn, setFadeIn] = useState(false);
@@ -22,53 +21,43 @@ export default function Projects() {
           </p>
         </div>
 
-        <LazyLoading
-          items={projects}
-          initialCount={8}
-          loadMoreCount={8}
-          visibleSections={{}}
-          threshold={0.1}
-        >
-          {(visibleProjects) => (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {visibleProjects.map((project, index) => (
-                <Link
-                  key={project.id}
-                  to={`/projects/${project.slug}`}
-                  className="group block transition-all duration-500 ease-out hover:scale-105 hover:-translate-y-2"
-                  style={{
-                    animation: 'fadeInUp 0.6s ease-out forwards',
-                    animationDelay: `${(index % 8) * 0.05}s`,
-                    opacity: 0
-                  }}
-                >
-                  <div className="overflow-hidden mb-6 bg-gray-200">
-                    <img
-                      src={project.heroImage}
-                      alt={project.title}
-                      className="w-full aspect-[2/3] object-cover transition-opacity duration-700 object-center"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {projects.map((project, index) => (
+            <Link
+              key={project.id}
+              to={`/projects/${project.slug}`}
+              className="group block transition-all duration-500 ease-out hover:scale-105 hover:-translate-y-2"
+              style={{
+                animation: 'fadeInUp 0.6s ease-out forwards',
+                animationDelay: `${(index % 8) * 0.05}s`,
+                opacity: 0
+              }}
+            >
+              <div className="overflow-hidden mb-6 bg-gray-200">
+                <img
+                  src={project.heroImage}
+                  alt={project.title}
+                  className="w-full aspect-[2/3] object-cover transition-opacity duration-700 object-center"
+                  loading={index < 8 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              </div>
 
-                  <div className="space-y-3 text-left">
-                    <h2 className="text-base font-normal tracking-wide relative inline-block lowercase">
-                      {project.title}
-                      <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
-                    </h2>
+              <div className="space-y-3 text-left">
+                <h2 className="text-base font-normal tracking-wide relative inline-block lowercase">
+                  {project.title}
+                  <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
+                </h2>
 
-                    <div className="flex items-center space-x-4 text-base text-gray-600 lowercase">
-                      <span>{project.year}</span>
-                      <span>•</span>
-                      <span>{project.location}</span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
-        </LazyLoading>
+                <div className="flex items-center space-x-4 text-base text-gray-600 lowercase">
+                  <span>{project.year}</span>
+                  <span>•</span>
+                  <span>{project.location}</span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
       </section>
 
       <style>{`

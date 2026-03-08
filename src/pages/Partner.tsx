@@ -1,14 +1,83 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { keyPartners, journeyPartners, signatureProjects } from '../data/partner';
 
+function HeroSection() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const heroOpacity = Math.max(0, 1 - scrollY / 200);
+  const imageBlur = Math.min(10, (scrollY - 100) / 30);
+  const overlayOpacity = Math.min(1, (scrollY - 100) / 300);
+  const overlayTranslateY = Math.max(0, 40 - (scrollY - 100) / 10);
+
+  return (
+    <section className="relative h-[200vh]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+
+        {/* Blurred Background Video */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            filter: `blur(${Math.max(0, imageBlur)}px)`,
+            transform: 'scale(1.1)',
+          }}
+          poster="/v2_thumbnail.avif"
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
+          <source src="/zlg_v2.mp4" type="video/mp4" />
+        </video>
+
+        {/* Dark overlay — always present */}
+        <div className="absolute inset-0 bg-black/40" />
+
+        {/* Hero text — fades out on scroll */}
+        <div
+          className="absolute inset-0 flex flex-col items-center justify-center text-center px-8"
+          style={{ opacity: heroOpacity, transition: 'none' }}
+        >
+          <p className="text-xs tracking-[0.3em] lowercase font-light text-white/60 mb-4">
+            our network
+          </p>
+          <h1 className="text-4xl md:text-5xl font-extralight tracking-widest lowercase text-white">
+            partners
+          </h1>
+        </div>
+
+        {/* Text — fades in on scroll over blurred video */}
+        <div
+          className="absolute inset-0 flex items-center px-8 max-w-screen-2xl mx-auto"
+          style={{
+            opacity: overlayOpacity,
+            transform: `translateY(${overlayTranslateY}px)`,
+            transition: 'none',
+          }}
+        >
+          <div className="max-w-xl">
+            <h2 className="text-base font-normal tracking-wider mb-4 lowercase underline text-white">Key Partners</h2>
+            <p className="text-base text-white/90 leading-relaxed lowercase text-left">
+              Our partners are built on decades of collaboration with exceptional architects and designers who have shaped the built environment across continents. Together, we bring world-class expertise and a shared vision of design excellence.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
 export default function Partners() {
   const [fadeIn, setFadeIn] = useState(false);
-  const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({
-    hero: true
-  });
+  const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
-  // Split journey partners into those with images and those without
   const partnersWithImages = journeyPartners.filter(p => p.image);
   const partnersTextOnly = journeyPartners.filter(p => !p.image);
 
@@ -50,57 +119,15 @@ export default function Partners() {
 
   return (
     <div className={`transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
-      {/* Hero Section - Z-10 */}
-      <section
-        ref={setRef('hero')}
-        data-section="hero"
-        className="md:sticky md:top-0 h-screen flex items-center justify-center bg-white pt-28 pb-8 md:pt-28 md:pb-0"
-        style={{ zIndex: 10 }}
-      >
-        {/* Blurred Background Video */}
-        <video
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{
-            filter: 'blur(2px)',
-            transform: 'scale(1.1)'
-          }}
-          poster="/v2_thumbnail.avif"
-          autoPlay
-          loop
-          muted
-          playsInline
-        >
-          <source src="/zlg_v2.mp4" type="video/mp4" />
-          {/* Fallback for browsers that don't support video */}
-          Your browser does not support the video tag.
-        </video>
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+      <HeroSection />
 
-        {/* Content */}
-        <div className={`relative z-10 text-center px-8 max-w-4xl mx-auto transition-all duration-1000 ease-out ${visibleSections.hero ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          }`}>
-          <h1 className="text-4xl md:text-5xl font-light tracking-wider mb-6 text-white lowercase">
-            Key Partners
-          </h1>
-          <p className="text-lg md:text-xl text-white leading-relaxed font-light lowercase mb-8">
-            Our partners are built on decades of collaboration with exceptional architects and designers who have shaped the built environment across continents. Together, we bring world-class expertise and a shared vision of design excellence.
-          </p>
-        </div>
-      </section>
-
-      {/* Spacer */}
-      <div className="h-8 md:h-16"></div>
-
-      {/* Introduction Section - Z-20 */}
+      {/* Introduction Section */}
       <section
         ref={setRef('intro')}
         data-section="intro"
-        className="md:sticky md:top-0 md:h-screen bg-white flex items-start py-8 md:py-0 relative"
-        style={{ zIndex: 20 }}
+        className="bg-white flex items-start py-8 md:py-16 relative"
       >
-        {/* Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -108,10 +135,9 @@ export default function Partners() {
             opacity: 0.2
           }}
         />
-
-        {/* Content */}
-        <div className={`relative z-10 w-full pt-8 md:pt-12 px-8 md:px-8 pb-8 transition-all duration-1000 ease-out ${visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          }`}>
+        <div className={`relative z-10 w-full px-8 pb-8 transition-all duration-1000 ease-out ${
+          visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+        }`}>
           <div className="max-w-screen-2xl mx-auto">
             <div className="max-w-2xl">
               <h2 className="text-2xl font-light tracking-wider mb-8 lowercase text-black">Our Partnership Philosophy</h2>
@@ -131,27 +157,24 @@ export default function Partners() {
         </div>
       </section>
 
-
-
-      {/* Partners Along the Journey & Signature Projects Section - Z-index continues */}
+      {/* Partners Along the Journey & Signature Projects */}
       <section
         ref={setRef('projects')}
         data-section="projects"
-        className="md:sticky md:top-0 bg-white py-16"
-        style={{ zIndex: 30 + keyPartners.length }}
+        className="bg-white py-16"
       >
         <div className="max-w-screen-2xl mx-auto px-8 w-full">
-          <div className={`transition-all duration-1000 ease-out ${visibleSections.projects ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-            }`}>
-            
+          <div className={`transition-all duration-1000 ease-out ${
+            visibleSections.projects ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}>
+
             {/* Partners Along the Journey */}
             <div className="mb-16">
               <h4 className="text-base font-normal tracking-wide mb-8 lowercase">partners along the journey</h4>
-              
-              {/* 4 Partners with Images - 1 row, 4 columns */}
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                 {partnersWithImages.map((partner, index) => (
-                  <div 
+                  <div
                     key={partner.name}
                     className="transition-all duration-1000 ease-out"
                     style={{ transitionDelay: `${index * 100}ms` }}
@@ -173,10 +196,9 @@ export default function Partners() {
                 ))}
               </div>
 
-              {/* Text-only Partners */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
-                {partnersTextOnly.map((partner, index) => (
-                  <div 
+                {partnersTextOnly.map((partner) => (
+                  <div
                     key={partner.name}
                     className="flex items-start text-base text-gray-700 font-light lowercase"
                   >
@@ -190,11 +212,9 @@ export default function Partners() {
             {/* Signature Projects */}
             <div>
               <h4 className="text-base font-normal tracking-wide mb-8 lowercase">Signature Projects</h4>
-              
-              {/* 3 Projects with Images - 1 row, 3 columns */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                 {signatureProjects.map((project, index) => (
-                  <div 
+                  <div
                     key={project.title}
                     className="transition-all duration-1000 ease-out"
                     style={{ transitionDelay: `${index * 100}ms` }}
@@ -221,19 +241,16 @@ export default function Partners() {
         </div>
       </section>
 
-      {/* Spacer */}
-      <div className="h-8 md:h-16"></div>
-
-      {/* CTA Section - Final section */}
+      {/* CTA Section */}
       <section
         ref={setRef('cta')}
         data-section="cta"
         className="relative bg-gray-50 py-16"
-        style={{ zIndex: 30 + keyPartners.length + 1 }}
       >
         <div className="max-w-screen-2xl mx-auto px-8">
-          <div className={`text-left transition-all duration-1000 ease-out ${visibleSections.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-            }`}>
+          <div className={`text-left transition-all duration-1000 ease-out ${
+            visibleSections.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}>
             <h2 className="text-base font-normal tracking-wider mb-4 lowercase">Become a Partner</h2>
             <p className="text-base text-gray-700 leading-relaxed mb-8 font-light lowercase text-left">
               We're always interested in connecting with talented consultants, engineers, contractors, and fabricators who share our values. If you believe in design excellence and collaborative practice, let's talk.
@@ -248,6 +265,7 @@ export default function Partners() {
           </div>
         </div>
       </section>
+
     </div>
   );
 }

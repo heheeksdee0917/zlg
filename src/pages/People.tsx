@@ -3,6 +3,74 @@ import { keyPartners, team } from '../data/partner';
 import type { Team } from '../data/partner';
 import LazyLoading from '../components/LazyLoading';
 
+function HeroSection() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const heroOpacity = Math.max(0, 1 - scrollY / 200);
+  const imageBlur = Math.min(10, (scrollY - 100) / 30);
+  const overlayOpacity = Math.min(1, (scrollY - 100) / 300);
+  const overlayTranslateY = Math.max(0, 40 - (scrollY - 100) / 10);
+
+  return (
+    <section className="relative h-[200vh]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+
+        {/* Base Image — blurs on scroll */}
+        <div
+          className="absolute inset-0 bg-cover"
+          style={{
+            backgroundImage: `url('/People/zlg_group.jpeg')`,
+            backgroundPosition: 'center 70%',
+            marginTop: '32px',
+            filter: `blur(${Math.max(0, imageBlur)}px)`,
+            transform: 'scale(1.05)',
+          }}
+        />
+
+        {/* Dark overlay — always present */}
+        <div className="absolute inset-0 bg-black/30" />
+
+        {/* Hero text — fades out on scroll */}
+        <div
+          className="absolute inset-0 flex flex-col items-center justify-center text-center px-8"
+          style={{ opacity: heroOpacity, transition: 'none' }}
+        >
+          <p className="text-xs tracking-[0.3em] lowercase font-light text-white/60 mb-4">
+            zlg design
+          </p>
+          <h1 className="text-4xl md:text-5xl font-extralight tracking-widest lowercase text-white">
+            people
+          </h1>
+        </div>
+
+        {/* Text — fades in on scroll over blurred image */}
+        <div
+          className="absolute inset-0 flex items-center px-8 max-w-screen-2xl mx-auto"
+          style={{
+            opacity: overlayOpacity,
+            transform: `translateY(${overlayTranslateY}px)`,
+            transition: 'none',
+          }}
+        >
+          <div className="max-w-xl">
+            <h2 className="text-base font-normal tracking-wider mb-4 lowercase underline text-white">Our Team</h2>
+            <p className="text-base text-white/90 leading-relaxed lowercase text-left">
+              ZLG Design is a collective of architects, designers, and thinkers united by a shared passion for creating meaningful spaces. Our diverse backgrounds and expertise enable us to approach each project with fresh perspectives and rigorous craft.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
 export default function People() {
   const [fadeIn, setFadeIn] = useState(false);
   const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({
@@ -49,41 +117,7 @@ export default function People() {
   return (
     <div className={`transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
 
-      {/* Hero Intro — Rolex-style pinned scroll */}
-      <section className="relative h-[200vh]">
-
-        {/* Sticky pinned image — stays in place while text scrolls over */}
-        <div className="sticky top-0 h-screen w-full overflow-hidden">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: `url('/People/zlg_group.jpeg')`,
-              marginTop: '32px',
-              transform: 'scale(0.88)',
-            }}
-          />
-          {/* Subtle dark overlay always present */}
-          <div className="absolute inset-0 bg-black/20" />
-        </div>
-
-        {/* Text block — scrolls up naturally over the pinned image */}
-        <div className="relative z-10 -mt-[40vh] px-8 pt-24 pb-24 max-w-screen-2xl mx-auto">
-          <div
-            className="inline-block px-10 py-12 max-w-xl"
-            style={{
-              background: 'rgba(255, 255, 255, 0.15)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
-            }}
-          >
-            <h2 className="text-base font-normal tracking-wider mb-4 lowercase underline text-white">Our Team</h2>
-            <p className="text-base text-white/90 leading-relaxed lowercase text-left">
-              ZLG Design is a collective of architects, designers, and thinkers united by a shared passion for creating meaningful spaces. Our diverse backgrounds and expertise enable us to approach each project with fresh perspectives and rigorous craft.
-            </p>
-          </div>
-        </div>
-
-      </section>
+      <HeroSection />
 
       {/* Key Partners + Team Grid */}
       <section
