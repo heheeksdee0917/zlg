@@ -149,8 +149,8 @@ export default function Home() {
           {/* Video — full width on mobile, left half on desktop */}
           <video
             className="w-full h-1/2 md:w-1/2 md:h-full object-cover"
-            style={{ opacity: 0.6, objectPosition: '10% center' }}
-            src="/general/HomeCP_Philosophy.mp4"
+            style={{ opacity: 0.8, objectPosition: '10% center' }}
+            src="/general/Philosophy_video.mp4"
             autoPlay
             muted
             loop

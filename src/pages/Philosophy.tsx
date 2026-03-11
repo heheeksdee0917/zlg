@@ -10,59 +10,78 @@ function HeroSection() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const heroOpacity = Math.max(0, 1 - scrollY / 200);
-  const imageBlur = Math.min(10, (scrollY - 100) / 30);
-  const overlayOpacity = Math.min(1, (scrollY - 100) / 200) * Math.max(0, 1 - (scrollY - 500) / 200);
-  const overlayTranslateY = Math.max(0, 40 - (scrollY - 100) / 10);
-  const secondOpacity = Math.min(1, (scrollY - 700) / 300);
-  const secondTranslateY = Math.max(0, 40 - (scrollY - 700) / 10);
+  const vh = typeof window !== 'undefined' ? window.innerHeight : 800;
+
+  const snapIndex = Math.min(2, Math.round(scrollY / vh));
+
+  const heroOpacity = scrollY > vh * 2.6 ? Math.max(0, 1 - (scrollY - vh * 2.6) / (vh * 0.4)) : 1;
+
+  const imageBlur = snapIndex >= 1 ? 8 : 0;
+
+  const PanelContent = ({ text, heading, imgSrc }: { text: string; heading?: string; imgSrc: string }) => (
+    <div className="w-full flex items-center justify-between px-8 md:px-16 max-w-screen-2xl mx-auto">
+      {/* Text — left */}
+      <div className="max-w-sm">
+        {heading && <h2 className="text-base font-normal tracking-wider mb-4 lowercase underline text-white">{heading}</h2>}
+        <p className="text-base text-white/90 leading-relaxed lowercase text-left">{text}</p>
+      </div>
+
+      {/* Square image — pushed to the far right */}
+      <div className="hidden md:block w-[38vh] h-[38vh] flex-shrink-0 overflow-hidden">
+        <img src={imgSrc} alt="" className="w-full h-full object-cover" />
+      </div>
+    </div>
+  );
 
   return (
-    <section className="relative h-[300vh]" style={{ scrollSnapType: 'y mandatory' }}>
-      <div style={{ scrollSnapAlign: 'start', height: '100vh' }} />
-      <div style={{ scrollSnapAlign: 'start', height: '100vh' }} />
-      <div style={{ scrollSnapAlign: 'start', height: '100vh' }} />
+    <section className="relative h-[300vh]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ opacity: heroOpacity }}>
 
-      <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ marginTop: '-300vh' }}>
+        {/* Background image */}
         <div
-          className="absolute inset-0 bg-cover"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: `url('/your-philosophy-image-here.jpg')`,
             backgroundPosition: 'center 70%',
-            marginTop: '32px',
-            filter: `blur(${Math.max(0, imageBlur)}px)`,
+            filter: `blur(${imageBlur}px)`,
             transform: 'scale(1.05)',
+            transition: 'filter 0.8s ease',
           }}
         />
         <div className="absolute inset-0 bg-black/30" />
+
+        {/* Panel 1 — title */}
         <div
-          className="absolute inset-0 flex flex-col items-center justify-center text-center px-8"
-          style={{ opacity: heroOpacity, transition: 'none' }}
+          className="absolute inset-0 flex flex-col items-center justify-center text-center px-8 transition-opacity duration-500"
+          style={{ opacity: snapIndex === 0 ? 1 : 0 }}
         >
           <p className="text-xs tracking-[0.3em] lowercase font-light text-white/60 mb-4">our thinking</p>
           <h1 className="text-4xl md:text-5xl font-extralight tracking-widest lowercase text-white">philosophy</h1>
         </div>
+
+        {/* Panel 2 */}
         <div
-          className="absolute inset-0 flex items-center px-8 max-w-screen-2xl mx-auto"
-          style={{ opacity: overlayOpacity, transform: `translateY(${overlayTranslateY}px)`, transition: 'none' }}
+          className="absolute inset-0 flex items-center transition-opacity duration-500"
+          style={{ opacity: snapIndex === 1 ? 1 : 0 }}
         >
-          <div className="max-w-xl">
-            <h2 className="text-base font-normal tracking-wider mb-4 lowercase underline text-white">Our Philosophy</h2>
-            <p className="text-base text-white/90 leading-relaxed lowercase text-left">
-              In 1992 when susanne and me started thinking of doing competitions our focus was only design and ever since our work revolved around ideas and concepts that go beyond what was then always a pre-defined architectural pursuit or entity. We had simply wanted to do architecture that would not only engage the human spirit, but also something with a deep philosophy behind the work.
-            </p>
-          </div>
+          <PanelContent
+            heading="Our Philosophy"
+            text="In 1992 when susanne and me started thinking of doing competitions our focus was only design and ever since our work revolved around ideas and concepts that go beyond what was then always a pre-defined architectural pursuit or entity. We had simply wanted to do architecture that would not only engage the human spirit, but also something with a deep philosophy behind the work."
+            imgSrc="/general/eg.avif"
+          />
         </div>
+
+        {/* Panel 3 */}
         <div
-          className="absolute inset-0 flex items-center px-8 max-w-screen-2xl mx-auto"
-          style={{ opacity: secondOpacity, transform: `translateY(${secondTranslateY}px)`, transition: 'none' }}
+          className="absolute inset-0 flex items-center transition-opacity duration-500"
+          style={{ opacity: snapIndex === 2 ? 1 : 0 }}
         >
-          <div className="max-w-xl">
-            <p className="text-base text-white/90 leading-relaxed lowercase text-left">
-              I think architecture is taking much longer to becoming like what good art is, it is not so generative and it is not always assuming an emotive role, like a good work of art does. We think that it is possible for us to connect to our buildings as easily as we can connect to art, or to our music, or to things that we adore, like our children or our books.
-            </p>
-          </div>
+          <PanelContent
+            text="I think architecture is taking much longer to becoming like what good art is, it is not so generative and it is not always assuming an emotive role, like a good work of art does. We think that it is possible for us to connect to our buildings as easily as we can connect to art, or to our music, or to things that we adore, like our children or our books."
+            imgSrc="/general/eg.avif"
+          />
         </div>
+
       </div>
     </section>
   );
@@ -113,27 +132,17 @@ export default function Philosophy() {
     switch (section.type) {
       case 'text-image':
         return (
-          <section
-            key={section.id}
-            ref={setRef(section.id)}
-            data-section={section.id}
-            className="bg-white py-24 "
-          >
+          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-white py-24">
             <div className="max-w-screen-2xl mx-auto px-8 w-full">
               <div className="flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-16">
-
-                {/* Title — always left */}
                 <div className={`flex flex-col justify-start transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                   <h2 className="text-4xl font-normal tracking-wider">{section.title}</h2>
                 </div>
-
-                {/* Content — always right */}
                 <div className={`flex flex-col justify-start transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
                   {section.content.text?.map((p, i) => (
                     <p key={i} className="text-base text-gray-700 leading-relaxed mb-6 last:mb-0">{p}</p>
                   ))}
                 </div>
-
               </div>
             </div>
           </section>
@@ -141,12 +150,7 @@ export default function Philosophy() {
 
       case 'quote-only':
         return (
-          <section
-            key={section.id}
-            ref={setRef(section.id)}
-            data-section={section.id}
-            className="bg-white py-24 "
-          >
+          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-white py-24">
             <div className="max-w-screen-2xl mx-auto px-8">
               <blockquote className={`text-base font-light text-left italic text-gray-800 py-8 border-t border-b border-gray-300 transition-all duration-1000 ease-out lowercase ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                 {section.content.quote}
@@ -160,12 +164,7 @@ export default function Philosophy() {
 
       case 'columns-only':
         return (
-          <section
-            key={section.id}
-            ref={setRef(section.id)}
-            data-section={section.id}
-            className="bg-white py-24 "
-          >
+          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-white py-24">
             <div className="max-w-screen-2xl mx-auto px-8">
               <div className="grid md:grid-cols-2 gap-16">
                 {section.content.columns?.map((col, i) => (
@@ -179,36 +178,22 @@ export default function Philosophy() {
           </section>
         );
 
-        case 'text-only':
-          return (
-            <section
-              key={section.id}
-              ref={setRef(section.id)}
-              data-section={section.id}
-              className="bg-white py-24  relative min-h-[60vh] flex items-center"
-              style={{ justifyContent: section.content.layout === 'center' ? 'center' : 'flex-start' }}
-            >
-              <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${section.content.image})`, opacity: 0.5 }} />
-              <div className={`relative z-10 transition-all duration-1000 ease-out px-8
-                ${section.content.layout === 'center' ? 'max-w-2xl mx-auto text-left' : 'w-full md:pl-28 md:pr-16'}
-                ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
-              `}>
-                <h3 className="text-2xl font-light tracking-wide mb-6 text-black lowercase">{section.title}</h3>
-                {section.content.text?.map((p, i) => (
-                  <p key={i} className="text-base text-black leading-relaxed mb-4 last:mb-0 lowercase">{p}</p>
-                ))}
-              </div>
-            </section>
-          );
+      case 'text-only':
+        return (
+          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-white py-24 relative min-h-[60vh] flex items-center" style={{ justifyContent: section.content.layout === 'center' ? 'center' : 'flex-start' }}>
+            <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${section.content.image})`, opacity: 0.5 }} />
+            <div className={`relative z-10 transition-all duration-1000 ease-out px-8 ${section.content.layout === 'center' ? 'max-w-2xl mx-auto text-left' : 'w-full md:pl-28 md:pr-16'} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <h3 className="text-2xl font-light tracking-wide mb-6 text-black lowercase">{section.title}</h3>
+              {section.content.text?.map((p, i) => (
+                <p key={i} className="text-base text-black leading-relaxed mb-4 last:mb-0 lowercase">{p}</p>
+              ))}
+            </div>
+          </section>
+        );
 
       case 'publications':
         return (
-          <section
-            key={section.id}
-            ref={setRef(section.id)}
-            data-section={section.id}
-            className={`relative bg-white py-24  transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
-          >
+          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className={`relative bg-white py-24 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             <div className="max-w-screen-2xl mx-auto px-8">
               <h2 className="text-base font-normal tracking-wider mb-8">{section.title}</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
