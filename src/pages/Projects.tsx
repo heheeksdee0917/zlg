@@ -38,8 +38,6 @@ export default function Projects() {
                   src={project.heroImage}
                   alt={project.title}
                   className="w-full aspect-[2/3] object-cover transition-opacity duration-700 object-center"
-                  loading={index < 8 ? 'eager' : 'lazy'}
-                  decoding="async"
                 />
               </div>
 

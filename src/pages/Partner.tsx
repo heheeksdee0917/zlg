@@ -126,7 +126,8 @@ export default function Partners() {
       <section
         ref={setRef('intro')}
         data-section="intro"
-        className="bg-white flex items-start py-8 md:py-16 relative"
+        className="bg-white flex items-start py-8 md:py-16 relative min-h-[100vh]"
+        
       >
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -139,8 +140,8 @@ export default function Partners() {
           visibleSections.intro ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
         }`}>
           <div className="max-w-screen-2xl mx-auto">
-            <div className="max-w-2xl">
-              <h2 className="text-2xl font-light tracking-wider mb-8 lowercase text-black">Our Partnership Philosophy</h2>
+            <div className="max-w-3xl">
+              <h2 className="text-3xl font-light tracking-wider mb-8 lowercase text-black">Our Partnership Philosophy</h2>
               <div className="space-y-6">
                 <p className="text-base text-black leading-relaxed font-light lowercase text-left">
                   zlg partners with a number of universities and design colleges among them the one academy and taylor's university. we believe in continuous research and lairing all practical work sharpened through a deep understanding of ongoing issues such as carbon storage and climate change, and global conservation efforts.

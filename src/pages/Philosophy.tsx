@@ -21,13 +21,13 @@ function HeroSection() {
   const PanelContent = ({ text, heading, imgSrc }: { text: string; heading?: string; imgSrc: string }) => (
     <div className="w-full flex items-center justify-between px-8 md:px-16 max-w-screen-2xl mx-auto">
       {/* Text — left */}
-      <div className="max-w-sm">
+      <div className="max-w-2xl">
         {heading && <h2 className="text-base font-normal tracking-wider mb-4 lowercase underline text-white">{heading}</h2>}
         <p className="text-base text-white/90 leading-relaxed lowercase text-left">{text}</p>
       </div>
 
       {/* Square image — pushed to the far right */}
-      <div className="hidden md:block w-[38vh] h-[38vh] flex-shrink-0 overflow-hidden">
+      <div className="hidden md:block w-[75vh] h-[75vh] flex-shrink-0 overflow-hidden">
         <img src={imgSrc} alt="" className="w-full h-full object-cover" />
       </div>
     </div>
@@ -41,14 +41,13 @@ function HeroSection() {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url('/your-philosophy-image-here.jpg')`,
-            backgroundPosition: 'center 70%',
+            backgroundImage: `url('/general/Philosophy.avif')`,
+            backgroundPosition: 'center',
             filter: `blur(${imageBlur}px)`,
-            transform: 'scale(1.05)',
             transition: 'filter 0.8s ease',
           }}
         />
-        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-black/50" />
 
         {/* Panel 1 — title */}
         <div
@@ -67,7 +66,7 @@ function HeroSection() {
           <PanelContent
             heading="Our Philosophy"
             text="In 1992 when susanne and me started thinking of doing competitions our focus was only design and ever since our work revolved around ideas and concepts that go beyond what was then always a pre-defined architectural pursuit or entity. We had simply wanted to do architecture that would not only engage the human spirit, but also something with a deep philosophy behind the work."
-            imgSrc="/general/eg.avif"
+            imgSrc="/general/zlg_livingroom1.avif"
           />
         </div>
 
@@ -78,7 +77,7 @@ function HeroSection() {
         >
           <PanelContent
             text="I think architecture is taking much longer to becoming like what good art is, it is not so generative and it is not always assuming an emotive role, like a good work of art does. We think that it is possible for us to connect to our buildings as easily as we can connect to art, or to our music, or to things that we adore, like our children or our books."
-            imgSrc="/general/eg.avif"
+            imgSrc="/general/huatlim.avif"
           />
         </div>
 
@@ -180,13 +179,25 @@ export default function Philosophy() {
 
       case 'text-only':
         return (
-          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-white py-24 relative min-h-[60vh] flex items-center" style={{ justifyContent: section.content.layout === 'center' ? 'center' : 'flex-start' }}>
+          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-white py-24 relative min-h-[100vh] flex items-start" style={{ justifyContent: section.content.layout === 'center' ? 'center' : 'flex-start' }}>
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${section.content.image})`, opacity: 0.5 }} />
             <div className={`relative z-10 transition-all duration-1000 ease-out px-8 ${section.content.layout === 'center' ? 'max-w-2xl mx-auto text-left' : 'w-full md:pl-28 md:pr-16'} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h3 className="text-2xl font-light tracking-wide mb-6 text-black lowercase">{section.title}</h3>
-              {section.content.text?.map((p, i) => (
-                <p key={i} className="text-base text-black leading-relaxed mb-4 last:mb-0 lowercase">{p}</p>
-              ))}
+
+              {/* Glassmorphism card */}
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                borderRadius: '32px',
+                padding: '2.5rem',
+              }}>
+                <h3 className="text-2xl font-light tracking-wide mb-6 text-black lowercase">{section.title}</h3>
+                {section.content.text?.map((p, i) => (
+                  <p key={i} className="text-base text-black leading-relaxed mb-4 last:mb-0 lowercase">{p}</p>
+                ))}
+              </div>
+
             </div>
           </section>
         );

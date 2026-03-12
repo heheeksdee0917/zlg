@@ -42,6 +42,20 @@ export const philosophySections: PhilosophySection[] = [
     }
   },
   {
+    id: 'imagination',
+    title: 'The power of imagination',
+    type: 'text-only',
+    content: {
+      layout: 'center',
+      text: [
+        "On what motivates them to design, huat has this to say:",
+        "Thought is a form of necessary action, a precursor to a possible work of art. And if you can't imagine it in your head, it's not likely to get built. Getting that image in the mind's eye, and then executing it is what it's really all about.",
+        "We usually start off with a sketch."
+      ],
+      image: '/images/imagination.avif'
+    }
+  },
+  {
     id: 'ourethos',
     title: 'Our Ethos',
     type: 'text-image',
@@ -78,20 +92,6 @@ export const philosophySections: PhilosophySection[] = [
     content: {
       quote: "god created paper for the purpose of drawing architecture on it. everything else is, at least for me, an abuse of paper.",
       quoteAuthor: "— alvar aalto"
-    }
-  },
-  {
-    id: 'imagination',
-    title: 'The power of imagination',
-    type: 'text-only',
-    content: {
-      layout: 'center',
-      text: [
-        "On what motivates them to design, huat has this to say:",
-        "Thought is a form of necessary action, a precursor to a possible work of art. And if you can't imagine it in your head, it's not likely to get built. Getting that image in the mind's eye, and then executing it is what it's really all about.",
-        "We usually start off with a sketch."
-      ],
-      image: '/images/imagination.avif'
     }
   },
   {

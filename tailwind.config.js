@@ -4,9 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: [
-          'Helvetica Neue',
-        ],
+        sans: ['Calibri', 'sans-serif'],
+        arial: ['Arial Bold', 'sans-serif'],
       },
       fontWeight: {
         light: '300',
