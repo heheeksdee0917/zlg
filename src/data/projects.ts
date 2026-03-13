@@ -34,14 +34,14 @@ export const projects: Project[] = [
         content: 'Private bedrooms are located above, while below, entertainment, play, and sports areas are nestled, surrounded by a lush garden.'
       },
     ],
-    heroImage: '/projects/tepian-tunku/CP.avif',
+    heroImage: '/projects/tepian-tunku/A4.avif',
     images: [
-      '/projects/tepian-tunku/CP.avif',
       '/projects/tepian-tunku/A1.avif',
       '/projects/tepian-tunku/A2.avif',
       '/projects/tepian-tunku/A3.avif',
       '/projects/tepian-tunku/A4.avif',
       '/projects/tepian-tunku/A5.avif',
+      '/projects/tepian-tunku/A6.avif',
     ],
   },
   {
@@ -88,14 +88,14 @@ export const projects: Project[] = [
         content: 'Elegantly rising from the slopes, the slanting walls in the façade continues the natural geometry of the site while the rectangular punctuations complement the ever developing built environment in Damansara Perdana. Light permeating through the punctured façade promises a soothing and safe ambience, highlighted further by the backing hills as well as the warm and raw colours of the chosen materials and finishes. There is no denying that this is a much anticipated addition to the trendy workplaces that seem to centralise upon this hilly area.'
       },
     ],
-    heroImage: '/projects/point92/CP.avif',
+    heroImage: '/projects/point92/A1.avif',
     images: [
-      '/projects/point92/CP.avif',
       '/projects/point92/A1.avif',
       '/projects/point92/A2.avif',
       '/projects/point92/A3.avif',
       '/projects/point92/A4.avif',
       '/projects/point92/A5.avif',
+      '/projects/point92/A6.avif',
     ],
   },
   {
@@ -136,13 +136,14 @@ export const projects: Project[] = [
         content: 'BOH Visitor Centre, Cameron Highlands, 2006. BOH Extension, Cameron Highlands, 2019.'
       },
     ],
-    heroImage: '/projects/boh-visitor/CP.avif',
+    heroImage: '/projects/boh-visitor/A1.avif',
     images: [
-      '/projects/boh-visitor/CP.avif',
       '/projects/boh-visitor/A1.avif',
       '/projects/boh-visitor/A2.avif',
       '/projects/boh-visitor/A3.avif',
-      '/projects/boh-visitor/A4.avif'
+      '/projects/boh-visitor/A4.avif',
+      '/projects/boh-visitor/A5.avif',
+
     ],
   },
   {
@@ -173,11 +174,12 @@ export const projects: Project[] = [
         content: 'This project taught us that architecture is a never-ending process. The building is alive, responding to what we place inside it and what we take away from it; an evolving dialogue between space, light, air, and the life it shelters.'
       },
     ],
-    heroImage: '/projects/wangsa-ukay/CP.avif',
+    heroImage: '/projects/wangsa-ukay/A1.avif',
     images: [
       '/projects/wangsa-ukay/A1.avif',
       '/projects/wangsa-ukay/A2.avif',
       '/projects/wangsa-ukay/A3.avif',
+      '/projects/wangsa-ukay/A4.avif',
     ],
   },
   {
@@ -234,14 +236,12 @@ export const projects: Project[] = [
         content: 'the mediatecque is unique for its location facing la maison carre andnits glass staircase and intricate rooflights. many sketches were produced by the team, among them a large axonometric which covered the entire wall of their studio in jardin de la fontaines in nimes.'
       },
     ],
-    heroImage: '/projects/nimes/CP.avif',
+    heroImage: '/projects/nimes-museum/A1.avif',
     images: [
-      '/projects/nimes/CP.avif',
       '/projects/nimes/A1.avif',
       '/projects/nimes/A2.avif',
       '/projects/nimes/A3.avif',
       '/projects/nimes/A4.avif',
-      '/projects/nimes/A5.avif',
     ],
   },
   {
