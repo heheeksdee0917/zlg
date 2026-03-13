@@ -206,14 +206,14 @@ export const projects: Project[] = [
         content: 'Inside, Lantern Hotel features an open layout with a narrow, triple-height atrium, its windows overlooking the void and drawing light deep into the space, creating a sense of openness and continuity.'
       },
     ],
-    heroImage: '/projects/lantern-hotel/CP.avif',
+    heroImage: '/projects/lantern-hotel/A4.avif',
     images: [
-      '/projects/lantern-hotel/CP.avif',
       '/projects/lantern-hotel/A1.avif',
       '/projects/lantern-hotel/A2.avif',
       '/projects/lantern-hotel/A3.avif',
       '/projects/lantern-hotel/A4.avif',
       '/projects/lantern-hotel/A5.avif',
+      '/projects/lantern-hotel/A6.avif',
     ],
   },
   {
