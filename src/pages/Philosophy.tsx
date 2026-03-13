@@ -23,11 +23,11 @@ function HeroSection() {
       {/* Text — left */}
       <div className="max-w-2xl">
         {heading && <h2 className="text-base font-normal tracking-wider mb-4 lowercase underline text-white">{heading}</h2>}
-        <p className="text-base text-white/90 leading-relaxed lowercase text-left">{text}</p>
+        <p className="text-base text-white leading-relaxed lowercase text-left">{text}</p>
       </div>
 
       {/* Square image — pushed to the far right */}
-      <div className="hidden md:block w-[75vh] h-[75vh] flex-shrink-0 overflow-hidden">
+      <div className="hidden md:block w-[60vh] h-[75vh] flex-shrink-0 overflow-hidden">
         <img src={imgSrc} alt="" className="w-full h-full object-cover" />
       </div>
     </div>
@@ -47,7 +47,13 @@ function HeroSection() {
             transition: 'filter 0.8s ease',
           }}
         />
-        <div className="absolute inset-0 bg-black/50" />
+        <div
+          className="absolute inset-0 bg-black"
+          style={{
+            opacity: Math.min(0.85, 0.3 + (scrollY / (vh * 3)) * 0.55),
+            transition: 'opacity 0.1s ease',
+          }}
+        />
 
         {/* Panel 1 — title */}
         <div
