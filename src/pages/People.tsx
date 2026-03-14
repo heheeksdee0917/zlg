@@ -44,7 +44,7 @@ function HeroSection() {
           <p className="text-xs tracking-[0.3em] lowercase font-light text-white/60 mb-4">
             zlg design
           </p>
-          <h1 className="text-4xl md:text-5xl font-extralight tracking-widest lowercase text-white">
+          <h1 className="text-4xl md:text-5xl font-extralight  lowercase text-white">
             people
           </h1>
         </div>
@@ -59,7 +59,7 @@ function HeroSection() {
           }}
         >
           <div className="max-w-xl">
-            <h2 className="text-base font-normal tracking-wider mb-4 lowercase underline text-white">Our Team</h2>
+            <h2 className="text-base font-normal  mb-4 lowercase underline text-white">Our Team</h2>
             <p className="text-base text-white/90 leading-relaxed lowercase text-left">
               ZLG Design is a collective of architects, designers, and thinkers united by a shared passion for creating meaningful spaces. Our diverse backgrounds and expertise enable us to approach each project with fresh perspectives and rigorous craft.
             </p>
@@ -142,13 +142,11 @@ export default function People() {
                         src={partner.image}
                         alt={partner.name}
                         className="w-full aspect-[2/3] object-cover object-center"
-                        loading="lazy"
-                        decoding="async"
                       />
                     </div>
                     <div className="flex flex-col justify-center">
-                      <h3 className="text-base font-normal tracking-wide mb-2 lowercase">{partner.name}</h3>
-                      <p className="text-base text-gray-600 mb-8 tracking-wide font-light lowercase">{partner.role}</p>
+                      <h3 className="text-base font-normal  mb-2 lowercase">{partner.name}</h3>
+                      <p className="text-base text-gray-600 mb-8  font-light lowercase">{partner.role}</p>
                       <div className="space-y-6 text-gray-700 leading-relaxed font-light lowercase text-left">
                         {partner.bio.map((paragraph, i) => (
                           <p key={i} className="text-base">{paragraph}</p>
@@ -159,8 +157,8 @@ export default function People() {
                 ) : (
                   <>
                     <div className="flex flex-col justify-center order-2 md:order-1">
-                      <h3 className="text-base font-normal tracking-wide mb-2 lowercase">{partner.name}</h3>
-                      <p className="text-base text-gray-600 mb-8 tracking-wide font-light lowercase">{partner.role}</p>
+                      <h3 className="text-base font-normal  mb-2 lowercase">{partner.name}</h3>
+                      <p className="text-base text-gray-600 mb-8  font-light lowercase">{partner.role}</p>
                       <div className="space-y-6 text-gray-700 leading-relaxed font-light lowercase text-left">
                         {partner.bio.map((paragraph, i) => (
                           <p key={i} className="text-base">{paragraph}</p>
@@ -210,8 +208,8 @@ export default function People() {
                       decoding="async"
                     />
                   </div>
-                  <h3 className="text-base font-normal tracking-wide mb-1 lowercase">{member.name}</h3>
-                  <p className="text-base text-gray-600 mb-4 tracking-wide">{member.role}</p>
+                  <h3 className="text-base font-normal  mb-1 lowercase">{member.name}</h3>
+                  <p className="text-base text-gray-600 mb-4 ">{member.role}</p>
                 </div>
               ))}
             </div>
@@ -228,13 +226,13 @@ export default function People() {
         <div className="max-w-screen-2xl mx-auto px-8">
           <div className={`text-left transition-all duration-1000 ease-out ${visibleSections.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
             }`}>
-            <h2 className="text-base font-normal tracking-wider mb-4 lowercase underline">Join Our Team</h2>
+            <h2 className="text-base font-normal  mb-4 lowercase underline">Join Our Team</h2>
             <p className="text-base text-gray-700 leading-relaxed mb-8 lowercase text-left">
               We are always seeking talented architects and designers who share our commitment to excellence, sustainability, and thoughtful design. If you are passionate about creating spaces that matter, we would love to hear from you.
             </p>
             <a
               href="mailto:info@zlgdesign.com"
-              className="inline-block text-sm tracking-wide px-12 py-4 border border-black font-light relative overflow-hidden group"
+              className="inline-block text-sm  px-12 py-4 border border-black font-light relative overflow-hidden group"
             >
               <span className="absolute inset-0 bg-black transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
               <span className="relative z-10 group-hover:text-white transition-colors duration-300 lowercase">join the team</span>

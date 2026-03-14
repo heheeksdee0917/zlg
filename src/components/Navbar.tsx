@@ -81,7 +81,7 @@ export default function Navbar() {
             <Link to="/" className="flex items-center" onClick={closeMenu}>
               <img src="/logo(white).png" alt="ZLG Design" className="h-6" />
             </Link>
-            <span className="text-sm tracking-wide font-light text-white lowercase">zlgdesign</span>
+            <span className="text-sm font-regular text-white lowercase">zlgdesign</span>
           </div>
 
           {/* Hamburger */}
@@ -115,15 +115,15 @@ export default function Navbar() {
                 onMouseEnter={() => setHoveredColumn(index)}
                 onMouseLeave={() => setHoveredColumn(null)}
               >
-                <span className="text-white/30 text-xs tracking-widest font-light w-6">
+                <span className="text-white/30 text-xs  font-light w-6">
                   0{index + 1}
                 </span>
-                <h2
-                  className="text-4xl md:text-5xl font-extralight tracking-widest lowercase text-white transition-all duration-300"
+                <span
+                  className="text-4xl md:text-5xl font-extralight  lowercase text-white transition-all duration-300"
                   style={{ opacity: hoveredColumn === null || hoveredColumn === index ? 1 : 0.3 }}
                 >
                   {item.title}
-                </h2>
+                </span>
                 {isActive(item.link) && (
                   <span className="ml-auto w-2 h-2 rounded-full bg-white opacity-70" />
                 )}
@@ -178,11 +178,11 @@ export default function Navbar() {
               onClick={closeMenu}
               className="group flex items-center gap-4"
             >
-              <span className="text-white/30 text-xs tracking-widest font-light">
+              <span className="text-white/30 text-xs  font-light">
                 0{index + 1}
               </span>
               <span
-                className={`text-3xl tracking-widest font-extralight lowercase transition-opacity duration-300 ${
+                className={`text-3xl  font-extralight lowercase transition-opacity duration-300 ${
                   isActive(item.link) ? 'text-white' : 'text-white/80'
                 }`}
               >

@@ -46,7 +46,7 @@ function HeroSection() {
           <p className="text-xs tracking-[0.3em] lowercase font-light text-white/60 mb-4">
             our network
           </p>
-          <h1 className="text-4xl md:text-5xl font-extralight tracking-widest lowercase text-white">
+          <h1 className="text-4xl md:text-5xl font-extralight  lowercase text-white">
             partners
           </h1>
         </div>
@@ -61,7 +61,7 @@ function HeroSection() {
           }}
         >
           <div className="max-w-xl">
-            <h2 className="text-base font-normal tracking-wider mb-4 lowercase underline text-white">Key Partners</h2>
+            <h2 className="text-base font-normal  mb-4 lowercase underline text-white">Key Partners</h2>
             <p className="text-base text-white/90 leading-relaxed lowercase text-left">
               Our partners are built on decades of collaboration with exceptional architects and designers who have shaped the built environment across continents. Together, we bring world-class expertise and a shared vision of design excellence.
             </p>
@@ -133,7 +133,7 @@ export default function Partners() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: 'url(/images/langkawi.avif)',
-            opacity: 0.2
+            opacity: 0.6
           }}
         />
         <div className={`relative z-10 w-full px-8 pb-8 transition-all duration-1000 ease-out ${
@@ -141,15 +141,15 @@ export default function Partners() {
         }`}>
           <div className="max-w-screen-2xl mx-auto">
             <div className="max-w-3xl">
-              <h2 className="text-3xl font-light tracking-wider mb-8 lowercase text-black">Our Partnership Philosophy</h2>
+              <h2 className="text-3xl font-light  mb-8 lowercase text-[#185B30]">Our Partnership Philosophy</h2>
               <div className="space-y-6">
-                <p className="text-base text-black leading-relaxed font-light lowercase text-left">
+                <p className="text-base text-[#185B30] leading-relaxed font-light lowercase text-left">
                   zlg partners with a number of universities and design colleges among them the one academy and taylor's university. we believe in continuous research and lairing all practical work sharpened through a deep understanding of ongoing issues such as carbon storage and climate change, and global conservation efforts.
                 </p>
-                <p className="text-base text-black leading-relaxed font-light lowercase text-left">
+                <p className="text-base text-[#185B30] leading-relaxed font-light lowercase text-left">
                   our partners include individuals who share similar interests, often clients. among them are artists and artisans alike, and furniture makers and retailers such as atmos, bnr, TMOG and GTA interior designers.
                 </p>
-                <p className="text-base text-black leading-relaxed font-light lowercase text-left">
+                <p className="text-base text-[#185B30] leading-relaxed font-light lowercase text-left">
                   zlg also works closely with researchers and specialists often working together on life long relationships on projects. among them are scientists such as dr daniel cicuzza, dr brandon chee and dr nike baetzner.
                 </p>
               </div>
@@ -171,7 +171,7 @@ export default function Partners() {
 
             {/* Partners Along the Journey */}
             <div className="mb-16">
-              <h4 className="text-base font-normal tracking-wide mb-8 lowercase">partners along the journey</h4>
+              <h4 className="text-base font-normal  mb-8 lowercase">partners along the journey</h4>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                 {partnersWithImages.map((partner, index) => (
@@ -189,9 +189,9 @@ export default function Partners() {
                         decoding="async"
                       />
                     </div>
-                    <h5 className="text-base font-normal tracking-wide mb-1 lowercase">{partner.name}</h5>
+                    <h5 className="text-base font-normal  mb-1 lowercase">{partner.name}</h5>
                     {partner.title && (
-                      <p className="text-sm text-gray-600 font-light lowercase">{partner.title}</p>
+                      <p className="text-sm font-light lowercase">{partner.title}</p>
                     )}
                   </div>
                 ))}
@@ -201,7 +201,7 @@ export default function Partners() {
                 {partnersTextOnly.map((partner) => (
                   <div
                     key={partner.name}
-                    className="flex items-start text-base text-gray-700 font-light lowercase"
+                    className="flex items-start text-base font-light lowercase"
                   >
                     <span className="mr-3">•</span>
                     <span>{partner.name}{partner.title && `: ${partner.title}`}</span>
@@ -212,7 +212,7 @@ export default function Partners() {
 
             {/* Signature Projects */}
             <div>
-              <h4 className="text-base font-normal tracking-wide mb-8 lowercase">Signature Projects</h4>
+              <h4 className="text-base font-normal  mb-8 lowercase">Signature Projects</h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                 {signatureProjects.map((project, index) => (
                   <div
@@ -229,13 +229,13 @@ export default function Partners() {
                         decoding="async"
                       />
                     </div>
-                    <h5 className="text-base font-normal tracking-wide lowercase">{project.title}</h5>
+                    <h5 className="text-base font-normal  lowercase">{project.title}</h5>
                   </div>
                 ))}
               </div>
             </div>
 
-            <p className="text-base text-gray-700 leading-relaxed font-light lowercase text-left mt-12">
+            <p className="text-base leading-relaxed font-light lowercase text-left mt-12">
               With over 22 years of experience working on very large and complex buildings across Europe and Asia, our partners bring unparalleled expertise in architectural design, interior design, and project delivery.
             </p>
           </div>
@@ -252,13 +252,13 @@ export default function Partners() {
           <div className={`text-left transition-all duration-1000 ease-out ${
             visibleSections.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}>
-            <h2 className="text-base font-normal tracking-wider mb-4 lowercase">Become a Partner</h2>
-            <p className="text-base text-gray-700 leading-relaxed mb-8 font-light lowercase text-left">
+            <h2 className="text-base font-normal mb-4 lowercase">Become a Partner</h2>
+            <p className="text-base leading-relaxed mb-8 font-light lowercase text-left">
               We're always interested in connecting with talented consultants, engineers, contractors, and fabricators who share our values. If you believe in design excellence and collaborative practice, let's talk.
             </p>
             <a
               href="mailto:info@zlgdesign.com"
-              className="inline-block text-sm tracking-wide px-12 py-4 border border-black font-light relative overflow-hidden group lowercase"
+              className="inline-block text-sm  px-12 py-4 border border-black font-light relative overflow-hidden group lowercase"
             >
               <span className="absolute inset-0 bg-black transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
               <span className="relative z-10 group-hover:text-white transition-colors duration-300">contact us</span>

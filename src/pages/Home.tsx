@@ -8,7 +8,7 @@ const slides = [
     slug: 'point-92',
   },
   {
-    image: '/projects/boh-visitor/CP.avif',
+    image: '/projects/boh-visitor/A1.avif',
     projectName: 'boh visitor centre',
     slug: 'boh-visitor-centre',
   },
@@ -96,7 +96,7 @@ export default function Home() {
           {/* Text — bottom, center-aligned */}
           <div className="absolute z-20 bottom-16 left-0 right-0 flex flex-col items-center text-white text-center px-8">
             <p
-              className="fade-up text-xs tracking-[0.3em] lowercase font-light mb-1 opacity-60"
+              className="fade-up text-xs tracking-[0.1em] lowercase font-light mb-1 opacity-60"
               style={{ animationDelay: '0.2s' }}
             >
               signature projects
@@ -104,18 +104,18 @@ export default function Home() {
 
             <h1
               key={nameKey}
-              className="fade-up text-4xl md:text-4xl font-bold tracking-widest lowercase mb-8"
+              className="fade-up text-4xl md:text-4xl font-bold lowercase mb-8"
               style={{ animationDelay: '0.35s' }}
             >
               {slide.projectName}
             </h1>
-
             <Link
               to={`/projects/${slide.slug}`}
-              className="fade-up inline-block text-xs tracking-[0.35em] font-light border-b border-white/50 pb-1 hover:border-white hover:opacity-100 opacity-70 transition-all duration-500 lowercase"
+              className="fade-up inline-block text-base tracking-[0.08em] font-light lowercase opacity-70 hover:opacity-100 transition-colors duration-300 relative group"
               style={{ animationDelay: '0.55s' }}
             >
               explore
+              <span className="absolute bottom-0 left-0 h-px bg-white w-0 group-hover:w-full transition-all duration-500 ease-out" />
             </Link>
           </div>
 
@@ -163,8 +163,8 @@ export default function Home() {
 
           {/* Text — bottom center on mobile, overlaps on desktop */}
           <div className="absolute inset-0 z-10 flex items-end md:items-center pb-[50%] md:pb-0 px-8 md:px-0">
-            <div className="md:ml-[45%] max-w-lg">
-              <p className="text-2xl md:text-3xl font-normal leading-relaxed lowercase tracking-wide text-gray-900 mb-3">
+            <div className="md:ml-[45%] max-w-3xl">
+              <p className="text-2xl md:text-4xl font-normal leading-relaxed lowercase tracking-wide mb-3">
                 Thought is a form of necessary action,{' '}
                 <br />a precursor to a possible work of art.
                 <span className="text-xs tracking-widest font-light text-gray-500 ml-1 align-middle">
@@ -173,14 +173,54 @@ export default function Home() {
               </p>
               <a
                 href="/philosophy"
-                className="inline-block text-xs tracking-[0.25em] font-light border-b border-gray-400 pb-0.5 hover:border-gray-800 transition-all duration-300 lowercase text-gray-600 hover:text-gray-900 mt-4"
+                className="inline-block text-base tracking-[0.08em] font-light lowercase text-gray-600 hover:text-gray-900 transition-colors duration-300 mt-4 relative group"
               >
                 explore the mind
+                <span className="absolute bottom-0 left-0 h-px bg-gray-800 w-0 group-hover:w-full transition-all duration-500 ease-out" />
               </a>
             </div>
           </div>
 
         </section>
+        {/* Partners Section */}
+<section className="relative w-full h-screen overflow-hidden">
+
+{/* Same hero video as Partners page */}
+<video
+  className="absolute inset-0 w-full h-full object-cover"
+  autoPlay
+  muted
+  loop
+  playsInline
+  poster="/v2_thumbnail.avif"
+>
+  <source src="/zlg_v2.mp4" type="video/mp4" />
+</video>
+
+{/* Dark overlay */}
+<div className="absolute inset-0 bg-black/40" />
+
+{/* Text content */}
+<div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-8">
+  <p className="text-xs tracking-[0.1em] lowercase font-light text-white/60 mb-4">
+    our network
+  </p>
+  <h2 className="text-4xl md:text-5xl font-extralight lowercase text-white mb-6">
+    partners
+  </h2>
+  <p className="text-base font-light text-white/80 lowercase leading-relaxed max-w-lg mb-10">
+    decades of collaboration with exceptional architects, designers, and specialists who share our vision of design excellence.
+  </p>
+  <a
+    href="/partner"
+    className="inline-block text-base tracking-[0.08em] font-light lowercase text-white opacity-70 hover:opacity-100 transition-colors duration-300 relative group"
+  >
+    explore our partners
+    <span className="absolute bottom-0 left-0 h-px bg-white w-0 group-hover:w-full transition-all duration-500 ease-out" />
+  </a>
+</div>
+
+</section>
       </div>
     </>
   );

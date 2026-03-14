@@ -22,7 +22,7 @@ function HeroSection() {
     <div className="w-full flex items-center justify-between px-8 md:px-16 max-w-screen-2xl mx-auto">
       {/* Text — left */}
       <div className="max-w-2xl">
-        {heading && <h2 className="text-base font-normal tracking-wider mb-4 lowercase underline text-white">{heading}</h2>}
+        {heading && <h2 className="text-base font-normal  mb-4 lowercase underline text-white">{heading}</h2>}
         <p className="text-base text-white leading-relaxed lowercase text-left">{text}</p>
       </div>
 
@@ -61,7 +61,7 @@ function HeroSection() {
           style={{ opacity: snapIndex === 0 ? 1 : 0 }}
         >
           <p className="text-xs tracking-[0.3em] lowercase font-light text-white/60 mb-4">our thinking</p>
-          <h1 className="text-4xl md:text-5xl font-extralight tracking-widest lowercase text-white">philosophy</h1>
+          <h1 className="text-4xl md:text-5xl font-extralight  lowercase text-white">philosophy</h1>
         </div>
 
         {/* Panel 2 */}
@@ -137,15 +137,15 @@ export default function Philosophy() {
     switch (section.type) {
       case 'text-image':
         return (
-          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-white py-24">
+          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-[#F5FAF7] py-24">
             <div className="max-w-screen-2xl mx-auto px-8 w-full">
               <div className="flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-16">
                 <div className={`flex flex-col justify-start transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  <h2 className="text-4xl font-normal tracking-wider">{section.title}</h2>
+                  <h2 className="text-4xl font-normal text-[#185B30]">{section.title}</h2>
                 </div>
                 <div className={`flex flex-col justify-start transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
                   {section.content.text?.map((p, i) => (
-                    <p key={i} className="text-base text-gray-700 leading-relaxed mb-6 last:mb-0">{p}</p>
+                    <p key={i} className="text-base text-[#185B30] leading-relaxed mb-6 last:mb-0">{p}</p>
                   ))}
                 </div>
               </div>
@@ -155,12 +155,12 @@ export default function Philosophy() {
 
       case 'quote-only':
         return (
-          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-white py-24">
-            <div className="max-w-screen-2xl mx-auto px-8">
-              <blockquote className={`text-base font-light text-left italic text-gray-800 py-8 border-t border-b border-gray-300 transition-all duration-1000 ease-out lowercase ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-[#F5FAF7] py-24">
+            <div className="max-w-screen-2xl mx-auto px-8 ">
+              <blockquote className={`text-base font-light text-[#185B30] text-left italic text-gray-800 py-8 border-t border-b border-gray-300 transition-all duration-1000 ease-out lowercase ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                 {section.content.quote}
                 {section.content.quoteAuthor && (
-                  <span className="block text-base not-italic mt-4 text-gray-600">{section.content.quoteAuthor}</span>
+                  <span className="block text-base text-[#185B30] not-italic mt-4 text-gray-600">{section.content.quoteAuthor}</span>
                 )}
               </blockquote>
             </div>
@@ -169,13 +169,13 @@ export default function Philosophy() {
 
       case 'columns-only':
         return (
-          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-white py-24">
+          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-[#F5FAF7] py-24">
             <div className="max-w-screen-2xl mx-auto px-8">
               <div className="grid md:grid-cols-2 gap-16">
                 {section.content.columns?.map((col, i) => (
                   <div key={i} className={`transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: `${i * 150}ms` }}>
-                    <h3 className="text-base font-normal tracking-wide mb-4">{col.title}</h3>
-                    <p className="text-base text-gray-700 leading-relaxed text-left">{col.text}</p>
+                    <h3 className="text-base font-normal text-[#185B30]  mb-4">{col.title}</h3>
+                    <p className="text-base text-[#185B30] leading-relaxed text-left">{col.text}</p>
                   </div>
                 ))}
               </div>
@@ -185,7 +185,7 @@ export default function Philosophy() {
 
       case 'text-only':
         return (
-          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-white py-24 relative min-h-[100vh] flex items-start" style={{ justifyContent: section.content.layout === 'center' ? 'center' : 'flex-start' }}>
+          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-[#F5FAF7] py-24 relative min-h-[100vh] flex items-start" style={{ justifyContent: section.content.layout === 'center' ? 'center' : 'flex-start' }}>
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${section.content.image})`, opacity: 0.5 }} />
             <div className={`relative z-10 transition-all duration-1000 ease-out px-8 ${section.content.layout === 'center' ? 'max-w-2xl mx-auto text-left' : 'w-full md:pl-28 md:pr-16'} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
 
@@ -198,9 +198,9 @@ export default function Philosophy() {
                 borderRadius: '32px',
                 padding: '2.5rem',
               }}>
-                <h3 className="text-2xl font-light tracking-wide mb-6 text-black lowercase">{section.title}</h3>
+                <h3 className="text-2xl font-light text-[#185B30] mb-6 lowercase">{section.title}</h3>
                 {section.content.text?.map((p, i) => (
-                  <p key={i} className="text-base text-black leading-relaxed mb-4 last:mb-0 lowercase">{p}</p>
+                  <p key={i} className="text-base text-[#185B30] leading-relaxed mb-4 last:mb-0 lowercase">{p}</p>
                 ))}
               </div>
 
@@ -210,9 +210,9 @@ export default function Philosophy() {
 
       case 'publications':
         return (
-          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className={`relative bg-white py-24 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className={`relative bg-[#F5FAF7] py-24 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             <div className="max-w-screen-2xl mx-auto px-8">
-              <h2 className="text-base font-normal tracking-wider mb-8">{section.title}</h2>
+              <h2 className="text-base font-normal  mb-8">{section.title}</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {section.content.publications?.map((pub, i) => (
                   <div key={i} className={`border border-gray-200 transition-all duration-1000 ease-out hover:shadow-lg flex flex-col overflow-hidden ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: `${(i + 2) * 100}ms` }}>
@@ -220,7 +220,7 @@ export default function Philosophy() {
                       <img src={pub.image} alt={pub.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                     </div>
                     <div className="p-6">
-                      <h3 className="text-sm font-normal tracking-wide mb-2 lowercase">{pub.title}</h3>
+                      <h3 className="text-sm font-normal  mb-2 lowercase">{pub.title}</h3>
                       <p className="text-sm text-gray-600 font-light leading-relaxed text-left">{pub.description}</p>
                     </div>
                   </div>
