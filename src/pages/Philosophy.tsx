@@ -12,30 +12,37 @@ function HeroSection() {
 
   const vh = typeof window !== 'undefined' ? window.innerHeight : 800;
 
-  const snapIndex = Math.min(2, Math.round(scrollY / vh));
-
-  const heroOpacity = scrollY > vh * 2.6 ? Math.max(0, 1 - (scrollY - vh * 2.6) / (vh * 0.4)) : 1;
+  const snapIndex = Math.min(2, Math.floor(scrollY / vh));
 
   const imageBlur = snapIndex >= 1 ? 8 : 0;
+  const overlayOpacity = snapIndex >= 1 ? Math.min(0.7, (scrollY - vh) / (vh * 0.5)) : 0;
 
   const PanelContent = ({ text, heading, imgSrc }: { text: string; heading?: string; imgSrc: string }) => (
     <div className="w-full flex items-center justify-between px-8 md:px-16 max-w-screen-2xl mx-auto">
-      {/* Text — left */}
       <div className="max-w-2xl">
-        {heading && <h2 className="text-base font-normal  mb-4 lowercase underline text-white">{heading}</h2>}
+        {heading && <h2 className="text-base font-normal mb-4 lowercase underline text-white">{heading}</h2>}
         <p className="text-base text-white leading-relaxed lowercase text-left">{text}</p>
       </div>
-
-      {/* Square image — pushed to the far right */}
-      <div className="hidden md:block w-[60vh] h-[75vh] flex-shrink-0 overflow-hidden">
+      <div
+        className="hidden md:block w-[60vh] h-[75vh] flex-shrink-0 overflow-hidden"
+        style={{ animation: 'floatPhoto 6s ease-in-out infinite' }}
+      >
         <img src={imgSrc} alt="" className="w-full h-full object-cover" />
       </div>
     </div>
   );
 
   return (
-    <section className="relative h-[300vh]">
-      <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ opacity: heroOpacity }}>
+    <section className="relative h-[400vh]">
+      <style>{`
+        @keyframes floatPhoto {
+          0%   { transform: translateY(0px); }
+          50%  { transform: translateY(-12px); }
+          100% { transform: translateY(0px); }
+        }
+      `}</style>
+      <img src="/general/Philosophy.avif" alt="" className="hidden" fetchPriority="high" />
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
 
         {/* Background image */}
         <div
@@ -44,13 +51,16 @@ function HeroSection() {
             backgroundImage: `url('/general/Philosophy.avif')`,
             backgroundPosition: 'center',
             filter: `blur(${imageBlur}px)`,
+            transform: 'scale(1.05)',
             transition: 'filter 0.8s ease',
           }}
         />
+
+        {/* Dark overlay — kicks in after step 1 */}
         <div
           className="absolute inset-0 bg-black"
           style={{
-            opacity: Math.min(0.85, 0.3 + (scrollY / (vh * 3)) * 0.55),
+            opacity: overlayOpacity,
             transition: 'opacity 0.1s ease',
           }}
         />
@@ -61,7 +71,7 @@ function HeroSection() {
           style={{ opacity: snapIndex === 0 ? 1 : 0 }}
         >
           <p className="text-xs tracking-[0.3em] lowercase font-light text-white/60 mb-4">our thinking</p>
-          <h1 className="text-4xl md:text-5xl font-extralight  lowercase text-white">philosophy</h1>
+          <h1 className="text-4xl md:text-5xl font-extralight lowercase text-white">philosophy</h1>
         </div>
 
         {/* Panel 2 */}
@@ -217,7 +227,7 @@ export default function Philosophy() {
                 {section.content.publications?.map((pub, i) => (
                   <div key={i} className={`border border-gray-200 transition-all duration-1000 ease-out hover:shadow-lg flex flex-col overflow-hidden ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: `${(i + 2) * 100}ms` }}>
                     <div className="w-full aspect-[2/3] bg-gray-100 overflow-hidden">
-                      <img src={pub.image} alt={pub.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
+                      <img src={pub.image} alt={pub.title} className="w-full h-full object-cover"/>
                     </div>
                     <div className="p-6">
                       <h3 className="text-sm font-normal  mb-2 lowercase">{pub.title}</h3>

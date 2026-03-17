@@ -238,10 +238,10 @@ export const projects: Project[] = [
     ],
     heroImage: '/projects/nimes-museum/A1.avif',
     images: [
-      '/projects/nimes/A1.avif',
-      '/projects/nimes/A2.avif',
-      '/projects/nimes/A3.avif',
-      '/projects/nimes/A4.avif',
+      '/projects/nimes-museum/A1.avif',
+      '/projects/nimes-museum/A2.avif',
+      '/projects/nimes-museum/A3.avif',
+      '/projects/nimes-museum/A4.avif',
     ],
   },
   {

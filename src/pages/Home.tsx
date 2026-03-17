@@ -194,7 +194,7 @@ export default function Home() {
   playsInline
   poster="/v2_thumbnail.avif"
 >
-  <source src="/zlg_v2.mp4" type="video/mp4" />
+  <source src="/general/zlg_v4_upscaled.mp4" type="video/mp4" />
 </video>
 
 {/* Dark overlay */}
