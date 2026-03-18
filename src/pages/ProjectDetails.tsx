@@ -11,13 +11,13 @@ import { useScrollActiveImage } from '../hooks/useScrollActiveImage';
 export default function ProjectDetails() {
   const { slug } = useParams<{ slug: string }>();
   const project = projects.find((p) => p.slug === slug);
-  
+
   const [zoom, setZoom] = useState<number>(1);
   const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
   const [fadeIn, setFadeIn] = useState(false);
   const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
   const [showScrollHint, setShowScrollHint] = useState(true);
-  
+
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const mobileScrollContainerRef = useRef<HTMLDivElement>(null);
   const desktopScrollContainerRef = useRef<HTMLDivElement>(null);
@@ -42,14 +42,14 @@ export default function ProjectDetails() {
 
   // Mobile scroll active image detection with Intersection Observer
   const mobileScrollHook = useScrollActiveImage(
-    mobileScrollContainerRef, 
+    mobileScrollContainerRef,
     project?.images.length || 0
   );
   const { activeIndex: activeImageIndex, setImageRef: setMobileImageRef } = mobileScrollHook;
 
   // Desktop scroll active image detection with Intersection Observer
   const desktopScrollHook = useScrollActiveImage(
-    desktopScrollContainerRef, 
+    desktopScrollContainerRef,
     project?.images.length || 0
   );
   const { activeIndex: activeDesktopImageIndex, setImageRef: setDesktopImageRef } = desktopScrollHook;
@@ -83,7 +83,7 @@ export default function ProjectDetails() {
     setFadeIn(false);
     setVisibleSections({});
     setShowScrollHint(true);
-    
+
     const timer = setTimeout(() => setFadeIn(true), 50);
     return () => clearTimeout(timer);
   }, [slug]);
@@ -180,36 +180,28 @@ export default function ProjectDetails() {
               </div>
             ))}
           </div>
-          
+
           {/* Dots Indicator - Fixed Position, Outside Scroll Container */}
           <div className="absolute bottom-24 left-8 z-20 flex flex-col items-center gap-3 pointer-events-none">
             {project.images.map((_, index) => (
               <div
                 key={index}
-                className={`rounded-full transition-all duration-300 ${
-                  index === activeImageIndex
-                    ? 'w-2 h-2 bg-black'
-                    : 'w-2 h-2 bg-transparent border border-black'
-                }`}
+                className={`rounded-full transition-all duration-300 ${index === activeImageIndex
+                    ? 'w-2 h-2 bg-white'
+                    : 'w-2 h-2 bg-transparent border border-white'
+                  }`}
               />
             ))}
           </div>
-
-          {/* Scroll Hint */}
-          {showScrollHint && (
-            <div className="absolute bottom-0 left-0 right-0 z-10 bg-black bg-opacity-80 text-white py-3 text-center text-base font-light tracking-wider animate-pulse">
-              scroll for more ↓
-            </div>
-          )}
         </div>
 
         {/* Project Info - 10% */}
-        <div className="h-[10vh] bg-white overflow-y-auto">
+        <div className="h-[10vh] bg-[#F5FAF7] overflow-y-auto">
           <div className="px-8 py-4">
-            <h1 className="text-base font-bold mb-1 lowercase leading-tight">
+            <h1 className="text-base font-bold mb-1 text-[#185B30] lowercase leading-tight">
               {project.title}
             </h1>
-            <p className="text-base text-gray-600 font-light lowercase">
+            <p className="text-base text-[#185B30] font-light lowercase">
               {project.location}, {project.year}
             </p>
           </div>
@@ -225,11 +217,10 @@ export default function ProjectDetails() {
             {project.images.map((_, index) => (
               <div
                 key={index}
-                className={`rounded-full transition-all duration-300 ${
-                  index === activeDesktopImageIndex
-                    ? 'w-2 h-2 bg-black'
-                    : 'w-2 h-2 bg-transparent border border-black'
-                }`}
+                className={`rounded-full transition-all duration-300 ${index === activeDesktopImageIndex
+                  ? 'w-2 h-2 bg-white'
+                  : 'w-2 h-2 bg-transparent border border-white'
+                  }`}
               />
             ))}
           </div>
@@ -256,13 +247,13 @@ export default function ProjectDetails() {
         </div>
 
         {/* Project Info - 40% on desktop */}
-        <div className="w-[40%] bg-white sticky top-20 h-screen overflow-y-auto custom-scrollbar pt-28">
+        <div className="w-[40%] bg-[#F5FAF7] sticky top-20 h-screen overflow-y-auto custom-scrollbar pt-28">
           <div className="p-8 md:p-16">
             <div className="mb-12">
               <h1 className="text-base font-bold mb-2 lowercase leading-tight">
                 {project.title}
               </h1>
-              <p className="text-base text-gray-600 font-light lowercase">
+              <p className="text-base text-[#185B30] font-light lowercase">
                 {project.location}, {project.year}
               </p>
             </div>
@@ -278,7 +269,7 @@ export default function ProjectDetails() {
                             {block.heading}
                           </h4>
                         )}
-                        <p className="text-gray-700 leading-relaxed font-light lowercase text-base">
+                        <p className="text-[#185B30] leading-relaxed font-light lowercase text-base">
                           {block.content}
                         </p>
                       </div>
@@ -292,7 +283,7 @@ export default function ProjectDetails() {
                               {block.heading}
                             </h4>
                           )}
-                          <p className="text-gray-700 leading-relaxed font-light lowercase text-base">
+                          <p className="text-[#185B30] leading-relaxed font-light lowercase text-base">
                             {block.content}
                           </p>
                         </div>
@@ -315,7 +306,7 @@ export default function ProjectDetails() {
       </section>
 
       {/* Mobile Full Details Section */}
-      <div className="md:hidden bg-white">
+      <div className="md:hidden bg-[#F5FAF7]">
         <div className="px-8 py-8 border-t border-gray-200">
           {hasContent && (
             <>
@@ -326,7 +317,7 @@ export default function ProjectDetails() {
                       {block.heading}
                     </h4>
                   )}
-                  <p className="text-gray-700 leading-relaxed font-light lowercase text-base">
+                  <p className="text-[#185B30] leading-relaxed font-light lowercase text-base">
                     {block.content}
                   </p>
                 </div>
@@ -340,12 +331,11 @@ export default function ProjectDetails() {
       <section
         ref={setRef('related')}
         data-section="related"
-        className="bg-gray-50 py-4 pb-0"
+        className="bg-[#F5FAF7] py-4 pb-0"
       >
-        <div className="max-w-screen-2xl mx-auto px-4">
-          <h2 className={`text-base font-medium tracking-wider mb-4 transition-all duration-1000 ease-out ${
-            visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          }`}>
+        <div className="max-w-screen-2xl mx-auto px-4 text-[#185B30]">
+          <h2 className={`text-base font-medium tracking-wider mb-4 transition-all duration-1000 ease-out ${visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}>
             related projects
           </h2>
         </div>
@@ -355,24 +345,23 @@ export default function ProjectDetails() {
             <Link
               key={relatedProject.id}
               to={`/projects/${relatedProject.slug}`}
-              className={`group block relative overflow-hidden transition-all duration-1000 ease-out ${
-                visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
+              className={`group block relative overflow-hidden transition-all duration-1000 ease-out ${visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                }`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
               <div className="relative w-full" style={{ aspectRatio: '2/3' }}>
                 <img
                   src={relatedProject.heroImage}
                   alt={relatedProject.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover"
                   loading="lazy"
                 />
               </div>
-              <div className="p-8 bg-white">
-                <h3 className="text-base font-light mb-2 group-hover:border-b border-black inline-block lowercase">
+              <div className="p-8 bg-[#F5FAF7]">
+                <h3 className="text-base text-[#185B30] font-light mb-2 inline-block lowercase">
                   {relatedProject.title}
                 </h3>
-                <p className="text-base text-gray-600 font-light lowercase">
+                <p className="text-base text-[#185B30] font-light lowercase">
                   {relatedProject.location} • {relatedProject.year}
                 </p>
               </div>
@@ -383,14 +372,14 @@ export default function ProjectDetails() {
 
       {/* Lightbox with Touch Gestures */}
       {lightboxOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center"
           ref={lightboxImageRef}
           {...lightboxGestures}
         >
           <button
             onClick={closeLightbox}
-            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
+            className="absolute top-4 right-4 text-white hover:text-[#185B30] transition-colors z-10"
             aria-label="Close lightbox"
           >
             <X size={32} />
@@ -400,7 +389,7 @@ export default function ProjectDetails() {
             <button
               onClick={handleZoomOut}
               disabled={zoom <= 1}
-              className="text-white hover:text-gray-300 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              className="text-white hover:text-[#185B30] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
               aria-label="Zoom out"
             >
               <ZoomOut size={24} />
@@ -409,7 +398,7 @@ export default function ProjectDetails() {
             <button
               onClick={handleZoomIn}
               disabled={zoom >= 3}
-              className="text-white hover:text-gray-300 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              className="text-white hover:text-[#185B30] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
               aria-label="Zoom in"
             >
               <ZoomIn size={24} />
@@ -419,7 +408,7 @@ export default function ProjectDetails() {
           {currentImageIndex > 0 && (
             <button
               onClick={goToPrevious}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors z-10 bg-black bg-opacity-50 rounded-full p-2"
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-[#185B30] transition-colors z-10 bg-black bg-opacity-50 rounded-full p-2"
               aria-label="Previous image"
             >
               <ChevronLeft size={32} />
@@ -429,7 +418,7 @@ export default function ProjectDetails() {
           {currentImageIndex < project.images.length - 1 && (
             <button
               onClick={goToNext}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors z-10 bg-black bg-opacity-50 rounded-full p-2"
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-[#185B30] transition-colors z-10 bg-black bg-opacity-50 rounded-full p-2"
               aria-label="Next image"
             >
               <ChevronRight size={32} />

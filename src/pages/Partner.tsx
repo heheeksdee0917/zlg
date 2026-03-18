@@ -16,10 +16,9 @@ function HeroSection() {
   const overlayTranslateY = Math.max(0, 40 - (scrollY - 100) / 10);
 
   return (
-    <section className="relative h-[200vh]">
+    <section className="relative h-[150vh] md:h-[200vh]">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
 
-        {/* Blurred Background Video */}
         <video
           className="absolute inset-0 w-full h-full object-cover"
           style={{
@@ -35,10 +34,8 @@ function HeroSection() {
           <source src="/general/zlg_v4_upscaled.mp4" type="video/mp4" />
         </video>
 
-        {/* Dark overlay — always present */}
         <div className="absolute inset-0 bg-black/40" />
 
-        {/* Hero text — fades out on scroll */}
         <div
           className="absolute inset-0 flex flex-col items-center justify-center text-center px-8"
           style={{ opacity: heroOpacity, transition: 'none' }}
@@ -46,12 +43,11 @@ function HeroSection() {
           <p className="text-xs tracking-[0.3em] lowercase font-light text-white/60 mb-4">
             our network
           </p>
-          <h1 className="text-4xl md:text-5xl font-extralight  lowercase text-white">
+          <h1 className="text-4xl md:text-5xl font-extralight lowercase text-white">
             partners
           </h1>
         </div>
 
-        {/* Text — fades in on scroll over blurred video */}
         <div
           className="absolute inset-0 flex items-center px-8 max-w-screen-2xl mx-auto"
           style={{
@@ -61,7 +57,7 @@ function HeroSection() {
           }}
         >
           <div className="max-w-xl">
-            <h2 className="text-base font-normal  mb-4 lowercase underline text-white">Key Partners</h2>
+            <h2 className="text-base font-normal mb-4 lowercase underline text-white">Key Partners</h2>
             <p className="text-base text-white/90 leading-relaxed lowercase text-left">
               Our partners are built on decades of collaboration with exceptional architects and designers who have shaped the built environment across continents. Together, we bring world-class expertise and a shared vision of design excellence.
             </p>
@@ -89,8 +85,8 @@ export default function Partners() {
 
   useEffect(() => {
     const observerOptions: IntersectionObserverInit = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -100px 0px'
+      threshold: 0.05,
+      rootMargin: '0px 0px 0px 0px'
     };
 
     const observerCallback: IntersectionObserverCallback = (entries) => {
@@ -105,11 +101,9 @@ export default function Partners() {
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
-
     Object.values(sectionRefs.current).forEach((ref) => {
       if (ref) observer.observe(ref);
     });
-
     return () => observer.disconnect();
   }, []);
 
@@ -126,8 +120,7 @@ export default function Partners() {
       <section
         ref={setRef('intro')}
         data-section="intro"
-        className="bg-white flex items-start py-8 md:py-16 relative min-h-[100vh]"
-        
+        className="bg-white flex flex-col items-start py-8 md:py-16 relative min-h-[100vh]"
       >
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -141,7 +134,7 @@ export default function Partners() {
         }`}>
           <div className="max-w-screen-2xl mx-auto">
             <div className="max-w-3xl">
-              <h2 className="text-3xl font-light  mb-8 lowercase text-[#185B30]">Our Partnership Philosophy</h2>
+              <h2 className="text-3xl font-light mb-8 lowercase text-[#185B30]">Our Partnership Philosophy</h2>
               <div className="space-y-6">
                 <p className="text-base text-[#185B30] leading-relaxed font-light lowercase text-left">
                   zlg partners with a number of universities and design colleges among them the one academy and taylor's university. we believe in continuous research and lairing all practical work sharpened through a deep understanding of ongoing issues such as carbon storage and climate change, and global conservation efforts.
@@ -169,9 +162,8 @@ export default function Partners() {
             visibleSections.projects ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}>
 
-            {/* Partners Along the Journey */}
             <div className="mb-16">
-              <h4 className="text-base font-normal  mb-8 lowercase">partners along the journey</h4>
+              <h4 className="text-base font-normal mb-8 lowercase">partners along the journey</h4>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                 {partnersWithImages.map((partner, index) => (
@@ -185,11 +177,9 @@ export default function Partners() {
                         src={partner.image}
                         alt={partner.name}
                         className="w-full h-full object-cover"
-                        loading="lazy"
-                        decoding="async"
                       />
                     </div>
-                    <h5 className="text-base font-normal  mb-1 lowercase">{partner.name}</h5>
+                    <h5 className="text-base font-normal mb-1 lowercase">{partner.name}</h5>
                     {partner.title && (
                       <p className="text-sm font-light lowercase">{partner.title}</p>
                     )}
@@ -210,9 +200,8 @@ export default function Partners() {
               </div>
             </div>
 
-            {/* Signature Projects */}
             <div>
-              <h4 className="text-base font-normal  mb-8 lowercase">Signature Projects</h4>
+              <h4 className="text-base font-normal mb-8 lowercase">Signature Projects</h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                 {signatureProjects.map((project, index) => (
                   <div
@@ -225,11 +214,9 @@ export default function Partners() {
                         src={project.image}
                         alt={project.title}
                         className="w-full h-full object-cover"
-                        loading="lazy"
-                        decoding="async"
                       />
                     </div>
-                    <h5 className="text-base font-normal  lowercase">{project.title}</h5>
+                    <h5 className="text-base font-normal lowercase">{project.title}</h5>
                   </div>
                 ))}
               </div>
@@ -242,30 +229,6 @@ export default function Partners() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section
-        ref={setRef('cta')}
-        data-section="cta"
-        className="relative bg-gray-50 py-16"
-      >
-        <div className="max-w-screen-2xl mx-auto px-8">
-          <div className={`text-left transition-all duration-1000 ease-out ${
-            visibleSections.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          }`}>
-            <h2 className="text-base font-normal mb-4 lowercase">Become a Partner</h2>
-            <p className="text-base leading-relaxed mb-8 font-light lowercase text-left">
-              We're always interested in connecting with talented consultants, engineers, contractors, and fabricators who share our values. If you believe in design excellence and collaborative practice, let's talk.
-            </p>
-            <a
-              href="mailto:info@zlgdesign.com"
-              className="inline-block text-sm  px-12 py-4 border border-black font-light relative overflow-hidden group lowercase"
-            >
-              <span className="absolute inset-0 bg-black transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-              <span className="relative z-10 group-hover:text-white transition-colors duration-300">contact us</span>
-            </a>
-          </div>
-        </div>
-      </section>
 
     </div>
   );

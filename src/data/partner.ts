@@ -356,9 +356,9 @@ export const companyTimeline: TimelineMilestone[] =[
 // Partners along the journey data - 4 with images, rest text-only
 export const journeyPartners: JourneyPartner[] = [
   { name: 'sc shekar', title: 'photographer', image: '/partners/sc-shekar.jpg' },
-  { name: 'gareth richards', title: 'editor, copyrighter, public speaker', image: '/general/gareth_solo.avif' },
-  { name: 'the one academy', title: '', image: '/partners/one-academy.jpg' },
-  { name: 'taylors university', title: '', image: '/partners/taylors-university.jpg' },
+  { name: 'gareth richards', title: 'editor, copyrighter, public speaker', image: '/general/partners/gareth_solo_1.avif' },
+  { name: 'the one academy', title: '', image: '/general/partners/toa_landscape.avif' },
+  { name: 'taylors university', title: '', image: '/general/partners/tu_landscape.avif' },
   { name: 'damien yow', title: 'entrepreneur, civil engineer' },
   { name: 'nike baetzner', title: 'researcher, historian' },
   { name: 'justus pysall', title: 'architect' },
