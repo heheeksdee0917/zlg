@@ -12,11 +12,11 @@ export default function Projects() {
   }, []);
 
   return (
-    <div className={`min-h-screen pt-28 transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
+    <div className={`min-h-screen bg-[#F5FAF7] pt-28 transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
       <section className="max-w-screen-2xl mx-auto px-8 py-8">
         <div className="mb-8 text-left">
-          <h1 className="text-base font-normal  mb-4 lowercase">projects</h1>
-          <p className="text-base text-gray-600 lowercase text-left">
+          <h1 className="text-base text-[#185B30] font-normal  mb-4 lowercase">projects</h1>
+          <p className="text-base text-[#185B30] lowercase text-left">
             our portfolio represents a diverse range of architectural typologies, from intimate residences to large-scale urban interventions. each project is a unique response to site, program, and client aspirations.
           </p>
         </div>
@@ -33,7 +33,7 @@ export default function Projects() {
                 opacity: 0
               }}
             >
-              <div className="overflow-hidden mb-6 bg-gray-200">
+              <div className="overflow-hidden mb-6">
                 <img
                   src={project.heroImage}
                   alt={project.title}
@@ -42,12 +42,12 @@ export default function Projects() {
               </div>
 
               <div className="space-y-3 text-left">
-                <h2 className="text-base font-normal  relative inline-block lowercase">
+                <h2 className="text-base text-[#185B30] font-normal relative inline-block lowercase">
                   {project.title}
                   <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
                 </h2>
 
-                <div className="flex items-center space-x-4 text-base text-gray-600 lowercase">
+                <div className="flex items-center space-x-4 text-base text-[#185B30] lowercase">
                   <span>{project.year}</span>
                   <span>•</span>
                   <span>{project.location}</span>

@@ -71,9 +71,8 @@ export default function Navbar() {
     <>
       {/* Navbar Bar */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-[500] transition-transform duration-300 shadow-md ${
-          isVisible ? 'translate-y-0' : '-translate-y-full'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-[500] transition-transform duration-300 shadow-md ${isVisible ? 'translate-y-0' : '-translate-y-full'
+          }`}
         style={{ background: 'linear-gradient(to right, #336138 0%, #5a9d63 100%)' }}
       >
         <div className="max-w-screen-2xl mx-auto px-8 py-6 flex items-center justify-between">
@@ -81,15 +80,19 @@ export default function Navbar() {
             <Link to="/" className="flex items-center" onClick={closeMenu}>
               <img src="/logo(white).png" alt="ZLG Design" className="h-6" />
             </Link>
-            <span className="text-sm font-regular text-white lowercase">zlgdesign</span>
+            <span className="text-sm text-white lowercase leading-none">zlgdesign</span>
           </div>
 
           {/* Hamburger */}
-          <button onClick={toggleMenu} className="text-white hover:text-gray-200 transition-colors" aria-label="Toggle menu">
-            <div className="relative w-6 h-6">
-              <span className={`absolute top-1/2 left-0 w-full h-0.5 bg-white transform transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-0' : '-translate-y-2'}`}></span>
-              <span className={`absolute top-1/2 left-0 w-full h-0.5 bg-white transform transition-all duration-300 ${menuOpen ? 'opacity-0' : 'opacity-100'}`}></span>
-              <span className={`absolute top-1/2 left-0 w-full h-0.5 bg-white transform transition-all duration-300 ${menuOpen ? '-rotate-45 translate-y-0' : 'translate-y-2'}`}></span>
+          <button
+            onClick={toggleMenu}
+            className="text-white hover:text-gray-200 transition-colors flex items-center justify-center"
+            aria-label="Toggle menu"
+          >
+            <div className="relative w-5 h-4 flex flex-col justify-between">
+              <span className={`block w-full h-[2px] bg-white transform transition-all duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-[9px]' : ''}`} />
+              <span className={`block w-full h-[2px] bg-white transform transition-all duration-300 ${menuOpen ? 'opacity-0' : 'opacity-100'}`} />
+              <span className={`block w-full h-[2px] bg-white transform transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-[9px]' : ''}`} />
             </div>
           </button>
         </div>
@@ -115,11 +118,11 @@ export default function Navbar() {
                 onMouseEnter={() => setHoveredColumn(index)}
                 onMouseLeave={() => setHoveredColumn(null)}
               >
-                <span className="text-white/30 text-xs  font-light w-6">
+                <span className="text-white/30 text-xs font-light w-6">
                   0{index + 1}
                 </span>
                 <span
-                  className="text-4xl md:text-5xl font-extralight  lowercase text-white transition-all duration-300"
+                  className="text-4xl md:text-5xl font-extralight lowercase text-white transition-all duration-300"
                   style={{ opacity: hoveredColumn === null || hoveredColumn === index ? 1 : 0.3 }}
                 >
                   {item.title}
@@ -152,9 +155,9 @@ export default function Navbar() {
               <button
                 key={i}
                 onClick={() => setCarouselSlide(i)}
-                className={`h-px transition-all duration-500 ${
-                  i === carouselSlide ? 'w-8 bg-white' : 'w-4 bg-white/40'
-                }`}
+                className={`h-px transition-all duration-500 ${i === carouselSlide ? 'w-8' : 'w-4'
+                  }`}
+                style={{ backgroundColor: i === carouselSlide ? '#185B30' : '#185B3066' }}
               />
             ))}
           </div>
@@ -178,13 +181,12 @@ export default function Navbar() {
               onClick={closeMenu}
               className="group flex items-center gap-4"
             >
-              <span className="text-white/30 text-xs  font-light">
+              <span className="text-white/30 text-xs font-light">
                 0{index + 1}
               </span>
               <span
-                className={`text-3xl  font-extralight lowercase transition-opacity duration-300 ${
-                  isActive(item.link) ? 'text-white' : 'text-white/80'
-                }`}
+                className={`text-3xl font-extralight lowercase transition-opacity duration-300 ${isActive(item.link) ? 'text-white' : 'text-white/80'
+                  }`}
               >
                 {item.title}
               </span>

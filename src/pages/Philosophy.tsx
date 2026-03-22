@@ -24,10 +24,10 @@ function HeroSection() {
         <p className="text-base text-white leading-relaxed lowercase text-left">{text}</p>
       </div>
       <div
-        className="hidden md:block w-[60vh] h-[75vh] flex-shrink-0 overflow-hidden"
-        style={{ animation: 'floatPhoto 6s ease-in-out infinite' }}
+        className="hidden md:block flex-shrink-0 overflow-hidden"
+        style={{ height: '75vh', aspectRatio: '2/3', animation: 'floatPhoto 6s ease-in-out infinite' }}
       >
-        <img src={imgSrc} alt="" className="w-full h-full object-cover" />
+        <img src={imgSrc} alt="" className="w-full h-full object-cover object-center" />
       </div>
     </div>
   );
@@ -166,11 +166,11 @@ export default function Philosophy() {
       case 'quote-only':
         return (
           <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-[#F5FAF7] py-24">
-            <div className="max-w-screen-2xl mx-auto px-8 ">
-              <blockquote className={`text-base font-light text-[#185B30] text-left italic text-gray-800 py-8 border-t border-b border-gray-300 transition-all duration-1000 ease-out lowercase ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="max-w-screen-2xl mx-auto px-8">
+              <blockquote className={`text-base font-light text-[#185B30] text-left italic py-8 border-t border-b border-gray-300 transition-all duration-1000 ease-out lowercase ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                 {section.content.quote}
                 {section.content.quoteAuthor && (
-                  <span className="block text-base text-[#185B30] not-italic mt-4 text-gray-600">{section.content.quoteAuthor}</span>
+                  <span className="block text-base text-[#185B30] not-italic mt-4">{section.content.quoteAuthor}</span>
                 )}
               </blockquote>
             </div>
@@ -184,7 +184,7 @@ export default function Philosophy() {
               <div className="grid md:grid-cols-2 gap-16">
                 {section.content.columns?.map((col, i) => (
                   <div key={i} className={`transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: `${i * 150}ms` }}>
-                    <h3 className="text-base font-normal text-[#185B30]  mb-4">{col.title}</h3>
+                    <h3 className="text-base font-normal text-[#185B30] mb-4">{col.title}</h3>
                     <p className="text-base text-[#185B30] leading-relaxed text-left">{col.text}</p>
                   </div>
                 ))}
@@ -198,8 +198,6 @@ export default function Philosophy() {
           <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-[#F5FAF7] py-24 relative min-h-[100vh] flex items-start" style={{ justifyContent: section.content.layout === 'center' ? 'center' : 'flex-start' }}>
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${section.content.image})`, opacity: 0.5 }} />
             <div className={`relative z-10 transition-all duration-1000 ease-out px-8 ${section.content.layout === 'center' ? 'max-w-2xl mx-auto text-left' : 'w-full md:pl-28 md:pr-16'} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-
-              {/* Glassmorphism card */}
               <div style={{
                 background: 'rgba(255, 255, 255, 0.1)',
                 backdropFilter: 'blur(12px)',
@@ -213,7 +211,6 @@ export default function Philosophy() {
                   <p key={i} className="text-base text-[#185B30] leading-relaxed mb-4 last:mb-0 lowercase">{p}</p>
                 ))}
               </div>
-
             </div>
           </section>
         );
@@ -222,15 +219,15 @@ export default function Philosophy() {
         return (
           <section key={section.id} ref={setRef(section.id)} data-section={section.id} className={`relative bg-[#F5FAF7] py-24 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             <div className="max-w-screen-2xl mx-auto px-8">
-              <h2 className="text-base font-normal  mb-8">{section.title}</h2>
+              <h2 className="text-base font-normal mb-8 text-[#185B30]">{section.title}</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {section.content.publications?.map((pub, i) => (
                   <div key={i} className={`border border-gray-200 transition-all duration-1000 ease-out hover:shadow-lg flex flex-col overflow-hidden ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: `${(i + 2) * 100}ms` }}>
                     <div className="w-full aspect-[2/3] bg-gray-100 overflow-hidden">
-                      <img src={pub.image} alt={pub.title} className="w-full h-full object-cover"/>
+                      <img src={pub.image} alt={pub.title} className="w-full h-full object-cover" />
                     </div>
                     <div className="p-6">
-                      <h3 className="text-sm font-normal  mb-2 lowercase">{pub.title}</h3>
+                      <h3 className="text-sm font-normal mb-2 lowercase text-[#185B30]">{pub.title}</h3>
                       <p className="text-sm text-gray-600 font-light leading-relaxed text-left">{pub.description}</p>
                     </div>
                   </div>

@@ -155,7 +155,7 @@ export default function Partners() {
       <section
         ref={setRef('projects')}
         data-section="projects"
-        className="bg-white py-16"
+        className="bg-[#F5FAF7] py-16"
       >
         <div className="max-w-screen-2xl mx-auto px-8 w-full">
           <div className={`transition-all duration-1000 ease-out ${
@@ -163,7 +163,7 @@ export default function Partners() {
           }`}>
 
             <div className="mb-16">
-              <h4 className="text-base font-normal mb-8 lowercase">partners along the journey</h4>
+              <h4 className="text-[#185B30] font-normal mb-8 lowercase">partners along the journey</h4>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                 {partnersWithImages.map((partner, index) => (
@@ -179,9 +179,9 @@ export default function Partners() {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <h5 className="text-base font-normal mb-1 lowercase">{partner.name}</h5>
+                    <h5 className="text-[#185B30] font-normal mb-1 lowercase">{partner.name}</h5>
                     {partner.title && (
-                      <p className="text-sm font-light lowercase">{partner.title}</p>
+                      <p className="text-sm text-[#185B30] font-light lowercase">{partner.title}</p>
                     )}
                   </div>
                 ))}
@@ -191,9 +191,9 @@ export default function Partners() {
                 {partnersTextOnly.map((partner) => (
                   <div
                     key={partner.name}
-                    className="flex items-start text-base font-light lowercase"
+                    className="flex items-start text-[#185B30] font-light lowercase"
                   >
-                    <span className="mr-3">•</span>
+                    <span className="mr-3 text-[#185B30]">•</span>
                     <span>{partner.name}{partner.title && `: ${partner.title}`}</span>
                   </div>
                 ))}
@@ -201,7 +201,7 @@ export default function Partners() {
             </div>
 
             <div>
-              <h4 className="text-base font-normal mb-8 lowercase">Signature Projects</h4>
+              <h4 className="text-[#185B30] font-normal mb-8 lowercase">Signature Projects</h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                 {signatureProjects.map((project, index) => (
                   <div
@@ -209,20 +209,20 @@ export default function Partners() {
                     className="transition-all duration-1000 ease-out"
                     style={{ transitionDelay: `${index * 100}ms` }}
                   >
-                    <div className="w-full aspect-[2/3] bg-gray-100 overflow-hidden mb-4">
+                    <div className="w-full aspect-[2/3] bg-[#F5FAF7] overflow-hidden mb-4">
                       <img
                         src={project.image}
                         alt={project.title}
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <h5 className="text-base font-normal lowercase">{project.title}</h5>
+                    <h5 className="text-[#185B30] font-normal lowercase">{project.title}</h5>
                   </div>
                 ))}
               </div>
             </div>
 
-            <p className="text-base leading-relaxed font-light lowercase text-left mt-12">
+            <p className="text-[#185B30] leading-relaxed font-light lowercase text-left mt-12">
               With over 22 years of experience working on very large and complex buildings across Europe and Asia, our partners bring unparalleled expertise in architectural design, interior design, and project delivery.
             </p>
           </div>
