@@ -104,7 +104,7 @@ export default function Home() {
 
             <h1
               key={nameKey}
-              className="fade-up text-4xl md:text-4xl font-bold lowercase mb-8"
+              className="fade-up text-4xl md:text-4xl font-bold lowercase mb-6"
               style={{ animationDelay: '0.35s' }}
             >
               {slide.projectName}
@@ -132,9 +132,8 @@ export default function Home() {
                 onClick={() => { setCurrentSlide(i); setNameKey((k) => k + 1); }}
                 className="flex items-center gap-2 group"
               >
-                <span className={`block h-px transition-all duration-700 ease-in-out ${
-                  i === currentSlide ? 'w-10 bg-white' : 'w-4 bg-white/30 group-hover:bg-white/60 group-hover:w-6'
-                }`} />
+                <span className={`block h-px transition-all duration-700 ease-in-out ${i === currentSlide ? 'w-10 bg-white' : 'w-4 bg-white/30 group-hover:bg-white/60 group-hover:w-6'
+                  }`} />
               </button>
             ))}
           </div>
@@ -168,14 +167,14 @@ export default function Home() {
           <div className="w-full h-1/2 md:w-1/2 md:h-full bg-white" />
 
           {/* Text — bottom center on mobile, overlaps on desktop */}
-          <div className="absolute inset-0 z-10 flex items-end md:items-center pb-[50%] md:pb-0 px-8 md:px-0">
-            <div className="md:ml-[45%] max-w-3xl w-full text-center md:text-left">
+          <div className="absolute inset-x-0 bottom-0 h-1/2 md:inset-0 md:h-auto z-10 flex items-center px-8 md:px-0">
+            <div className="md:ml-[45%] max-w-none w-full text-center md:text-left">
+              <p className="text-xs tracking-[0.1em] lowercase font-light mb-3 opacity-60">
+                founder's quote
+              </p>
               <p className="text-2xl md:text-4xl font-normal leading-relaxed lowercase tracking-wide mb-3">
                 Thought is a form of necessary action,{' '}
                 <br />a precursor to a possible work of art.<br />
-                <span className="text-xs tracking-widest font-light text-gray-500 ml-1 align-middle">
-                  huat lim
-                </span>
               </p>
               <a
                 href="/philosophy"

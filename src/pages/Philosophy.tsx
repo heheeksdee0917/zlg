@@ -144,7 +144,7 @@ export default function Philosophy() {
     switch (section.type) {
       case 'text-image':
         return (
-          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-[#F5FAF7] py-24">
+          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-[#F5FAF7] py-12">
             <div className="max-w-screen-2xl mx-auto px-8 w-full">
               <div className="flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-16">
                 <div className={`flex flex-col justify-start transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -162,7 +162,7 @@ export default function Philosophy() {
 
       case 'quote-only':
         return (
-          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-[#F5FAF7] py-24">
+          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-[#F5FAF7] py-4">
             <div className="max-w-screen-2xl mx-auto px-8">
               <blockquote className={`text-base font-light text-[#185B30] text-left italic py-8 border-t border-b border-gray-300 transition-all duration-1000 ease-out lowercase ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                 {section.content.quote}
@@ -176,7 +176,7 @@ export default function Philosophy() {
 
       case 'columns-only':
         return (
-          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-[#F5FAF7] py-24">
+          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-[#F5FAF7] py-12">
             <div className="max-w-screen-2xl mx-auto px-8">
               <div className="grid md:grid-cols-2 gap-16">
                 {section.content.columns?.map((col, i) => (
@@ -192,7 +192,7 @@ export default function Philosophy() {
 
       case 'text-only':
         return (
-          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-[#F5FAF7] py-24 relative min-h-[100vh] flex items-start" style={{ justifyContent: section.content.layout === 'center' ? 'center' : 'flex-start' }}>
+          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className="bg-[#F5FAF7] py-4 relative min-h-[100vh] flex items-start" style={{ justifyContent: section.content.layout === 'center' ? 'center' : 'flex-start' }}>
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${section.content.image})`, opacity: 0.5 }} />
             <div className={`relative z-10 transition-all duration-1000 ease-out px-8 ${section.content.layout === 'center' ? 'max-w-2xl mx-auto text-left' : 'w-full md:pl-28 md:pr-16'} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <div style={{
@@ -214,7 +214,7 @@ export default function Philosophy() {
 
       case 'publications':
         return (
-          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className={`relative bg-[#F5FAF7] py-24 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <section key={section.id} ref={setRef(section.id)} data-section={section.id} className={`relative bg-[#F5FAF7] py-6 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             <div className="max-w-screen-2xl mx-auto px-8">
               <h2 className="text-base font-normal mb-8 text-[#185B30]">{section.title}</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
