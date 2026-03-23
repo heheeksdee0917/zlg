@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { philosophySections } from '../data/philosophy';
+import LazyLoading from '../components/LazyLoading';
 
 function HeroSection() {
   const [scrollY, setScrollY] = useState(0);
@@ -44,7 +45,6 @@ function HeroSection() {
       <img src="/general/Philosophy.avif" alt="" className="hidden" fetchPriority="high" />
       <div className="sticky top-0 h-screen w-full overflow-hidden">
 
-        {/* Background image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -56,7 +56,6 @@ function HeroSection() {
           }}
         />
 
-        {/* Dark overlay — kicks in after step 1 */}
         <div
           className="absolute inset-0 bg-black"
           style={{
@@ -65,7 +64,6 @@ function HeroSection() {
           }}
         />
 
-        {/* Panel 1 — title */}
         <div
           className="absolute inset-0 flex flex-col items-center justify-center text-center px-8 transition-opacity duration-500"
           style={{ opacity: snapIndex === 0 ? 1 : 0 }}
@@ -74,7 +72,6 @@ function HeroSection() {
           <h1 className="text-4xl md:text-5xl font-extralight lowercase text-white">philosophy</h1>
         </div>
 
-        {/* Panel 2 */}
         <div
           className="absolute inset-0 flex items-center transition-opacity duration-500"
           style={{ opacity: snapIndex === 1 ? 1 : 0 }}
@@ -86,7 +83,6 @@ function HeroSection() {
           />
         </div>
 
-        {/* Panel 3 */}
         <div
           className="absolute inset-0 flex items-center transition-opacity duration-500"
           style={{ opacity: snapIndex === 2 ? 1 : 0 }}
@@ -113,10 +109,11 @@ export default function Philosophy() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Re-runs after every render to pick up newly lazy-loaded sections
   useEffect(() => {
-    const observerOptions: IntersectionObserverInit = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -100px 0px'
+    const observerOptions = {
+      threshold: 0.05,
+      rootMargin: '0px 0px 0px 0px'
     };
 
     const observerCallback: IntersectionObserverCallback = (entries) => {
@@ -135,7 +132,7 @@ export default function Philosophy() {
       if (ref) observer.observe(ref);
     });
     return () => observer.disconnect();
-  }, []);
+  });
 
   const setRef = (id: string) => (el: HTMLElement | null) => {
     sectionRefs.current[id] = el;
@@ -245,13 +242,22 @@ export default function Philosophy() {
   return (
     <div className={`transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
       <HeroSection />
-      <div className="flex flex-col">
-        {philosophySections.map((section, index) => (
-          <React.Fragment key={section.id}>
-            {renderSection(section, index)}
-          </React.Fragment>
-        ))}
-      </div>
+      <LazyLoading
+        items={philosophySections}
+        initialCount={2}
+        loadMoreCount={2}
+        visibleSections={visibleSections}
+      >
+        {(displayedSections) => (
+          <div className="flex flex-col">
+            {displayedSections.map((section, index) => (
+              <React.Fragment key={section.id}>
+                {renderSection(section, index)}
+              </React.Fragment>
+            ))}
+          </div>
+        )}
+      </LazyLoading>
     </div>
   );
 }

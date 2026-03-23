@@ -170,8 +170,6 @@ export default function People() {
                           src={partner.image}
                           alt={partner.name}
                           className="w-full aspect-[2/3] object-cover object-center"
-                          loading="lazy"
-                          decoding="async"
                         />
                       </div>
                     </>
