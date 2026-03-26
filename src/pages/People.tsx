@@ -145,7 +145,7 @@ export default function People() {
                         />
                       </div>
                       <div className="flex flex-col justify-center">
-                        <h3 className="text-base font-normal text-[#185B30] mb-2 lowercase">{partner.name}</h3>
+                        <h3 className="text-base font-normal text-[#185B30] lowercase">{partner.name}</h3>
                         <p className="text-base text-[#185B30] mb-8 font-light lowercase">{partner.role}</p>
                         <div className="space-y-6 text-[#185B30] leading-relaxed font-light lowercase text-left">
                           {partner.bio.map((paragraph, i) => (
@@ -157,7 +157,7 @@ export default function People() {
                   ) : (
                     <>
                       <div className="flex flex-col justify-center order-2 md:order-1">
-                        <h3 className="text-base font-normal text-[#185B30] mb-2 lowercase">{partner.name}</h3>
+                        <h3 className="text-base font-normal text-[#185B30] lowercase">{partner.name}</h3>
                         <p className="text-base text-[#185B30] mb-8 font-light lowercase">{partner.role}</p>
                         <div className="space-y-6 text-[#185B30] leading-relaxed font-light lowercase text-left">
                           {partner.bio.map((paragraph, i) => (
