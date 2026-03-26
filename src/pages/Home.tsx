@@ -3,11 +3,6 @@ import React, { useState, useEffect } from 'react';
 
 const slides = [
   {
-    image: '/general/HomeCP_point92.avif',
-    projectName: 'point 92',
-    slug: 'point-92',
-  },
-  {
     image: '/projects/boh-visitor/A1.avif',
     projectName: 'boh visitor centre',
     slug: 'boh-visitor-centre',
@@ -17,9 +12,14 @@ const slides = [
     projectName: 'lantern hotel',
     slug: 'lantern-hotel',
   },
+  {
+    image: '/general/HomeCP_point92.avif',
+    projectName: 'point 92',
+    slug: 'point-92',
+  },
 ];
 
-const SLIDE_DURATION = 3000;
+const SLIDE_DURATION = 4500;
 
 export default function Home() {
   const [fadeIn, setFadeIn] = useState(false);
@@ -95,23 +95,21 @@ export default function Home() {
 
           {/* Text — bottom, center-aligned */}
           <div className="absolute z-20 bottom-16 left-0 right-0 flex flex-col items-center text-white text-center px-8">
-            <p
-              className="fade-up text-xs tracking-[0.1em] lowercase font-light mb-1 opacity-60"
-              style={{ animationDelay: '0.2s' }}
-            >
-              signature projects
-            </p>
-
             <h1
-              key={nameKey}
-              className="fade-up text-4xl md:text-4xl font-bold lowercase mb-6"
+              className="fade-up text-4xl md:text-4xl font-bold lowercase mb-2"
               style={{ animationDelay: '0.35s' }}
             >
-              {slide.projectName}
+              zlgdesign
             </h1>
+            <p
+              className="fade-up text-xs tracking-[0.1em] lowercase font-light mb-6 opacity-60"
+              style={{ animationDelay: '0.2s' }}
+            >
+              design | architecture | archives | theory
+            </p>
 
             <Link
-              to={`/projects/${slide.slug}`}
+              to="/projects"
               className="fade-up inline-block text-base tracking-[0.08em] font-light lowercase text-white px-8 py-3 border border-white/60 transition-all duration-300 relative"
               style={{
                 animationDelay: '0.55s',

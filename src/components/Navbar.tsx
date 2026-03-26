@@ -23,16 +23,17 @@ export default function Navbar() {
   ];
 
   const carouselImages = [
-    '/general/HomeCP_point92.avif',
-    '/projects/boh-visitor/CP.avif',
-    '/general/HomeCP_Lantern.avif',
+    '/images/Image6.avif',
+    '/images/Image1.avif',
+    '/images/Image2.avif',
+    '/images/Image3.avif',
   ];
 
   useEffect(() => {
     if (!menuOpen) return;
     const timer = setInterval(() => {
       setCarouselSlide((prev) => (prev + 1) % carouselImages.length);
-    }, 3000);
+    }, 5000);
     return () => clearInterval(timer);
   }, [menuOpen]);
 
@@ -71,7 +72,7 @@ export default function Navbar() {
     <>
       {/* Navbar Bar */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-[500] transition-transform duration-300 shadow-md ${isVisible ? 'translate-y-0' : '-translate-y-full'
+        className={`fixed top-0 left-0 right-0 z-[500] transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'
           }`}
         style={{ background: 'linear-gradient(to right, #336138 0%, #5a9d63 100%)' }}
       >
@@ -90,25 +91,26 @@ export default function Navbar() {
             aria-label="Toggle menu"
           >
             <div className="relative w-5 h-4 flex flex-col justify-between">
-              <span className={`block w-full h-[2px] bg-white transform transition-all duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-[9px]' : ''}`} />
+              <span className={`block w-full h-[2px] bg-white transform transition-all duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
               <span className={`block w-full h-[2px] bg-white transform transition-all duration-300 ${menuOpen ? 'opacity-0' : 'opacity-100'}`} />
-              <span className={`block w-full h-[2px] bg-white transform transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-[9px]' : ''}`} />
+              <span className={`block w-full h-[2px] bg-white transform transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
             </div>
           </button>
         </div>
       </nav>
 
-      {/* ── DESKTOP OVERLAY — 60/40 split ── */}
+      {/* ── DESKTOP OVERLAY — full green bg + floating image ── */}
       <div
         className="hidden md:flex fixed inset-0 z-[499] transition-opacity duration-500 ease-in-out"
-        style={{ opacity: menuOpen ? 1 : 0, pointerEvents: menuOpen ? 'auto' : 'none' }}
+        style={{
+          background: 'linear-gradient(to right, #336138 0%, #5a9d63 100%)',
+          opacity: menuOpen ? 1 : 0,
+          pointerEvents: menuOpen ? 'auto' : 'none',
+        }}
       >
-        {/* LEFT — 60% navigation links */}
-        <div
-          className="w-[60%] h-full flex flex-col justify-center px-20"
-          style={{ background: 'linear-gradient(to right, #336138 0%, #5a9d63 100%)' }}
-        >
-          <div className="flex flex-col space-y-2">
+        {/* Navigation links — full width, but content offset left */}
+        <div className="flex flex-col justify-center px-20 w-full">
+          <div className="flex flex-col space-y-2 max-w-[55%]">
             {navItems.map((item, index) => (
               <Link
                 key={item.title}
@@ -135,8 +137,9 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* RIGHT — 40% carousel */}
-        <div className="w-[40%] h-full relative overflow-hidden">
+        {/* Floating image — absolute, right side, inset with margin so it floats */}
+        {/* Floating image — full bleed, right side */}
+        <div className="absolute right-0 top-0 bottom-0 w-[40%] overflow-hidden">
           {carouselImages.map((img, index) => (
             <div
               key={index}
@@ -147,17 +150,16 @@ export default function Navbar() {
               }}
             />
           ))}
-          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-0 bg-black/10" />
 
           {/* Dot indicators */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
             {carouselImages.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCarouselSlide(i)}
-                className={`h-px transition-all duration-500 ${i === carouselSlide ? 'w-8' : 'w-4'
-                  }`}
-                style={{ backgroundColor: i === carouselSlide ? '#185B30' : '#185B3066' }}
+                className={`h-px transition-all duration-500 ${i === carouselSlide ? 'w-8' : 'w-4'}`}
+                style={{ backgroundColor: i === carouselSlide ? '#ffffff' : '#ffffff66' }}
               />
             ))}
           </div>

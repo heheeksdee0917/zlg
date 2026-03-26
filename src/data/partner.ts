@@ -355,7 +355,7 @@ export const companyTimeline: TimelineMilestone[] =[
 
 // Partners along the journey data - 4 with images, rest text-only
 export const journeyPartners: JourneyPartner[] = [
-  { name: 'sc shekar', title: 'photographer', image: '/partners/sc-shekar.jpg' },
+  { name: 'sc shekar', title: 'photographer', image: '/general/partners/scshekar_solo.avif' },
   { name: 'gareth richards', title: 'editor, copyrighter, public speaker', image: '/general/partners/gareth_solo_1.avif' },
   { name: 'the one academy', title: '', image: '/general/partners/toa_landscape.avif' },
   { name: 'taylors university', title: '', image: '/general/partners/tu_landscape.avif' },
@@ -368,20 +368,4 @@ export const journeyPartners: JourneyPartner[] = [
   { name: 'viktor zeidler', title: 'graphic designer' },
   { name: 'zora gabrovsek', title: 'gallerist, film producer' },
   { name: 'brandon chee', title: 'ecologist' },
-];
-
-// Signature projects data - 3 projects with images
-export const signatureProjects: SignatureProject[] = [
-  {
-      title: 'BOH Visitor Centre',
-      image: '/projects/boh-visitor-centre.jpg'
-  },
-  {
-      title: 'Nimes Mediateque Museum',
-      image: '/projects/nimes-mediateque.jpg'
-  },
-  {
-      title: 'Singapore National Library Competition',
-      image: '/projects/singapore-library.jpg'
-  },
 ];

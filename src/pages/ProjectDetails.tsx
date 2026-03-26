@@ -227,6 +227,7 @@ export default function ProjectDetails() {
 
           {/* Scrollable Image Container */}
           <div className="w-full h-full overflow-y-auto" ref={desktopScrollContainerRef}>
+          <div style={{ paddingTop: '72px' }}>
             {project.images.map((image, index) => (
               <div
                 key={index}
@@ -244,13 +245,14 @@ export default function ProjectDetails() {
               </div>
             ))}
           </div>
+          </div>
         </div>
 
         {/* Project Info - 40% on desktop */}
         <div className="w-[40%] bg-[#F5FAF7] sticky top-20 h-screen overflow-y-auto custom-scrollbar pt-28">
           <div className="p-8 md:p-16">
             <div className="mb-12">
-              <h1 className="text-base font-bold mb-2 lowercase leading-tight">
+              <h1 className="text-base text-[#185B30] font-bold mb-2 lowercase leading-tight">
                 {project.title}
               </h1>
               <p className="text-base text-[#185B30] font-light lowercase">
@@ -327,48 +329,47 @@ export default function ProjectDetails() {
         </div>
       </div>
 
-      {/* Related Projects Section */}
-      <section
-        ref={setRef('related')}
-        data-section="related"
-        className="bg-[#F5FAF7] py-4 pb-0"
-      >
-        <div className="max-w-screen-2xl mx-auto px-4 text-[#185B30]">
-          <h2 className={`text-base font-medium tracking-wider mb-4 transition-all duration-1000 ease-out ${visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-            }`}>
-            related projects
-          </h2>
-        </div>
+{/* Related Projects Section */}
+<section
+  ref={setRef('related')}
+  data-section="related"
+  className="bg-[#F5FAF7] py-16"
+>
+  <div className="max-w-screen-2xl mx-auto px-8">
+    <h2 className={`text-base font-medium tracking-wider mb-8 text-[#185B30] transition-all duration-1000 ease-out ${
+      visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+    }`}>
+      related projects
+    </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
-          {relatedProjects.map((relatedProject, index) => (
-            <Link
-              key={relatedProject.id}
-              to={`/projects/${relatedProject.slug}`}
-              className={`group block relative overflow-hidden transition-all duration-1000 ease-out ${visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                }`}
-              style={{ transitionDelay: `${index * 150}ms` }}
-            >
-              <div className="relative w-full" style={{ aspectRatio: '2/3' }}>
-                <img
-                  src={relatedProject.heroImage}
-                  alt={relatedProject.title}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-              <div className="p-8 bg-[#F5FAF7]">
-                <h3 className="text-base text-[#185B30] font-light mb-2 inline-block lowercase">
-                  {relatedProject.title}
-                </h3>
-                <p className="text-base text-[#185B30] font-light lowercase">
-                  {relatedProject.location} • {relatedProject.year}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {relatedProjects.map((relatedProject, index) => (
+        <Link
+          key={relatedProject.id}
+          to={`/projects/${relatedProject.slug}`}
+          className={`group block transition-all duration-1000 ease-out ${
+            visibleSections.related ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}
+          style={{ transitionDelay: `${index * 150}ms` }}
+        >
+          <div className="w-full aspect-[2/3] overflow-hidden mb-4">
+            <img
+              src={relatedProject.heroImage}
+              alt={relatedProject.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <h3 className="text-base text-[#185B30] font-light mb-1 lowercase">
+            {relatedProject.title}
+          </h3>
+          <p className="text-base text-[#185B30] font-light lowercase">
+            {relatedProject.location} • {relatedProject.year}
+          </p>
+        </Link>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Lightbox with Touch Gestures */}
       {lightboxOpen && (

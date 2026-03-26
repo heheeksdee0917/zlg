@@ -24,7 +24,7 @@ function HeroSection() {
         <div
           className="absolute inset-0 bg-cover"
           style={{
-            backgroundImage: `url('/People/zlg_group.jpeg')`,
+            backgroundImage: `url('/People/team_hero.avif')`,
             backgroundPosition: 'center 70%',
             marginTop: '32px',
             filter: `blur(${Math.max(0, imageBlur)}px)`,

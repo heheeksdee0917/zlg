@@ -15,7 +15,7 @@ export default function Projects() {
     <div className={`min-h-screen bg-[#F5FAF7] pt-28 transition-opacity duration-500 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
       <section className="max-w-screen-2xl mx-auto px-8 py-8">
         <div className="mb-8 text-left">
-          <h1 className="text-base text-[#185B30] font-normal  mb-4 lowercase">projects</h1>
+          <h1 className="text-base text-[#185B30] font-normal mb-4 lowercase">projects</h1>
           <p className="text-base text-[#185B30] lowercase text-left">
             our portfolio represents a diverse range of architectural typologies, from intimate residences to large-scale urban interventions. each project is a unique response to site, program, and client aspirations.
           </p>
@@ -26,33 +26,38 @@ export default function Projects() {
             <Link
               key={project.id}
               to={`/projects/${project.slug}`}
-              className="group block transition-all duration-500 ease-out hover:scale-105 hover:-translate-y-2"
+              className="group block transition-all duration-500 ease-out"
               style={{
                 animation: 'fadeInUp 0.6s ease-out forwards',
                 animationDelay: `${(index % 8) * 0.05}s`,
                 opacity: 0
               }}
             >
-              <div className="overflow-hidden mb-6">
+              {/* Image container — relative for overlay */}
+              <div className="overflow-hidden mb-6 relative">
                 <img
                   src={project.heroImage}
                   alt={project.title}
-                  className="w-full aspect-[2/3] object-cover transition-opacity duration-700 object-center"
+                  className="w-full aspect-[2/3] object-cover object-center"
                 />
-              </div>
 
-              <div className="space-y-3 text-left">
-                <h2 className="text-base text-[#185B30] font-normal relative inline-block lowercase">
-                  {project.title}
-                  <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-black transition-all duration-500 ease-out group-hover:w-full"></span>
-                </h2>
-
-                <div className="flex items-center space-x-4 text-base text-[#185B30] lowercase">
-                  <span>{project.year}</span>
-                  <span>•</span>
-                  <span>{project.location}</span>
+                {/* Desktop hover overlay */}
+                <div className="hidden md:flex absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex-col items-start justify-end p-6">
+                  <h2 className="text-base text-white font-normal lowercase mb-1">
+                    {project.title}
+                  </h2>
+                  <p className="text-sm text-white/80 lowercase">{project.location}</p>
                 </div>
               </div>
+
+              {/* Mobile text — always visible */}
+              <div className="md:hidden space-y-1 text-left">
+                <h2 className="text-base text-[#185B30] font-normal lowercase">
+                  {project.title}
+                </h2>
+                <p className="text-base text-[#185B30] lowercase">{project.location}</p>
+              </div>
+
             </Link>
           ))}
         </div>

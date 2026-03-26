@@ -200,28 +200,6 @@ export default function Partners() {
               </div>
             </div>
 
-            <div>
-              <h4 className="text-[#185B30] font-normal mb-8 lowercase">Signature Projects</h4>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                {signatureProjects.map((project, index) => (
-                  <div
-                    key={project.title}
-                    className="transition-all duration-1000 ease-out"
-                    style={{ transitionDelay: `${index * 100}ms` }}
-                  >
-                    <div className="w-full aspect-[2/3] bg-[#F5FAF7] overflow-hidden mb-4">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <h5 className="text-[#185B30] font-normal lowercase">{project.title}</h5>
-                  </div>
-                ))}
-              </div>
-            </div>
-
             <p className="text-[#185B30] leading-relaxed font-light lowercase text-left mt-12">
               With over 22 years of experience working on very large and complex buildings across Europe and Asia, our partners bring unparalleled expertise in architectural design, interior design, and project delivery.
             </p>

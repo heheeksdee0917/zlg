@@ -13,10 +13,10 @@ function HeroSection() {
 
   const vh = typeof window !== 'undefined' ? window.innerHeight : 800;
 
-  const snapIndex = Math.min(2, Math.floor(scrollY / vh));
+  const snapIndex = Math.min(2, Math.floor(scrollY / (vh * 0.8)));
 
   const imageBlur = snapIndex >= 1 ? 8 : 0;
-  const overlayOpacity = snapIndex >= 1 ? Math.min(0.7, (scrollY - vh) / (vh * 0.5)) : 0;
+  const overlayOpacity = snapIndex >= 1 ? 0.6 : 0;
 
   const PanelContent = ({ text, heading, imgSrc }: { text: string; heading?: string; imgSrc: string }) => (
     <div className="w-full flex items-center justify-between px-8 md:px-16 max-w-screen-2xl mx-auto">
@@ -34,7 +34,7 @@ function HeroSection() {
   );
 
   return (
-    <section className="relative h-[400vh]">
+    <section className="relative h-[300vh]">
       <style>{`
         @keyframes floatPhoto {
           0%   { transform: translateY(0px); }
@@ -45,6 +45,7 @@ function HeroSection() {
       <img src="/general/Philosophy.avif" alt="" className="hidden" fetchPriority="high" />
       <div className="sticky top-0 h-screen w-full overflow-hidden">
 
+        {/* Background image — fixed, never moves */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -56,14 +57,16 @@ function HeroSection() {
           }}
         />
 
+        {/* Dark overlay — snaps on at panel 2, stays fixed */}
         <div
           className="absolute inset-0 bg-black"
           style={{
             opacity: overlayOpacity,
-            transition: 'opacity 0.1s ease',
+            transition: 'opacity 0.5s ease',
           }}
         />
 
+        {/* Panel 1 — title */}
         <div
           className="absolute inset-0 flex flex-col items-center justify-center text-center px-8 transition-opacity duration-500"
           style={{ opacity: snapIndex === 0 ? 1 : 0 }}
@@ -72,6 +75,7 @@ function HeroSection() {
           <h1 className="text-4xl md:text-5xl font-extralight lowercase text-white">philosophy</h1>
         </div>
 
+        {/* Panel 2 */}
         <div
           className="absolute inset-0 flex items-center transition-opacity duration-500"
           style={{ opacity: snapIndex === 1 ? 1 : 0 }}
@@ -83,6 +87,7 @@ function HeroSection() {
           />
         </div>
 
+        {/* Panel 3 */}
         <div
           className="absolute inset-0 flex items-center transition-opacity duration-500"
           style={{ opacity: snapIndex === 2 ? 1 : 0 }}
@@ -225,7 +230,7 @@ export default function Philosophy() {
                     </div>
                     <div className="p-6">
                       <h3 className="text-sm font-normal mb-2 lowercase text-[#185B30]">{pub.title}</h3>
-                      <p className="text-sm text-gray-600 font-light leading-relaxed text-left">{pub.description}</p>
+                      <p className="text-sm text-[#185B30] font-light leading-relaxed text-left">{pub.description}</p>
                     </div>
                   </div>
                 ))}
